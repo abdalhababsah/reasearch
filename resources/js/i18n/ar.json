@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "categories": "التصنيفات",
+    "tags": "الوسوم",
+    "profile": "الملف الشخصي",
+    "password": "كلمة المرور",
+    "twoFactor": "التحقق بخطوتين",
+    "appearance": "المظهر",
+    "platform": "المنصة"
+  },
+  "language": {
+    "label": "اللغة"
+  },
+  "actions": {
+    "create": "إنشاء",
+    "save": "حفظ",
+    "update": "تحديث",
+    "delete": "حذف",
+    "view": "عرض",
+    "edit": "تعديل",
+    "back": "عودة",
+    "close": "إغلاق",
+    "cancel": "إلغاء"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "placeholder": "عنصر توضيحي"
+  },
+  "categories": {
+    "title": "التصنيفات",
+    "description": "إدارة التصنيفات العليا للأبحاث وهيكلها الهرمي.",
+    "createTitle": "إنشاء تصنيف",
+    "createDescription": "عرّف الاسم والرابط الأبوي والوصف الاختياري.",
+    "editDialogTitle": "تعديل :name",
+    "editDialogDescription": "عدل البيانات أو أعد تعيين التصنيف الأب.",
+    "table": {
+      "name": "الاسم",
+      "slug": "الرابط",
+      "parent": "التصنيف الأب",
+      "actions": "الإجراءات"
+    },
+    "noResults": "لا توجد تصنيفات.",
+    "deleteConfirm": "هل تريد حذف هذا التصنيف؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "parentNone": "—",
+    "viewButton": "عرض"
+  },
+  "categoryShow": {
+    "parent": "التصنيف الأب",
+    "description": "الوصف",
+    "subcategories": "التصنيفات الفرعية",
+    "none": "لا يوجد",
+    "created": "تاريخ الإنشاء",
+    "updated": "تاريخ التحديث"
+  },
+  "tags": {
+    "title": "الوسوم",
+    "description": "وسوم مساعدة لوصف الأبحاث.",
+    "createTitle": "إنشاء وسم",
+    "createDescription": "أدخل اسم الوسم ورابطه.",
+    "editDialogTitle": "تعديل :name",
+    "editDialogDescription": "أعد تسمية الوسم أو عدل رابطه.",
+    "table": {
+      "name": "الاسم",
+      "slug": "الرابط",
+      "actions": "الإجراءات"
+    },
+    "noResults": "لا توجد وسوم.",
+    "deleteConfirm": "هل تريد حذف هذا الوسم؟"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "description": "إدارة ملفك الشخصي وإعدادات الحساب",
+    "profileNav": "الملف الشخصي",
+    "passwordNav": "كلمة المرور",
+    "twoFactorNav": "التحقق بخطوتين",
+    "appearanceNav": "المظهر",
+    "profileInformation": "معلومات الملف الشخصي",
+    "profileInformationDescription": "حدّث اسمك وعنوان بريدك الإلكتروني",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "unverified": "بريدك الإلكتروني غير موثّق.",
+    "resend": "اضغط هنا لإعادة إرسال رابط التحقق.",
+    "verificationSent": "تم إرسال رابط تحقق جديد إلى بريدك الإلكتروني.",
+    "saved": "تم الحفظ",
+    "appearanceTitle": "إعدادات المظهر",
+    "appearanceDescription": "حدّث مظهر حسابك.",
+    "passwordTitle": "إعدادات كلمة المرور",
+    "passwordHeading": "تحديث كلمة المرور",
+    "passwordDescription": "تأكد من استخدام كلمة مرور طويلة وعشوائية لحماية حسابك.",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "savePassword": "حفظ كلمة المرور"
+  },
+  "researcher": {
+    "profileTitle": "ملف الباحث",
+    "profileDescription": "شارك خلفيتك المهنية وخبراتك ومجالات بحثك.",
+    "infoSection": "معلومات الباحث",
+    "infoDescription": "حدّث معلومات ملف الباحث",
+    "bio": "نبذة",
+    "bioPlaceholder": "حدثنا عن نفسك (50 حرفًا على الأقل)",
+    "website": "الموقع الإلكتروني",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "linkedin": "لينكدإن",
+    "github": "غِت هَب",
+    "researchAreas": "مجالات البحث",
+    "experienceSection": "الخبرات",
+    "experienceDescription": "أضف خبراتك المهنية",
+    "educationSection": "التعليم",
+    "educationDescription": "أضف سجلك التعليمي",
+    "addExperience": "إضافة خبرة",
+    "addEducation": "إضافة مؤهل",
+    "currentlyWorking": "أعمل هنا حالياً",
+    "title": "المسمى الوظيفي",
+    "company": "الجهة",
+    "institution": "الجهة التعليمية",
+    "degree": "الدرجة",
+    "field": "التخصص",
+    "startDate": "تاريخ البدء",
+    "endDate": "تاريخ الانتهاء",
+    "description": "الوصف",
+    "saveProfile": "حفظ الملف",
+    "deleteConfirm": "هل أنت متأكد من الحذف؟",
+    "experienceAdded": "تمت إضافة الخبرة بنجاح.",
+    "experienceUpdated": "تم تحديث الخبرة بنجاح.",
+    "educationAdded": "تمت إضافة المؤهل بنجاح.",
+    "educationUpdated": "تم تحديث المؤهل بنجاح.",
+    "fixErrors": "يرجى تصحيح الحقول المحددة قبل الحفظ."
+  },
+  "notifications": {
+    "success": "نجاح",
+    "error": "خطأ"
+  },
+  "twoFactor": {
+    "title": "التحقق بخطوتين",
+    "description": "إدارة إعدادات التحقق بخطوتين.",
+    "enabledBadge": "مُفعّل",
+    "enabledDescription": "عند تفعيل التحقق بخطوتين سيتم مطالبتك برمز آمن عند تسجيل الدخول.",
+    "disabledBadge": "معطّل",
+    "disabledDescription": "فعّل التحقق بخطوتين لتطلب رمزاً آمناً من تطبيق TOTP عند تسجيل الدخول.",
+    "disableButton": "تعطيل التحقق بخطوتين",
+    "continueSetup": "متابعة الإعداد",
+    "enableButton": "تفعيل التحقق بخطوتين"
+  },
+  "deleteAccount": {
+    "title": "حذف الحساب",
+    "description": "حذف حسابك وكل موارده",
+    "warningTitle": "تحذير",
+    "warningBody": "يرجى المتابعة بحذر، فلا يمكن التراجع عن هذا الإجراء.",
+    "cta": "حذف الحساب",
+    "confirmTitle": "هل أنت متأكد أنك تريد حذف حسابك؟",
+    "confirmDescription": "بمجرد حذف حسابك سيتم حذف جميع بياناتك بشكل دائم. يرجى إدخال كلمة المرور للتأكيد.",
+    "passwordLabel": "كلمة المرور"
+  }
+}

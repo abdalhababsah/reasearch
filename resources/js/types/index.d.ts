@@ -27,6 +27,8 @@ export interface SharedData {
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
+    locale?: string;
+    direction?: 'ltr' | 'rtl';
     flash?: {
         success?: string | null;
         error?: string | null;

@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import TagForm from '@/features/admin/tags/tag-form';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { useTranslation } from '@/i18n';
 
 interface TagListItem {
     id: number;
@@ -35,49 +35,49 @@ interface TagIndexProps {
     };
 }
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Tags',
-        href: '/admin/tags',
-    },
-];
-
 export default function TagIndex({ tags }: TagIndexProps) {
     const [createOpen, setCreateOpen] = useState(false);
     const [editingTag, setEditingTag] = useState<TagListItem | null>(null);
+    const { t } = useTranslation();
 
     const handleDelete = (id: number) => {
-        if (confirm('Delete this tag?')) {
+        if (confirm(t('tags.deleteConfirm'))) {
             router.delete(`/admin/tags/${id}`);
         }
     };
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Tags" />
+        <AppLayout
+            breadcrumbs={[
+                {
+                    title: t('tags.title'),
+                    href: '/admin/tags',
+                },
+            ]}
+        >
+            <Head title={t('tags.title')} />
 
             <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl font-semibold">Tags</h1>
-                        <p className="text-muted-foreground">Micro labels for research entries.</p>
+                        <h1 className="text-2xl font-semibold">{t('tags.title')}</h1>
+                        <p className="text-muted-foreground">{t('tags.description')}</p>
                     </div>
 
                     <Dialog open={createOpen} onOpenChange={setCreateOpen}>
                         <DialogTrigger asChild>
-                            <Button>Create tag</Button>
+                            <Button>{t('tags.createTitle')}</Button>
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
-                                <DialogTitle>Create tag</DialogTitle>
-                                <DialogDescription>
-                                    Provide a name and slug for the new tag.
-                                </DialogDescription>
+                                <DialogTitle>{t('tags.createTitle')}</DialogTitle>
+                                <DialogDescription>{t('tags.createDescription')}</DialogDescription>
                             </DialogHeader>
 
                             <TagForm
                                 action="/admin/tags"
                                 method="post"
+                                submitLabel={t('actions.save')}
                                 onSuccess={() => setCreateOpen(false)}
                             />
                         </DialogContent>
@@ -94,13 +94,13 @@ export default function TagIndex({ tags }: TagIndexProps) {
                         <thead className="bg-muted/40">
                             <tr>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
-                                    Name
+                                    {t('tags.table.name')}
                                 </th>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
-                                    Slug
+                                    {t('tags.table.slug')}
                                 </th>
                                 <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
-                                    Actions
+                                    {t('tags.table.actions')}
                                 </th>
                             </tr>
                         </thead>
@@ -108,7 +108,7 @@ export default function TagIndex({ tags }: TagIndexProps) {
                             {tags.data.length === 0 && (
                                 <tr>
                                     <td colSpan={3} className="px-4 py-6 text-center text-muted-foreground">
-                                        No tags found.
+                                        {t('tags.noResults')}
                                     </td>
                                 </tr>
                             )}
@@ -120,21 +120,21 @@ export default function TagIndex({ tags }: TagIndexProps) {
                                     <td className="px-4 py-3 text-right">
                                         <div className="flex flex-wrap justify-end gap-2">
                                             <Button asChild size="sm" variant="ghost">
-                                                <Link href={`/admin/tags/${tag.id}`}>View</Link>
+                                                <Link href={`/admin/tags/${tag.id}`}>{t('actions.view')}</Link>
                                             </Button>
                                             <Button
                                                 size="sm"
                                                 variant="outline"
                                                 onClick={() => setEditingTag(tag)}
                                             >
-                                                Edit
+                                                {t('actions.edit')}
                                             </Button>
                                             <Button
                                                 size="sm"
                                                 variant="destructive"
                                                 onClick={() => handleDelete(tag.id)}
                                             >
-                                                Delete
+                                                {t('actions.delete')}
                                             </Button>
                                         </div>
                                     </td>
@@ -156,8 +156,12 @@ export default function TagIndex({ tags }: TagIndexProps) {
                 >
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Edit {editingTag ? editingTag.name : 'tag'}</DialogTitle>
-                            <DialogDescription>Rename or adjust the slug for this tag.</DialogDescription>
+                            <DialogTitle>
+                                {editingTag
+                                    ? t('tags.editDialogTitle', { name: editingTag.name })
+                                    : t('actions.edit')}
+                            </DialogTitle>
+                            <DialogDescription>{t('tags.editDialogDescription')}</DialogDescription>
                         </DialogHeader>
 
                         {editingTag && (
@@ -165,7 +169,7 @@ export default function TagIndex({ tags }: TagIndexProps) {
                                 action={`/admin/tags/${editingTag.id}`}
                                 method="put"
                                 defaultValues={editingTag}
-                                submitLabel="Update tag"
+                                submitLabel={t('actions.update')}
                                 onSuccess={() => setEditingTag(null)}
                             />
                         )}

@@ -15,15 +15,17 @@ import { Link, usePage } from '@inertiajs/react';
 import { FolderTree, LayoutGrid, Tags } from 'lucide-react';
 import { useMemo } from 'react';
 import AppLogo from './app-logo';
+import { useTranslation } from '@/i18n';
 
-export function AppSidebar() {
+export function AppSidebar({ side = 'left' }: { side?: 'left' | 'right' }) {
     const { auth } = usePage<SharedData>().props;
     const isAdmin = auth?.user?.role?.name === 'admin';
+    const { t } = useTranslation();
 
     const mainNavItems = useMemo<NavItem[]>(() => {
         const base: NavItem[] = [
             {
-                title: 'Dashboard',
+                title: t('nav.dashboard'),
                 href: dashboard(),
                 icon: LayoutGrid,
             },
@@ -32,12 +34,12 @@ export function AppSidebar() {
         if (isAdmin) {
             base.push(
                 {
-                    title: 'Categories',
+                    title: t('nav.categories'),
                     href: '/admin/categories',
                     icon: FolderTree,
                 },
                 {
-                    title: 'Tags',
+                    title: t('nav.tags'),
                     href: '/admin/tags',
                     icon: Tags,
                 },
@@ -45,10 +47,10 @@ export function AppSidebar() {
         }
 
         return base;
-    }, [isAdmin]);
+    }, [isAdmin, t]);
 
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon" variant="inset" side={side}>
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>

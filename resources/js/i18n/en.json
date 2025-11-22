@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "categories": "Categories",
+    "tags": "Tags",
+    "profile": "Profile",
+    "password": "Password",
+    "deleteAccount": {
+    "title": "Delete account"
+  },
+  "twoFactor": "Two-Factor Auth",
+    "appearance": "Appearance",
+    "platform": "Platform"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "actions": {
+    "create": "Create",
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete",
+    "view": "View",
+    "edit": "Edit",
+    "back": "Back",
+    "close": "Close",
+    "cancel": "Cancel"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "placeholder": "Placeholder"
+  },
+  "categories": {
+    "title": "Categories",
+    "description": "Manage top-level research categories and their hierarchy.",
+    "createTitle": "Create category",
+    "createDescription": "Define the name, slug, optional parent, and description.",
+    "editDialogTitle": "Edit :name",
+    "editDialogDescription": "Update metadata or reassign the parent category.",
+    "table": {
+      "name": "Name",
+      "slug": "Slug",
+      "parent": "Parent",
+      "actions": "Actions"
+    },
+    "noResults": "No categories found.",
+    "deleteConfirm": "Delete this category? This action cannot be undone.",
+    "parentNone": "—",
+    "viewButton": "View"
+  },
+  "categoryShow": {
+    "parent": "Parent",
+    "description": "Description",
+    "subcategories": "Subcategories",
+    "none": "None",
+    "created": "Created",
+    "updated": "Updated"
+  },
+  "tags": {
+    "title": "Tags",
+    "description": "Micro labels for research entries.",
+    "createTitle": "Create tag",
+    "createDescription": "Provide a name and slug for the new tag.",
+    "editDialogTitle": "Edit :name",
+    "editDialogDescription": "Rename or adjust the slug for this tag.",
+    "table": {
+      "name": "Name",
+      "slug": "Slug",
+      "actions": "Actions"
+    },
+    "noResults": "No tags found.",
+    "deleteConfirm": "Delete this tag?"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your profile and account settings",
+    "profileNav": "Profile",
+    "passwordNav": "Password",
+    "twoFactorNav": "Two-Factor Auth",
+    "appearanceNav": "Appearance",
+    "profileInformation": "Profile information",
+    "profileInformationDescription": "Update your name and email address",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email address",
+    "unverified": "Your email address is unverified.",
+    "resend": "Click here to resend the verification email.",
+    "verificationSent": "A new verification link has been sent to your email address.",
+    "saved": "Saved",
+    "appearanceTitle": "Appearance settings",
+    "appearanceDescription": "Update your account's appearance settings",
+    "passwordTitle": "Password settings",
+    "passwordHeading": "Update password",
+    "passwordDescription": "Ensure your account is using a long, random password to stay secure",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "savePassword": "Save password"
+  },
+  "researcher": {
+    "profileTitle": "Researcher profile",
+    "profileDescription": "Share your background, experiences, and research areas.",
+    "infoSection": "Profile Information",
+    "infoDescription": "Update your researcher profile information",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself (minimum 50 characters)",
+    "website": "Website",
+    "phone": "Phone",
+    "address": "Address",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "researchAreas": "Research Areas",
+    "experienceSection": "Experience",
+    "experienceDescription": "Add your professional experience",
+    "educationSection": "Education",
+    "educationDescription": "Add your educational background",
+    "addExperience": "Add Experience",
+    "addEducation": "Add Education",
+    "currentlyWorking": "Currently working here",
+    "title": "Title",
+    "company": "Company",
+    "institution": "Institution",
+    "degree": "Degree",
+    "field": "Field of Study",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "description": "Description",
+    "saveProfile": "Save Profile",
+    "deleteConfirm": "Are you sure you want to delete this item?",
+    "experienceAdded": "Experience added successfully.",
+    "experienceUpdated": "Experience updated successfully.",
+    "educationAdded": "Education added successfully.",
+    "educationUpdated": "Education updated successfully.",
+    "fixErrors": "Please fix the highlighted fields before saving."
+  },
+  "notifications": {
+    "success": "Success",
+    "error": "Error"
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "description": "Delete your account and all of its resources",
+    "warningTitle": "Warning",
+    "warningBody": "Please proceed with caution, this cannot be undone.",
+    "cta": "Delete account",
+    "confirmTitle": "Are you sure you want to delete your account?",
+    "confirmDescription": "Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+    "passwordLabel": "Password"
+  },
+  "twoFactor": {
+    "title": "Two-Factor Authentication",
+    "description": "Manage your two-factor authentication settings",
+    "enabledBadge": "Enabled",
+    "enabledDescription": "With two-factor authentication enabled, you will be prompted for a secure, random pin during login.",
+    "disabledBadge": "Disabled",
+    "disabledDescription": "Enable two-factor authentication to require a secure pin during login from a TOTP-compatible app.",
+    "disableButton": "Disable 2FA",
+    "continueSetup": "Continue Setup",
+    "enableButton": "Enable 2FA"
+  }
+}

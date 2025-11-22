@@ -18,20 +18,9 @@ import ResearcherProfileForm, {
     type ResearcherProfileData,
 } from '@/features/researcher/researcher-profile-form';
 import { cn } from '@/lib/utils';
+import { useTranslation } from '@/i18n';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Profile settings',
-        href: edit().url,
-    },
-];
-
-const researcherTabItems = [
-    { id: 'account', label: 'Account information' },
-    { id: 'researcher', label: 'Researcher Details' },
-] as const;
-
-type ResearcherTabId = (typeof researcherTabItems)[number]['id'];
+type ResearcherTabId = 'account' | 'researcher';
 
 export default function Profile({
     mustVerifyEmail,
@@ -45,12 +34,25 @@ export default function Profile({
     const { auth } = usePage<SharedData>().props;
     const [activeTab, setActiveTab] = useState<ResearcherTabId>('account');
     const hasResearcherProfile = Boolean(researcherProfile);
+    const { t } = useTranslation();
+
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: t('nav.profile'),
+            href: edit().url,
+        },
+    ];
+
+    const researcherTabItems = [
+        { id: 'account', label: t('settings.profileInformation') },
+        { id: 'researcher', label: t('researcher.profileTitle') },
+    ] as const;
 
     const renderAccountForm = () => (
         <div className="space-y-6">
             <HeadingSmall
-                title="Profile information"
-                description="Update your name and email address"
+                title={t('settings.profileInformation')}
+                description={t('settings.profileInformationDescription')}
             />
 
             <Form
@@ -63,7 +65,7 @@ export default function Profile({
                 {({ processing, recentlySuccessful, errors }) => (
                     <>
                         <div className="grid gap-2">
-                            <Label htmlFor="first_name">First Name</Label>
+                            <Label htmlFor="first_name">{t('settings.firstName')}</Label>
 
                             <Input
                                 id="first_name"
@@ -72,14 +74,14 @@ export default function Profile({
                                 name="first_name"
                                 required
                                 autoComplete="given-name"
-                                placeholder="First name"
+                                placeholder={t('settings.firstName')}
                             />
 
                             <InputError className="mt-2" message={errors.first_name} />
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="last_name">Last Name</Label>
+                            <Label htmlFor="last_name">{t('settings.lastName')}</Label>
 
                             <Input
                                 id="last_name"
@@ -88,14 +90,14 @@ export default function Profile({
                                 name="last_name"
                                 required
                                 autoComplete="family-name"
-                                placeholder="Last name"
+                                placeholder={t('settings.lastName')}
                             />
 
                             <InputError className="mt-2" message={errors.last_name} />
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="email">Email address</Label>
+                            <Label htmlFor="email">{t('settings.email')}</Label>
 
                             <Input
                                 id="email"
@@ -105,7 +107,7 @@ export default function Profile({
                                 name="email"
                                 required
                                 autoComplete="username"
-                                placeholder="Email address"
+                                placeholder={t('settings.email')}
                             />
 
                             <InputError className="mt-2" message={errors.email} />
@@ -114,19 +116,19 @@ export default function Profile({
                         {mustVerifyEmail && auth.user.email_verified_at === null && (
                             <div>
                                 <p className="-mt-4 text-sm text-muted-foreground">
-                                    Your email address is unverified.{' '}
+                                    {t('settings.unverified')}{' '}
                                     <Link
                                         href={send()}
                                         as="button"
                                         className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
                                     >
-                                        Click here to resend the verification email.
+                                        {t('settings.resend')}
                                     </Link>
                                 </p>
 
                                 {status === 'verification-link-sent' && (
                                     <div className="mt-2 text-sm font-medium text-green-600">
-                                        A new verification link has been sent to your email address.
+                                        {t('settings.verificationSent')}
                                     </div>
                                 )}
                             </div>
@@ -134,7 +136,7 @@ export default function Profile({
 
                         <div className="flex items-center gap-4">
                             <Button disabled={processing} data-test="update-profile-button">
-                                Save
+                                {t('actions.save')}
                             </Button>
 
                             <Transition
@@ -144,7 +146,7 @@ export default function Profile({
                                 leave="transition ease-in-out"
                                 leaveTo="opacity-0"
                             >
-                                <p className="text-sm text-neutral-600">Saved</p>
+                                <p className="text-sm text-neutral-600">{t('settings.saved')}</p>
                             </Transition>
                         </div>
                     </>
@@ -155,7 +157,7 @@ export default function Profile({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Profile settings" />
+            <Head title={t('nav.profile')} />
 
             <SettingsLayout>
                 {hasResearcherProfile ? (
@@ -186,8 +188,8 @@ export default function Profile({
                             {activeTab === 'researcher' && researcherProfile && (
                                 <div className="space-y-6">
                                     <HeadingSmall
-                                        title="Researcher profile"
-                                        description="Share your background, experiences, and research areas."
+                                        title={t('researcher.profileTitle')}
+                                        description={t('researcher.profileDescription')}
                                     />
 
                                     <ResearcherProfileForm {...researcherProfile} />

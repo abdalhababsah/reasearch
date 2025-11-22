@@ -9,10 +9,6 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children, breadcrumbs, ...props }: AppLayoutProps) {
     return (
-        <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                {children}
-            </div>
-        </AppLayoutTemplate>
+        <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>{children}</AppLayoutTemplate>
     );
 }

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePage } from '@inertiajs/react';
 
 import type { SharedData } from '@/types';
+import { useTranslation } from '@/i18n';
 
 interface ToastMessage {
     id: number;
@@ -16,6 +17,7 @@ export default function FlashToaster() {
     const { flash } = usePage<SharedData>().props;
     const [toasts, setToasts] = useState<ToastMessage[]>([]);
     const previous = useRef<{ success?: string | null; error?: string | null }>({});
+    const { t } = useTranslation();
 
     const dismiss = useCallback((id: number) => {
         setToasts((previousToasts) => previousToasts.filter((toast) => toast.id !== id));
@@ -72,7 +74,9 @@ export default function FlashToaster() {
                     <div className="flex items-start justify-between gap-4">
                         <div>
                             <p className="text-sm font-semibold">
-                                {toast.type === 'success' ? 'Success' : 'Error'}
+                                {toast.type === 'success'
+                                    ? t('notifications.success')
+                                    : t('notifications.error')}
                             </p>
                             <p className="text-sm opacity-90">{toast.text}</p>
                         </div>

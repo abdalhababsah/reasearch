@@ -5,21 +5,22 @@ import ResearcherProfileForm, {
     type ResearcherProfileData,
 } from '@/features/researcher/researcher-profile-form';
 import { type BreadcrumbItem, type SharedData } from '@/types';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Researcher Profile',
-        href: '/settings/profile',
-    },
-];
+import { useTranslation } from '@/i18n';
 
 export default function ResearcherProfile() {
     const { props } = usePage<SharedData & ResearcherProfileData>();
     const { profile, experiences, educations, majors, selected_majors } = props;
+    const { t } = useTranslation();
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: t('researcher.profileTitle'),
+            href: '/settings/profile',
+        },
+    ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Researcher Profile" />
+            <Head title={t('researcher.profileTitle')} />
             <ResearcherProfileForm
                 profile={profile}
                 experiences={experiences}

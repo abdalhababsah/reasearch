@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import CategoryForm from '@/features/admin/categories/category-form';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { useTranslation } from '@/i18n';
 
 interface CategoryListItem {
     id: number;
@@ -44,19 +44,13 @@ interface CategoryIndexProps {
     parents: ParentOption[];
 }
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Categories',
-        href: '/admin/categories',
-    },
-];
-
 export default function CategoriesIndex({ categories, parents }: CategoryIndexProps) {
     const [createOpen, setCreateOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState<CategoryListItem | null>(null);
+    const { t } = useTranslation();
 
     const handleDelete = (id: number) => {
-        if (confirm('Delete this category? This action cannot be undone.')) {
+        if (confirm(t('categories.deleteConfirm'))) {
             router.delete(`/admin/categories/${id}`);
         }
     };
@@ -69,34 +63,38 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
     }, [editingCategory, parents]);
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Categories" />
+        <AppLayout
+            breadcrumbs={[
+                {
+                    title: t('categories.title'),
+                    href: '/admin/categories',
+                },
+            ]}
+        >
+            <Head title={t('categories.title')} />
 
             <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl font-semibold">Categories</h1>
-                        <p className="text-muted-foreground">
-                            Manage top-level research categories and their hierarchy.
-                        </p>
+                        <h1 className="text-2xl font-semibold">{t('categories.title')}</h1>
+                        <p className="text-muted-foreground">{t('categories.description')}</p>
                     </div>
 
                     <Dialog open={createOpen} onOpenChange={setCreateOpen}>
                         <DialogTrigger asChild>
-                            <Button>Create category</Button>
+                            <Button>{t('categories.createTitle')}</Button>
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
-                                <DialogTitle>Create category</DialogTitle>
-                                <DialogDescription>
-                                    Define the name, slug, optional parent, and description.
-                                </DialogDescription>
+                                <DialogTitle>{t('categories.createTitle')}</DialogTitle>
+                                <DialogDescription>{t('categories.createDescription')}</DialogDescription>
                             </DialogHeader>
                             <CategoryForm
                                 action="/admin/categories"
                                 method="post"
                                 parentOptions={parents}
                                 onSuccess={() => setCreateOpen(false)}
+                                submitLabel={t('actions.save')}
                             />
                         </DialogContent>
                     </Dialog>
@@ -113,16 +111,16 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                         <thead className="bg-muted/40">
                             <tr>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
-                                    Name
+                                    {t('categories.table.name')}
                                 </th>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
-                                    Slug
+                                    {t('categories.table.slug')}
                                 </th>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
-                                    Parent
+                                    {t('categories.table.parent')}
                                 </th>
                                 <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
-                                    Actions
+                                    {t('categories.table.actions')}
                                 </th>
                             </tr>
                         </thead>
@@ -130,7 +128,7 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                             {categories.data.length === 0 && (
                                 <tr>
                                     <td colSpan={4} className="px-4 py-6 text-center text-muted-foreground">
-                                        No categories found.
+                                        {t('categories.noResults')}
                                     </td>
                                 </tr>
                             )}
@@ -140,26 +138,28 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                                     <td className="px-4 py-3 font-medium">{category.name}</td>
                                     <td className="px-4 py-3 text-muted-foreground">{category.slug}</td>
                                     <td className="px-4 py-3 text-muted-foreground">
-                                        {category.parent?.name ?? '—'}
+                                        {category.parent?.name ?? t('categories.parentNone')}
                                     </td>
                                     <td className="px-4 py-3 text-right">
                                         <div className="flex flex-wrap justify-end gap-2">
                                             <Button asChild size="sm" variant="ghost">
-                                                <Link href={`/admin/categories/${category.id}`}>View</Link>
+                                                <Link href={`/admin/categories/${category.id}`}>
+                                                    {t('actions.view')}
+                                                </Link>
                                             </Button>
                                             <Button
                                                 size="sm"
                                                 variant="outline"
                                                 onClick={() => setEditingCategory(category)}
                                             >
-                                                Edit
+                                                {t('actions.edit')}
                                             </Button>
                                             <Button
                                                 size="sm"
                                                 variant="destructive"
                                                 onClick={() => handleDelete(category.id)}
                                             >
-                                                Delete
+                                                {t('actions.delete')}
                                             </Button>
                                         </div>
                                     </td>
@@ -182,11 +182,11 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                     <DialogContent>
                         <DialogHeader>
                             <DialogTitle>
-                                Edit {editingCategory ? editingCategory.name : 'category'}
+                                {editingCategory
+                                    ? t('categories.editDialogTitle', { name: editingCategory.name })
+                                    : t('actions.edit')}
                             </DialogTitle>
-                            <DialogDescription>
-                                Update metadata or reassign the parent category.
-                            </DialogDescription>
+                            <DialogDescription>{t('categories.editDialogDescription')}</DialogDescription>
                         </DialogHeader>
 
                         {editingCategory && (
@@ -200,7 +200,7 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                                     description: editingCategory.description ?? '',
                                     parent_id: editingCategory.parent_id ?? undefined,
                                 }}
-                                submitLabel="Update category"
+                                submitLabel={t('actions.update')}
                                 onSuccess={() => setEditingCategory(null)}
                             />
                         )}

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useTranslation } from '@/i18n';
 
 interface ParentOption {
     id: number;
@@ -31,12 +32,13 @@ export default function CategoryForm({
     method,
     parentOptions,
     defaultValues,
-    submitLabel = 'Save category',
+    submitLabel,
     onSuccess,
 }: CategoryFormProps) {
     const [name, setName] = useState(defaultValues?.name ?? '');
     const [slug, setSlug] = useState(defaultValues?.slug ?? '');
     const [slugEdited, setSlugEdited] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setName(defaultValues?.name ?? '');
@@ -68,40 +70,40 @@ export default function CategoryForm({
             {({ processing, errors }) => (
                 <>
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">{t('categories.table.name')}</Label>
                         <Input
                             id="name"
                             name="name"
                             required
                             value={name}
                             onChange={(event) => handleNameChange(event.target.value)}
-                            placeholder="Machine Learning"
+                            placeholder={t('categories.table.name')}
                         />
                         <InputError message={errors.name} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="slug">Slug</Label>
+                        <Label htmlFor="slug">{t('categories.table.slug')}</Label>
                         <Input
                             id="slug"
                             name="slug"
                             required
                             value={slug}
                             onChange={(event) => handleSlugChange(event.target.value)}
-                            placeholder="machine-learning"
+                            placeholder={t('categories.table.slug')}
                         />
                         <InputError message={errors.slug} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="parent_id">Parent category</Label>
+                        <Label htmlFor="parent_id">{t('categories.table.parent')}</Label>
                         <select
                             id="parent_id"
                             name="parent_id"
                             defaultValue={defaultValues?.parent_id ?? ''}
                             className="rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none"
                         >
-                            <option value="">— None —</option>
+                            <option value="">{t('categories.parentNone')}</option>
                             {parentOptions.map((parent) => (
                                 <option key={parent.id} value={parent.id}>
                                     {parent.name}
@@ -112,18 +114,18 @@ export default function CategoryForm({
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="description">Description</Label>
+                        <Label htmlFor="description">{t('categoryShow.description')}</Label>
                         <Textarea
                             id="description"
                             name="description"
                             rows={5}
                             defaultValue={defaultValues?.description ?? ''}
-                            placeholder="Describe this research area"
+                            placeholder={t('categoryShow.description')}
                         />
                         <InputError message={errors.description} />
                     </div>
 
-                    <Button disabled={processing}>{submitLabel}</Button>
+                    <Button disabled={processing}>{submitLabel ?? t('actions.save')}</Button>
                 </>
             )}
         </Form>

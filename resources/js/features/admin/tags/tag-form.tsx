@@ -5,6 +5,7 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useTranslation } from '@/i18n';
 
 interface TagFormProps {
     action: string;
@@ -21,12 +22,13 @@ export default function TagForm({
     action,
     method,
     defaultValues,
-    submitLabel = 'Save tag',
+    submitLabel,
     onSuccess,
 }: TagFormProps) {
     const [name, setName] = useState(defaultValues?.name ?? '');
     const [slug, setSlug] = useState(defaultValues?.slug ?? '');
     const [slugEdited, setSlugEdited] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setName(defaultValues?.name ?? '');
@@ -56,34 +58,34 @@ export default function TagForm({
             }}
         >
             {({ processing, errors }) => (
-                <>
-                    <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
+                    <>
+                        <div className="grid gap-2">
+                            <Label htmlFor="name">{t('tags.table.name')}</Label>
                         <Input
                             id="name"
                             name="name"
                             required
                             value={name}
                             onChange={(event) => handleNameChange(event.target.value)}
-                            placeholder="Artificial Intelligence"
+                            placeholder={t('tags.table.name')}
                         />
                         <InputError message={errors.name} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="slug">Slug</Label>
+                            <Label htmlFor="slug">{t('tags.table.slug')}</Label>
                         <Input
                             id="slug"
                             name="slug"
                             required
                             value={slug}
                             onChange={(event) => handleSlugChange(event.target.value)}
-                            placeholder="ai"
+                            placeholder={t('tags.table.slug')}
                         />
                         <InputError message={errors.slug} />
                     </div>
 
-                    <Button disabled={processing}>{submitLabel}</Button>
+                    <Button disabled={processing}>{submitLabel ?? t('actions.save')}</Button>
                 </>
             )}
         </Form>

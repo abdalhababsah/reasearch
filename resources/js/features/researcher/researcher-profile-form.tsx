@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useTranslation } from '@/i18n';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export interface Experience {
@@ -94,6 +95,7 @@ export default function ResearcherProfileForm({
     const [educationFeedback, setEducationFeedback] = useState<FlashMessage>(null);
     const [experienceProcessing, setExperienceProcessing] = useState(false);
     const [educationProcessing, setEducationProcessing] = useState(false);
+    const { t } = useTranslation();
 
     const hasInvalidDateOrder = (start?: string, end?: string): boolean => {
         if (!start || !end) {
@@ -143,7 +145,7 @@ export default function ResearcherProfileForm({
     }, [editingEducation]);
 
     const handleDeleteExperience = (id: number) => {
-        if (confirm('Are you sure you want to delete this experience?')) {
+        if (confirm(t('researcher.deleteConfirm'))) {
             router.delete(`/researcher/profile/experiences/${id}`, {
                 preserveScroll: true,
             });
@@ -151,7 +153,7 @@ export default function ResearcherProfileForm({
     };
 
     const handleDeleteEducation = (id: number) => {
-        if (confirm('Are you sure you want to delete this education?')) {
+        if (confirm(t('researcher.deleteConfirm'))) {
             router.delete(`/researcher/profile/educations/${id}`, {
                 preserveScroll: true,
             });
@@ -167,7 +169,7 @@ export default function ResearcherProfileForm({
             setExperienceErrors(clientErrors);
             setExperienceFeedback({
                 type: 'error',
-                text: 'Please fix the highlighted fields before saving.',
+                text: t('researcher.fixErrors'),
             });
             return;
         }
@@ -181,7 +183,7 @@ export default function ResearcherProfileForm({
                 setExperienceErrors({});
                 setExperienceFeedback({
                     type: 'success',
-                    text: isUpdate ? 'Experience updated successfully.' : 'Experience added successfully.',
+                    text: isUpdate ? t('researcher.experienceUpdated') : t('researcher.experienceAdded'),
                 });
                 if (isUpdate) {
                     setEditingExperience(null);
@@ -194,7 +196,7 @@ export default function ResearcherProfileForm({
                 setExperienceErrors(errors as ExperienceErrors);
                 setExperienceFeedback({
                     type: 'error',
-                    text: 'Please fix the highlighted fields before saving.',
+                    text: t('researcher.fixErrors'),
                 });
             },
         };
@@ -241,7 +243,7 @@ export default function ResearcherProfileForm({
             setEducationErrors(clientErrors);
             setEducationFeedback({
                 type: 'error',
-                text: 'Please fix the highlighted fields before saving.',
+                text: t('researcher.fixErrors'),
             });
             return;
         }
@@ -255,7 +257,7 @@ export default function ResearcherProfileForm({
                 setEducationErrors({});
                 setEducationFeedback({
                     type: 'success',
-                    text: isUpdate ? 'Education updated successfully.' : 'Education added successfully.',
+                    text: isUpdate ? t('researcher.educationUpdated') : t('researcher.educationAdded'),
                 });
                 if (isUpdate) {
                     setEditingEducation(null);
@@ -268,7 +270,7 @@ export default function ResearcherProfileForm({
                 setEducationErrors(errors as EducationErrors);
                 setEducationFeedback({
                     type: 'error',
-                    text: 'Please fix the highlighted fields before saving.',
+                    text: t('researcher.fixErrors'),
                 });
             },
         };
@@ -285,8 +287,8 @@ export default function ResearcherProfileForm({
             {/* Profile Information */}
             <div className="space-y-6">
                 <HeadingSmall
-                    title="Profile Information"
-                    description="Update your researcher profile information"
+                    title={t('researcher.infoSection')}
+                    description={t('researcher.infoDescription')}
                 />
 
                 <Form
@@ -303,21 +305,21 @@ export default function ResearcherProfileForm({
                     {({ processing, errors }) => (
                         <>
                             <div className="grid gap-2">
-                                <Label htmlFor="bio">Bio *</Label>
+                                <Label htmlFor="bio">{t('researcher.bio')} *</Label>
                                 <Textarea
                                     id="bio"
                                     name="bio"
                                     defaultValue={profile?.bio || ''}
                                     required
                                     rows={6}
-                                    placeholder="Tell us about yourself (minimum 50 characters)"
+                                    placeholder={t('researcher.bioPlaceholder')}
                                 />
                                 <InputError message={errors.bio} />
                             </div>
 
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="website">Website</Label>
+                                        <Label htmlFor="website">{t('researcher.website')}</Label>
                                     <Input
                                         id="website"
                                         type="url"
@@ -329,7 +331,7 @@ export default function ResearcherProfileForm({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="phone">Phone</Label>
+                                        <Label htmlFor="phone">{t('researcher.phone')}</Label>
                                     <Input
                                         id="phone"
                                         name="phone"
@@ -342,7 +344,7 @@ export default function ResearcherProfileForm({
 
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="address">Address</Label>
+                                        <Label htmlFor="address">{t('researcher.address')}</Label>
                                     <Input
                                         id="address"
                                         name="address"
@@ -353,7 +355,7 @@ export default function ResearcherProfileForm({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="linkedin_url">LinkedIn</Label>
+                                        <Label htmlFor="linkedin_url">{t('researcher.linkedin')}</Label>
                                     <Input
                                         id="linkedin_url"
                                         type="url"
@@ -367,7 +369,7 @@ export default function ResearcherProfileForm({
 
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="github_url">GitHub</Label>
+                                        <Label htmlFor="github_url">{t('researcher.github')}</Label>
                                     <Input
                                         id="github_url"
                                         type="url"
@@ -380,7 +382,7 @@ export default function ResearcherProfileForm({
                             </div>
 
                             <div className="space-y-4">
-                                <Label>Research Areas</Label>
+                                <Label>{t('researcher.researchAreas')}</Label>
                                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
                                     {majors.map((major) => (
                                         <label
@@ -404,7 +406,7 @@ export default function ResearcherProfileForm({
                                 <InputError message={errors.major_ids} />
                             </div>
 
-                            <Button disabled={processing}>Save Profile</Button>
+                            <Button disabled={processing}>{t('researcher.saveProfile')}</Button>
                         </>
                     )}
                 </Form>
@@ -413,8 +415,8 @@ export default function ResearcherProfileForm({
             {/* Experiences */}
             <div className="space-y-6">
                 <HeadingSmall
-                    title="Experience"
-                    description="Add your professional experience"
+                    title={t('researcher.experienceSection')}
+                    description={t('researcher.experienceDescription')}
                 />
 
                 {experienceFeedback && (
@@ -423,7 +425,9 @@ export default function ResearcherProfileForm({
                         className="border"
                     >
                         <AlertTitle>
-                            {experienceFeedback.type === 'error' ? 'Error' : 'Success'}
+                            {experienceFeedback.type === 'error'
+                                ? t('notifications.error')
+                                : t('notifications.success')}
                         </AlertTitle>
                         <AlertDescription>{experienceFeedback.text}</AlertDescription>
                     </Alert>
@@ -477,13 +481,13 @@ export default function ResearcherProfileForm({
                 </div>
 
                 <div className="rounded-lg border border-dashed p-4">
-                    <button
-                        type="button"
-                        onClick={openNewExperienceForm}
-                        className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
-                    >
-                        <Plus className="h-4 w-4" /> Add Experience
-                    </button>
+                        <button
+                            type="button"
+                            onClick={openNewExperienceForm}
+                            className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
+                        >
+                            <Plus className="h-4 w-4" /> {t('researcher.addExperience')}
+                        </button>
                 </div>
 
                 {editingExperience === 0 && (
@@ -500,8 +504,8 @@ export default function ResearcherProfileForm({
             {/* Education */}
             <div className="space-y-6">
                 <HeadingSmall
-                    title="Education"
-                    description="Add your educational background"
+                    title={t('researcher.educationSection')}
+                    description={t('researcher.educationDescription')}
                 />
 
                 {educationFeedback && (
@@ -510,7 +514,9 @@ export default function ResearcherProfileForm({
                         className="border"
                     >
                         <AlertTitle>
-                            {educationFeedback.type === 'error' ? 'Error' : 'Success'}
+                            {educationFeedback.type === 'error'
+                                ? t('notifications.error')
+                                : t('notifications.success')}
                         </AlertTitle>
                         <AlertDescription>{educationFeedback.text}</AlertDescription>
                     </Alert>
@@ -563,13 +569,13 @@ export default function ResearcherProfileForm({
                 </div>
 
                 <div className="rounded-lg border border-dashed p-4">
-                    <button
-                        type="button"
-                        onClick={openNewEducationForm}
-                        className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
-                    >
-                        <Plus className="h-4 w-4" /> Add Education
-                    </button>
+                        <button
+                            type="button"
+                            onClick={openNewEducationForm}
+                            className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
+                        >
+                            <Plus className="h-4 w-4" /> {t('researcher.addEducation')}
+                        </button>
                 </div>
 
                 {editingEducation === 0 && (
@@ -600,6 +606,7 @@ function ExperienceForm({
     onCancel: () => void;
 }) {
     const [formData, setFormData] = useState<Experience>(experience);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setFormData(experience);
@@ -613,7 +620,7 @@ function ExperienceForm({
     return (
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 rounded-md border bg-muted/40 p-4">
             <div className="grid gap-2">
-                <Label htmlFor={`title-${experience.id}`}>Title</Label>
+                <Label htmlFor={`title-${experience.id}`}>{t('researcher.title')}</Label>
                 <Input
                     id={`title-${experience.id}`}
                     value={formData.title}
@@ -623,7 +630,7 @@ function ExperienceForm({
                 <InputError message={errors.title} />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor={`company-${experience.id}`}>Company</Label>
+                <Label htmlFor={`company-${experience.id}`}>{t('researcher.company')}</Label>
                 <Input
                     id={`company-${experience.id}`}
                     value={formData.company}
@@ -634,7 +641,7 @@ function ExperienceForm({
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="grid gap-2">
-                    <Label htmlFor={`start_date-${experience.id}`}>Start Date</Label>
+                    <Label htmlFor={`start_date-${experience.id}`}>{t('researcher.startDate')}</Label>
                     <Input
                         id={`start_date-${experience.id}`}
                         type="date"
@@ -644,7 +651,7 @@ function ExperienceForm({
                     <InputError message={errors.start_date} />
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor={`end_date-${experience.id}`}>End Date</Label>
+                    <Label htmlFor={`end_date-${experience.id}`}>{t('researcher.endDate')}</Label>
                     <Input
                         id={`end_date-${experience.id}`}
                         type="date"
@@ -668,12 +675,12 @@ function ExperienceForm({
                     }
                 />
                 <label htmlFor={`is_current-${experience.id}`} className="text-sm">
-                    Currently working here
+                    {t('researcher.currentlyWorking')}
                 </label>
             </div>
             <InputError message={errors.is_current} />
             <div className="grid gap-2">
-                <Label htmlFor={`description-${experience.id}`}>Description</Label>
+                <Label htmlFor={`description-${experience.id}`}>{t('researcher.description')}</Label>
                 <Textarea
                     id={`description-${experience.id}`}
                     value={formData.description || ''}
@@ -684,10 +691,10 @@ function ExperienceForm({
             </div>
             <div className="flex gap-2">
                 <Button type="submit" disabled={submitting}>
-                    Save
+                    {t('actions.save')}
                 </Button>
                 <Button type="button" variant="ghost" onClick={onCancel} disabled={submitting}>
-                    <X className="mr-2 h-4 w-4" /> Cancel
+                    <X className="mr-2 h-4 w-4" /> {t('actions.cancel')}
                 </Button>
             </div>
         </form>
@@ -708,6 +715,7 @@ function EducationForm({
     onCancel: () => void;
 }) {
     const [formData, setFormData] = useState<Education>(education);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setFormData(education);
@@ -721,7 +729,7 @@ function EducationForm({
     return (
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 rounded-md border bg-muted/40 p-4">
             <div className="grid gap-2">
-                <Label htmlFor={`institution-${education.id}`}>Institution</Label>
+                <Label htmlFor={`institution-${education.id}`}>{t('researcher.institution')}</Label>
                 <Input
                     id={`institution-${education.id}`}
                     value={formData.institution}
@@ -731,7 +739,7 @@ function EducationForm({
                 <InputError message={errors.institution} />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor={`degree-${education.id}`}>Degree</Label>
+                <Label htmlFor={`degree-${education.id}`}>{t('researcher.degree')}</Label>
                 <Input
                     id={`degree-${education.id}`}
                     value={formData.degree}
@@ -741,7 +749,7 @@ function EducationForm({
                 <InputError message={errors.degree} />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor={`field_of_study-${education.id}`}>Field of Study</Label>
+                <Label htmlFor={`field_of_study-${education.id}`}>{t('researcher.field')}</Label>
                 <Input
                     id={`field_of_study-${education.id}`}
                     value={formData.field_of_study || ''}
@@ -751,7 +759,7 @@ function EducationForm({
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="grid gap-2">
-                    <Label htmlFor={`edu_start_date-${education.id}`}>Start Date</Label>
+                    <Label htmlFor={`edu_start_date-${education.id}`}>{t('researcher.startDate')}</Label>
                     <Input
                         id={`edu_start_date-${education.id}`}
                         type="date"
@@ -761,7 +769,7 @@ function EducationForm({
                     <InputError message={errors.start_date} />
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor={`edu_end_date-${education.id}`}>End Date</Label>
+                    <Label htmlFor={`edu_end_date-${education.id}`}>{t('researcher.endDate')}</Label>
                     <Input
                         id={`edu_end_date-${education.id}`}
                         type="date"
@@ -772,7 +780,7 @@ function EducationForm({
                 </div>
             </div>
             <div className="grid gap-2">
-                <Label htmlFor={`edu_description-${education.id}`}>Description</Label>
+                <Label htmlFor={`edu_description-${education.id}`}>{t('researcher.description')}</Label>
                 <Textarea
                     id={`edu_description-${education.id}`}
                     value={formData.description || ''}
@@ -783,10 +791,10 @@ function EducationForm({
             </div>
             <div className="flex gap-2">
                 <Button type="submit" disabled={submitting}>
-                    Save
+                    {t('actions.save')}
                 </Button>
                 <Button type="button" variant="ghost" onClick={onCancel} disabled={submitting}>
-                    <X className="mr-2 h-4 w-4" /> Cancel
+                    <X className="mr-2 h-4 w-4" /> {t('actions.cancel')}
                 </Button>
             </div>
         </form>

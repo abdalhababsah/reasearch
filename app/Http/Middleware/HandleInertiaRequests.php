@@ -71,6 +71,8 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
+            'locale' => app()->getLocale(),
+            'direction' => app()->getLocale() === 'ar' ? 'rtl' : 'ltr',
             'auth' => [
                 'user' => $userData,
             ],

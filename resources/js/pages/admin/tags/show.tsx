@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
+import { useTranslation } from '@/i18n';
 
 interface TagDetails {
     id: number;
@@ -17,8 +18,9 @@ interface TagShowProps {
 }
 
 export default function TagShow({ tag }: TagShowProps) {
+    const { t } = useTranslation();
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Tags', href: '/admin/tags' },
+        { title: t('tags.title'), href: '/admin/tags' },
         { title: tag.name, href: `/admin/tags/${tag.id}` },
     ];
 
@@ -30,25 +32,27 @@ export default function TagShow({ tag }: TagShowProps) {
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-semibold">{tag.name}</h1>
-                        <p className="text-sm text-muted-foreground">Slug: {tag.slug}</p>
+                        <p className="text-sm text-muted-foreground">
+                            {t('tags.table.slug')}: {tag.slug}
+                        </p>
                     </div>
                     <div className="flex gap-2">
                         <Button asChild variant="outline">
-                            <Link href={`/admin/tags/${tag.id}/edit`}>Edit</Link>
+                            <Link href={`/admin/tags/${tag.id}/edit`}>{t('actions.edit')}</Link>
                         </Button>
                         <Button asChild variant="ghost">
-                            <Link href="/admin/tags">Back</Link>
+                            <Link href="/admin/tags">{t('actions.back')}</Link>
                         </Button>
                     </div>
                 </div>
 
                 <div className="space-y-4 rounded-xl border bg-card p-6 shadow-sm text-sm text-muted-foreground">
                     <div>
-                        <p className="font-semibold">Created</p>
+                        <p className="font-semibold">{t('categoryShow.created')}</p>
                         <p>{tag.created_at ?? '—'}</p>
                     </div>
                     <div>
-                        <p className="font-semibold">Updated</p>
+                        <p className="font-semibold">{t('categoryShow.updated')}</p>
                         <p>{tag.updated_at ?? '—'}</p>
                     </div>
                 </div>
