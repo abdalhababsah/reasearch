@@ -1,16 +1,24 @@
 {
   "nav": {
+    "home": "Home",
+    "researches": "Research",
+    "researchers": "Researchers",
+    "contact": "Contact",
     "dashboard": "Dashboard",
     "categories": "Categories",
     "tags": "Tags",
     "profile": "Profile",
     "password": "Password",
-    "deleteAccount": {
-    "title": "Delete account"
-  },
-  "twoFactor": "Two-Factor Auth",
+    "twoFactor": "Two-Factor Auth",
     "appearance": "Appearance",
-    "platform": "Platform"
+    "platform": "ResearchHub",
+    "features": "Features",
+    "menu": "Menu",
+    "account": "Account",
+    "myAccount": "My Account",
+    "deleteAccount": {
+      "title": "Delete account"
+    }
   },
   "language": {
     "label": "Language"
@@ -18,19 +26,253 @@
   "actions": {
     "create": "Create",
     "save": "Save",
+    "saving": "Saving...",
     "update": "Update",
     "delete": "Delete",
     "view": "View",
     "edit": "Edit",
     "back": "Back",
     "close": "Close",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "search": "Search",
+    "remove": "Remove",
+    "login": "Log in",
+    "logout": "Log out",
+    "register": "Register",
+    "getStarted": "Get Started",
+    "readMore": "Read more",
+    "viewProfile": "View Profile",
+    "clearFilters": "Clear Filters",
+    "filter": "Filter"
   },
-  "dashboard": {
-    "title": "Dashboard",
-    "placeholder": "Placeholder"
+  "hero": {
+    "badge": "Join 15,000+ researchers",
+    "where": "Where",
+    "ideas": "Ideas",
+    "become": "Become",
+    "impact": "Impact",
+    "description": "The next-generation platform for researchers to publish groundbreaking work, collaborate across borders, and accelerate scientific discovery.",
+    "free": "No publishing fees",
+    "openAccess": "Open access forever",
+    "rapidReview": "Rapid peer review",
+    "recentPublication": "Recent Publication"
+  },
+  "stats": {
+    "researchers": "Active Researchers",
+    "papers": "Published Papers",
+    "countries": "Countries",
+    "satisfaction": "Satisfaction Rate",
+    "citations": "Citations",
+    "collaborators": "Collaborators"
+  },
+  "features": {
+    "heading": "Everything You Need to Succeed",
+    "subheading": "Powerful tools designed to streamline your research workflow from draft to publication",
+    "publish": {
+      "title": "Publish Research",
+      "description": "Share your findings with a global academic community and get instant feedback"
+    },
+    "collaborate": {
+      "title": "Collaborate",
+      "description": "Connect with researchers worldwide and build interdisciplinary teams"
+    },
+    "track": {
+      "title": "Track Impact",
+      "description": "Monitor citations, downloads, and engagement metrics in real-time"
+    },
+    "secure": {
+      "title": "Secure Storage",
+      "description": "Keep your drafts and data safe with enterprise-grade security"
+    },
+    "fast": {
+      "title": "Fast Publishing",
+      "description": "Streamlined peer review process gets your work published faster"
+    },
+    "global": {
+      "title": "Global Reach",
+      "description": "Make your research accessible to readers in 150+ countries"
+    }
+  },
+  "researchers": {
+    "title": "Researchers",
+    "badge": "Our Community",
+    "heading": "Meet Leading Researchers",
+    "subheading": "Connect with brilliant minds pushing the boundaries of knowledge",
+    "browse": {
+      "heading": "Discover Researchers",
+      "subheading": "Connect with leading researchers and explore their groundbreaking work"
+    },
+    "search": {
+      "placeholder": "Search by name, institution, or field..."
+    },
+    "resultsCount": "Showing :count researchers",
+    "empty": {
+      "title": "No researchers found",
+      "description": "Try adjusting your search"
+    },
+    "browseAll": "Browse All Researchers",
+    "anonymous": "Anonymous",
+    "noField": "Field not specified",
+    "noInstitution": "Institution not specified"
+  },
+  "researcher": {
+    "papers": "Papers",
+    "viewProfile": "View Profile",
+    "profileTitle": "Researcher profile",
+    "profileDescription": "Share your background, experiences, and research areas.",
+    "infoSection": "Profile Information",
+    "infoDescription": "Update your researcher profile information",
+    "bio": "Biography",
+    "bioPlaceholder": "Tell us about yourself (minimum 50 characters)",
+    "website": "Website",
+    "phone": "Phone",
+    "address": "Address",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "researchAreas": "Research Areas",
+    "experienceSection": "Experience",
+    "experienceDescription": "Add your professional experience",
+    "educationSection": "Education",
+    "educationDescription": "Add your educational background",
+    "addExperience": "Add Experience",
+    "addEducation": "Add Education",
+    "currentlyWorking": "Currently working here",
+    "title": "Title",
+    "company": "Company",
+    "institution": "Institution",
+    "degree": "Degree",
+    "field": "Field of Study",
+    "fields": "Research Fields",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "description": "Description",
+    "saveProfile": "Save Profile",
+    "deleteConfirm": "Are you sure you want to delete this item?",
+    "experienceAdded": "Experience added successfully.",
+    "experienceUpdated": "Experience updated successfully.",
+    "educationAdded": "Education added successfully.",
+    "educationUpdated": "Education updated successfully.",
+    "fixErrors": "Please fix the highlighted fields before saving.",
+    "about": "About",
+    "publications": "Publications",
+    "noPublications": "No publications yet",
+    "experience": "Experience",
+    "education": "Education"
+  },
+  "researches": {
+    "title": "Research",
+    "my": "My Research",
+    "create": "Create Research",
+    "createButton": "Create research",
+    "description": "Manage your submissions, visibility, and supporting files.",
+    "adminDescription": "Review and manage all research submissions.",
+    "browse": {
+      "heading": "Browse Research Papers",
+      "subheading": "Discover groundbreaking research from leading researchers worldwide"
+    },
+    "search": {
+      "placeholder": "Search by title, keywords, or abstract..."
+    },
+    "resultsCount": "Showing :count results",
+    "empty": {
+      "title": "No research papers found",
+      "description": "Try adjusting your search or filters"
+    },
+    "emptyState": "No researches found. Start by creating one.",
+    "card": {
+      "untitled": "Untitled research",
+      "created": "Created :date",
+      "noSummary": "No summary was provided.",
+      "documentsAllowed": "Docs allowed",
+      "documentsBlocked": "Docs hidden"
+    },
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "Search by title or keywords",
+      "status": "Status",
+      "statusAll": "All statuses",
+      "visibility": "Visibility",
+      "visibilityAll": "All visibility options",
+      "visibilityPublic": "Public",
+      "visibilityPrivate": "Private",
+      "allYears": "All Years",
+      "reset": "Reset",
+      "apply": "Apply filters"
+    },
+    "actions": {
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "makePublic": "Make public",
+      "makePrivate": "Make private"
+    },
+    "statuses": {
+      "draft": "Draft",
+      "under_review": "Under review",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "visibility": {
+      "public": "Public",
+      "private": "Private"
+    },
+    "form": {
+      "createTitle": "Create research",
+      "createSubtitle": "Add your research details, attach documents, and configure visibility.",
+      "editSubtitle": "Update your research details, manage files, and adjust settings.",
+      "basicInfo": "Basic information",
+      "title_en": "Title (English)",
+      "title_ar": "Title (Arabic)",
+      "titlePlaceholderEn": "Enter the English title",
+      "titlePlaceholderAr": "Enter the Arabic title",
+      "abstract_en": "Abstract (English)",
+      "abstract_ar": "Abstract (Arabic)",
+      "abstractPlaceholderEn": "Write a concise English abstract",
+      "abstractPlaceholderAr": "Write a concise Arabic abstract",
+      "keywords_en": "Keywords (English)",
+      "keywords_ar": "Keywords (Arabic)",
+      "keywordsPlaceholderEn": "Comma-separated keywords in English",
+      "keywordsPlaceholderAr": "Comma-separated keywords in Arabic",
+      "keywordsHelp": "Separate keywords with commas, e.g. AI, education, policy.",
+      "taxonomy": "Categories & tags",
+      "taxonomyHelp": "Use categories and tags to make your research easier to discover.",
+      "categories": "Categories",
+      "noCategories": "No categories available.",
+      "tags": "Tags",
+      "noTags": "No tags available.",
+      "status": "Status",
+      "settings": "Settings",
+      "visibilityHelp": "Control whether this research is visible to everyone or only to you.",
+      "files": "Files",
+      "dropFilesTitle": "Upload research documents",
+      "dropFilesSubtitle": "PDF, Word, Excel, CSV, ZIP, or images.",
+      "chooseFiles": "Choose files",
+      "selectedFiles": "Selected files",
+      "existingFiles": "Existing Files",
+      "newFiles": "New Files",
+      "addMoreFiles": "Add more documents",
+      "primaryHint": "Select one file as the primary document to show first.",
+      "primaryFile": "Primary file",
+      "wallpaper": "Cover image",
+      "wallpaperHelp": "Optional cover image for the research card.",
+      "noWallpaperPreview": "No image",
+      "removeWallpaper": "Remove Wallpaper"
+    },
+    "show": {
+      "overview": "Overview",
+      "keywords": "Keywords",
+      "noKeywords": "No keywords provided.",
+      "metadata": "Metadata",
+      "status": "Status",
+      "visibility": "Visibility",
+      "createdAt": "Created",
+      "filesSection": "Files",
+      "filesHelp": "Preview or download the uploaded files.",
+      "noFiles": "No files uploaded yet.",
+      "deleteConfirm": "Delete this research? All files will be removed."
+    }
   },
   "categories": {
+    "all": "All Categories",
     "title": "Categories",
     "description": "Manage top-level research categories and their hierarchy.",
     "createTitle": "Create category",
@@ -46,15 +288,9 @@
     "noResults": "No categories found.",
     "deleteConfirm": "Delete this category? This action cannot be undone.",
     "parentNone": "—",
-    "viewButton": "View"
-  },
-  "categoryShow": {
-    "parent": "Parent",
-    "description": "Description",
-    "subcategories": "Subcategories",
-    "none": "None",
-    "created": "Created",
-    "updated": "Updated"
+    "viewButton": "View",
+    "nameEn": "Name (English)",
+    "nameAr": "Name (Arabic)"
   },
   "tags": {
     "title": "Tags",
@@ -69,7 +305,94 @@
       "actions": "Actions"
     },
     "noResults": "No tags found.",
-    "deleteConfirm": "Delete this tag?"
+    "deleteConfirm": "Delete this tag?",
+    "nameEn": "Name (English)",
+    "nameAr": "Name (Arabic)"
+  },
+  "sort": {
+    "latest": "Latest",
+    "oldest": "Oldest",
+    "titleAsc": "Title (A-Z)",
+    "titleDesc": "Title (Z-A)"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgo": ":count days ago",
+    "weeksAgo": ":count weeks ago",
+    "present": "Present"
+  },
+  "filters": {
+    "allYears": "All Years",
+    "status": "Status",
+    "visibility": "Visibility"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "heading": "Get in Touch",
+    "subheading": "Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "form": {
+      "title": "Send us a Message",
+      "description": "Fill out the form below and we'll get back to you soon",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "How can we help?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us more about your inquiry...",
+      "send": "Send Message",
+      "sending": "Sending..."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "hours": {
+      "title": "Office Hours",
+      "weekdays": "Monday - Friday",
+      "weekend": "Saturday - Sunday",
+      "closed": "Closed"
+    }
+  },
+  "cta": {
+    "heading": "Ready to Share Your Research?",
+    "subheading": "Join thousands of researchers making an impact. Publish your first paper for free today.",
+    "emailPlaceholder": "Enter your email",
+    "button": "Get Started",
+    "note": "No credit card required • Free forever for researchers"
+  },
+  "footer": {
+    "description": "Empowering researchers to share knowledge and collaborate globally.",
+    "platform": "Platform",
+    "pricing": "Pricing",
+    "api": "API",
+    "documentation": "Documentation",
+    "resources": "Resources",
+    "blog": "Blog",
+    "guidelines": "Guidelines",
+    "helpCenter": "Help Center",
+    "community": "Community",
+    "company": "Company",
+    "about": "About",
+    "careers": "Careers",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "copyright": "© 2024 ResearchHub. All rights reserved."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "placeholder": "Placeholder",
+    "profileIncompleteTitle": "Profile Incomplete",
+    "profileIncompleteDescription": "Please complete your profile to unlock all features.",
+    "profileIncompleteCta": "Complete Profile"
+  },
+  "profile": {
+    "settings": "Settings",
+    "edit": "Edit Profile"
   },
   "settings": {
     "title": "Settings",
@@ -97,45 +420,16 @@
     "confirmPassword": "Confirm password",
     "savePassword": "Save password"
   },
-  "researcher": {
-    "profileTitle": "Researcher profile",
-    "profileDescription": "Share your background, experiences, and research areas.",
-    "infoSection": "Profile Information",
-    "infoDescription": "Update your researcher profile information",
-    "bio": "Bio",
-    "bioPlaceholder": "Tell us about yourself (minimum 50 characters)",
-    "website": "Website",
-    "phone": "Phone",
-    "address": "Address",
-    "linkedin": "LinkedIn",
-    "github": "GitHub",
-    "researchAreas": "Research Areas",
-    "experienceSection": "Experience",
-    "experienceDescription": "Add your professional experience",
-    "educationSection": "Education",
-    "educationDescription": "Add your educational background",
-    "addExperience": "Add Experience",
-    "addEducation": "Add Education",
-    "currentlyWorking": "Currently working here",
-    "title": "Title",
-    "company": "Company",
-    "institution": "Institution",
-    "degree": "Degree",
-    "field": "Field of Study",
-    "startDate": "Start Date",
-    "endDate": "End Date",
-    "description": "Description",
-    "saveProfile": "Save Profile",
-    "deleteConfirm": "Are you sure you want to delete this item?",
-    "experienceAdded": "Experience added successfully.",
-    "experienceUpdated": "Experience updated successfully.",
-    "educationAdded": "Education added successfully.",
-    "educationUpdated": "Education updated successfully.",
-    "fixErrors": "Please fix the highlighted fields before saving."
-  },
-  "notifications": {
-    "success": "Success",
-    "error": "Error"
+  "twoFactor": {
+    "title": "Two-Factor Authentication",
+    "description": "Manage your two-factor authentication settings",
+    "enabledBadge": "Enabled",
+    "enabledDescription": "With two-factor authentication enabled, you will be prompted for a secure, random pin during login.",
+    "disabledBadge": "Disabled",
+    "disabledDescription": "Enable two-factor authentication to require a secure pin during login from a TOTP-compatible app.",
+    "disableButton": "Disable 2FA",
+    "continueSetup": "Continue Setup",
+    "enableButton": "Enable 2FA"
   },
   "deleteAccount": {
     "title": "Delete account",
@@ -147,15 +441,26 @@
     "confirmDescription": "Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
     "passwordLabel": "Password"
   },
-  "twoFactor": {
-    "title": "Two-Factor Authentication",
-    "description": "Manage your two-factor authentication settings",
-    "enabledBadge": "Enabled",
-    "enabledDescription": "With two-factor authentication enabled, you will be prompted for a secure, random pin during login.",
-    "disabledBadge": "Disabled",
-    "disabledDescription": "Enable two-factor authentication to require a secure pin during login from a TOTP-compatible app.",
-    "disableButton": "Disable 2FA",
-    "continueSetup": "Continue Setup",
-    "enableButton": "Enable 2FA"
+  "notifications": {
+    "success": "Success",
+    "error": "Error"
+  },
+  "categoryShow": {
+    "parent": "Parent",
+    "description": "Description",
+    "subcategories": "Subcategories",
+    "none": "None",
+    "created": "Created",
+    "updated": "Updated"
+  },
+  "papers": {
+    "badge": "Latest Research",
+    "heading": "Recently Published",
+    "subheading": "Discover cutting-edge research across all fields",
+    "search": "Search papers...",
+    "viewAll": "View All Papers",
+    "empty": "No research papers found in this category",
+    "noTitle": "Untitled Research",
+    "noAuthor": "Unknown Author"
   }
 }

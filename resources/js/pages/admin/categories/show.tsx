@@ -8,10 +8,12 @@ import { useTranslation } from '@/i18n';
 interface CategoryDetails {
     id: number;
     name: string;
+    name_en: string;
+    name_ar: string;
     slug: string;
     description?: string | null;
     parent?: { id: number; name: string } | null;
-    children?: { id: number; name: string }[];
+    children?: { id: number; name: string; name_en: string; name_ar: string }[];
     created_at?: string | null;
     updated_at?: string | null;
 }
@@ -31,7 +33,7 @@ export default function CategoryShow({ category }: CategoryShowProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={category.name} />
 
-            <div className="space-y-6">
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-semibold">{category.name}</h1>
@@ -50,6 +52,17 @@ export default function CategoryShow({ category }: CategoryShowProps) {
                 </div>
 
                 <div className="space-y-4 rounded-xl border bg-card p-6 shadow-sm">
+                    <div className="grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
+                        <div>
+                            <p className="font-semibold">{t('categories.nameEn')}</p>
+                            <p>{category.name_en}</p>
+                        </div>
+                        <div>
+                            <p className="font-semibold">{t('categories.nameAr')}</p>
+                            <p>{category.name_ar}</p>
+                        </div>
+                    </div>
+
                     <div>
                         <p className="text-sm font-semibold text-muted-foreground">
                             {t('categoryShow.parent')}

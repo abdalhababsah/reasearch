@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('researches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('researcher_id')->constrained('users')->onDelete('cascade');
-            $table->string('title');
-            $table->text('abstract')->nullable();
-            $table->string('keywords')->nullable();
+            $table->string('title_en');
+            $table->string('title_ar');
+            $table->text('abstract_en')->nullable();
+            $table->text('abstract_ar')->nullable();
+            $table->string('keywords_en')->nullable();
+            $table->string('keywords_ar')->nullable();
             $table->enum('status', ['draft', 'under_review', 'published', 'archived'])->default('draft');
             $table->boolean('is_public')->default(true);
-            $table->boolean('allow_document_view')->default(true);
-            $table->boolean('allow_dataset_browse')->default(false);
             $table->string('doi')->nullable();
             $table->string('journal_name')->nullable();
             $table->integer('year')->nullable();

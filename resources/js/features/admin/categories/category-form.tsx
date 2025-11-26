@@ -18,7 +18,8 @@ interface CategoryFormProps {
     method: 'post' | 'put';
     parentOptions: ParentOption[];
     defaultValues?: {
-        name?: string;
+        name_en?: string;
+        name_ar?: string;
         slug?: string;
         description?: string | null;
         parent_id?: number | null;
@@ -35,19 +36,21 @@ export default function CategoryForm({
     submitLabel,
     onSuccess,
 }: CategoryFormProps) {
-    const [name, setName] = useState(defaultValues?.name ?? '');
+    const [nameEn, setNameEn] = useState(defaultValues?.name_en ?? '');
+    const [nameAr, setNameAr] = useState(defaultValues?.name_ar ?? '');
     const [slug, setSlug] = useState(defaultValues?.slug ?? '');
     const [slugEdited, setSlugEdited] = useState(false);
     const { t } = useTranslation();
 
     useEffect(() => {
-        setName(defaultValues?.name ?? '');
+        setNameEn(defaultValues?.name_en ?? '');
+        setNameAr(defaultValues?.name_ar ?? '');
         setSlug(defaultValues?.slug ?? '');
         setSlugEdited(false);
     }, [defaultValues]);
 
     const handleNameChange = (value: string) => {
-        setName(value);
+        setNameEn(value);
         if (!slugEdited) {
             setSlug(generateSlug(value));
         }
@@ -70,16 +73,29 @@ export default function CategoryForm({
             {({ processing, errors }) => (
                 <>
                     <div className="grid gap-2">
-                        <Label htmlFor="name">{t('categories.table.name')}</Label>
+                        <Label htmlFor="name_en">{t('categories.nameEn')}</Label>
                         <Input
-                            id="name"
-                            name="name"
+                            id="name_en"
+                            name="name_en"
                             required
-                            value={name}
+                            value={nameEn}
                             onChange={(event) => handleNameChange(event.target.value)}
-                            placeholder={t('categories.table.name')}
+                            placeholder={t('categories.nameEn')}
                         />
-                        <InputError message={errors.name} />
+                        <InputError message={errors.name_en} />
+                    </div>
+
+                    <div className="grid gap-2">
+                        <Label htmlFor="name_ar">{t('categories.nameAr')}</Label>
+                        <Input
+                            id="name_ar"
+                            name="name_ar"
+                            required
+                            value={nameAr}
+                            onChange={(event) => setNameAr(event.target.value)}
+                            placeholder={t('categories.nameAr')}
+                        />
+                        <InputError message={errors.name_ar} />
                     </div>
 
                     <div className="grid gap-2">

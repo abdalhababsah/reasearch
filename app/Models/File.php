@@ -22,6 +22,7 @@ class File extends Model
         'size_bytes',
         'is_primary_doc',
         'is_downloadable',
+        'is_visible',
         'checksum',
         'uploaded_by',
         'uploaded_at',

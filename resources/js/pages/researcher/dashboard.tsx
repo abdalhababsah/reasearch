@@ -6,13 +6,7 @@ import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard().url,
-    },
-];
+import { useTranslation } from '@/i18n';
 
 interface DashboardProps {
     profileIncomplete?: boolean;
@@ -20,19 +14,27 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ profileIncomplete, warning }: DashboardProps) {
+    const { t } = useTranslation();
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: t('dashboard.title'),
+            href: dashboard().url,
+        },
+    ];
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
+            <Head title={t('dashboard.title')} />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                {profileIncomplete && warning && (
+                {profileIncomplete && (
                     <Alert className="border-yellow-500/50 bg-yellow-50 dark:bg-yellow-950/20">
                         <AlertTriangle className="text-yellow-600 dark:text-yellow-500" />
                         <AlertTitle className="text-yellow-800 dark:text-yellow-200">
-                            Profile Incomplete
+                            {t('dashboard.profileIncompleteTitle')}
                         </AlertTitle>
                         <AlertDescription className="text-yellow-700 dark:text-yellow-300">
                             <div className="flex items-center justify-between">
-                                <span>{warning}</span>
+                                <span>{t('dashboard.profileIncompleteDescription')}</span>
                                 <Button
                                     asChild
                                     variant="outline"
@@ -40,7 +42,7 @@ export default function Dashboard({ profileIncomplete, warning }: DashboardProps
                                     className="ml-4 border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-500 dark:text-yellow-300 dark:hover:bg-yellow-900/30"
                                 >
                                     <Link href="/settings/profile">
-                                        Complete Profile
+                                        {t('dashboard.profileIncompleteCta')}
                                         <ExternalLink className="ml-2 h-3 w-3" />
                                     </Link>
                                 </Button>

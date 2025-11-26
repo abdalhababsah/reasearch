@@ -18,6 +18,8 @@ import { useTranslation } from '@/i18n';
 interface TagListItem {
     id: number;
     name: string;
+    name_en: string;
+    name_ar: string;
     slug: string;
     created_at?: string | null;
 }
@@ -38,7 +40,9 @@ interface TagIndexProps {
 export default function TagIndex({ tags }: TagIndexProps) {
     const [createOpen, setCreateOpen] = useState(false);
     const [editingTag, setEditingTag] = useState<TagListItem | null>(null);
-    const { t } = useTranslation();
+    const { t, direction } = useTranslation();
+    const alignStart = direction === 'rtl' ? 'text-right' : 'text-left';
+    const alignEnd = direction === 'rtl' ? 'text-left' : 'text-right';
 
     const handleDelete = (id: number) => {
         if (confirm(t('tags.deleteConfirm'))) {
@@ -57,7 +61,7 @@ export default function TagIndex({ tags }: TagIndexProps) {
         >
             <Head title={t('tags.title')} />
 
-            <div className="space-y-6">
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-semibold">{t('tags.title')}</h1>
@@ -93,13 +97,13 @@ export default function TagIndex({ tags }: TagIndexProps) {
                         </colgroup>
                         <thead className="bg-muted/40">
                             <tr>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignStart} text-sm font-medium text-muted-foreground`}>
                                     {t('tags.table.name')}
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignStart} text-sm font-medium text-muted-foreground`}>
                                     {t('tags.table.slug')}
                                 </th>
-                                <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignEnd} text-sm font-medium text-muted-foreground`}>
                                     {t('tags.table.actions')}
                                 </th>
                             </tr>
@@ -115,10 +119,10 @@ export default function TagIndex({ tags }: TagIndexProps) {
 
                             {tags.data.map((tag) => (
                                 <tr key={tag.id}>
-                                    <td className="px-4 py-3 font-medium">{tag.name}</td>
-                                    <td className="px-4 py-3 text-muted-foreground">{tag.slug}</td>
-                                    <td className="px-4 py-3 text-right">
-                                        <div className="flex flex-wrap justify-end gap-2">
+                                    <td className={`px-4 py-3 font-medium ${alignStart}`}>{tag.name}</td>
+                                    <td className={`px-4 py-3 text-muted-foreground ${alignStart}`}>{tag.slug}</td>
+                                    <td className={`px-4 py-3 ${alignEnd}`}>
+                                        <div className={`flex flex-wrap gap-2 ${direction === 'rtl' ? 'justify-start' : 'justify-end'}`}>
                                             <Button asChild size="sm" variant="ghost">
                                                 <Link href={`/admin/tags/${tag.id}`}>{t('actions.view')}</Link>
                                             </Button>
@@ -168,7 +172,11 @@ export default function TagIndex({ tags }: TagIndexProps) {
                             <TagForm
                                 action={`/admin/tags/${editingTag.id}`}
                                 method="put"
-                                defaultValues={editingTag}
+                                defaultValues={{
+                                    name_en: editingTag.name_en,
+                                    name_ar: editingTag.name_ar,
+                                    slug: editingTag.slug,
+                                }}
                                 submitLabel={t('actions.update')}
                                 onSuccess={() => setEditingTag(null)}
                             />

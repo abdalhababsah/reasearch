@@ -20,7 +20,18 @@ class TagRequest extends FormRequest
         $tagId = $this->route('tag')?->id ?? null;
 
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name_en' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('tags', 'name_en')->ignore($tagId),
+            ],
+            'name_ar' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('tags', 'name_ar')->ignore($tagId),
+            ],
             'slug' => [
                 'required',
                 'string',

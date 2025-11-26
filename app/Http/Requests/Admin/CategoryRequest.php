@@ -25,7 +25,18 @@ class CategoryRequest extends FormRequest
         $categoryId = $this->route('category')?->id ?? null;
 
         $rules = [
-            'name' => ['required', 'string', 'max:255'],
+            'name_en' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories', 'name_en')->ignore($categoryId),
+            ],
+            'name_ar' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories', 'name_ar')->ignore($categoryId),
+            ],
             'slug' => [
                 'required',
                 'string',

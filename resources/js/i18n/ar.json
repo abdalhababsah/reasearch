@@ -1,5 +1,9 @@
 {
   "nav": {
+    "home": "الرئيسية",
+    "researches": "الأبحاث",
+    "researchers": "الباحثون",
+    "contact": "تواصل معنا",
     "dashboard": "لوحة التحكم",
     "categories": "التصنيفات",
     "tags": "الوسوم",
@@ -7,7 +11,14 @@
     "password": "كلمة المرور",
     "twoFactor": "التحقق بخطوتين",
     "appearance": "المظهر",
-    "platform": "المنصة"
+    "platform": "منصة الأبحاث",
+    "features": "المميزات",
+    "menu": "القائمة",
+    "account": "الحساب",
+    "myAccount": "حسابي",
+    "deleteAccount": {
+      "title": "حذف الحساب"
+    }
   },
   "language": {
     "label": "اللغة"
@@ -15,23 +26,259 @@
   "actions": {
     "create": "إنشاء",
     "save": "حفظ",
+    "saving": "جارٍ الحفظ...",
     "update": "تحديث",
     "delete": "حذف",
     "view": "عرض",
     "edit": "تعديل",
-    "back": "عودة",
+    "back": "رجوع",
     "close": "إغلاق",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "search": "بحث",
+    "remove": "إزالة",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "register": "التسجيل",
+    "getStarted": "ابدأ الآن",
+    "readMore": "اقرأ المزيد",
+    "viewProfile": "عرض الملف الشخصي",
+    "clearFilters": "مسح المرشحات",
+    "filter": "تصفية"
   },
-  "dashboard": {
-    "title": "لوحة التحكم",
-    "placeholder": "عنصر توضيحي"
+  "hero": {
+    "badge": "انضم إلى أكثر من 15,000 باحث",
+    "where": "حيث",
+    "ideas": "الأفكار",
+    "become": "تصبح",
+    "impact": "تأثيراً",
+    "description": "المنصة الرائدة للباحثين لنشر الأعمال الرائدة، والتعاون عبر الحدود، وتسريع الاكتشاف العلمي.",
+    "free": "بدون رسوم نشر",
+    "openAccess": "وصول مفتوح للأبد",
+    "rapidReview": "مراجعة سريعة من النظراء",
+    "recentPublication": "نشر حديث"
+  },
+  "stats": {
+    "researchers": "باحث نشط",
+    "papers": "بحث منشور",
+    "countries": "دولة",
+    "satisfaction": "معدل الرضا",
+    "citations": "الاستشهادات",
+    "collaborators": "المتعاونون"
+  },
+  "features": {
+    "heading": "كل ما تحتاجه للنجاح",
+    "subheading": "أدوات قوية مصممة لتبسيط سير عمل البحث من المسودة إلى النشر",
+    "publish": {
+      "title": "نشر الأبحاث",
+      "description": "شارك نتائجك مع مجتمع أكاديمي عالمي واحصل على ملاحظات فورية"
+    },
+    "collaborate": {
+      "title": "التعاون",
+      "description": "تواصل مع الباحثين في جميع أنحاء العالم وبناء فرق متعددة التخصصات"
+    },
+    "track": {
+      "title": "تتبع التأثير",
+      "description": "راقب الاستشهادات والتنزيلات ومقاييس المشاركة في الوقت الفعلي"
+    },
+    "secure": {
+      "title": "تخزين آمن",
+      "description": "حافظ على مسوداتك وبياناتك آمنة بأمان على مستوى المؤسسات"
+    },
+    "fast": {
+      "title": "نشر سريع",
+      "description": "عملية مراجعة مبسطة من النظراء تنشر عملك بشكل أسرع"
+    },
+    "global": {
+      "title": "وصول عالمي",
+      "description": "اجعل بحثك متاحًا للقراء في أكثر من 150 دولة"
+    }
+  },
+  "researchers": {
+    "title": "الباحثون",
+    "badge": "مجتمعنا",
+    "heading": "تعرف على الباحثين الرائدين",
+    "subheading": "تواصل مع العقول اللامعة التي تدفع حدود المعرفة",
+    "browse": {
+      "heading": "اكتشف الباحثين",
+      "subheading": "تواصل مع الباحثين الرائدين واستكشف أعمالهم الرائدة"
+    },
+    "search": {
+      "placeholder": "ابحث بالاسم أو المؤسسة أو المجال..."
+    },
+    "resultsCount": "عرض :count باحث",
+    "empty": {
+      "title": "لم يتم العثور على باحثين",
+      "description": "جرب تعديل البحث"
+    },
+    "browseAll": "تصفح جميع الباحثين",
+    "anonymous": "مجهول",
+    "noField": "المجال غير محدد",
+    "noInstitution": "المؤسسة غير محددة"
+  },
+  "researcher": {
+     "noField": "المجال غير محدد",
+  "noInstitution": "المؤسسة غير محددة",
+    "papers": "أبحاث",
+    "viewProfile": "عرض الملف الشخصي",
+    "profileTitle": "ملف الباحث",
+    "profileDescription": "شارك خلفيتك المهنية وخبراتك ومجالات بحثك.",
+    "infoSection": "معلومات الباحث",
+    "infoDescription": "حدّث معلومات ملف الباحث",
+    "bio": "السيرة الذاتية",
+    "bioPlaceholder": "حدثنا عن نفسك (50 حرفًا على الأقل)",
+    "website": "الموقع الإلكتروني",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "linkedin": "لينكدإن",
+    "github": "غِت هَب",
+    "researchAreas": "مجالات البحث",
+    "experienceSection": "الخبرات",
+    "experienceDescription": "أضف خبراتك المهنية",
+    "educationSection": "التعليم",
+    "educationDescription": "أضف سجلك التعليمي",
+    "addExperience": "إضافة خبرة",
+    "addEducation": "إضافة مؤهل",
+    "currentlyWorking": "أعمل هنا حالياً",
+    "title": "المسمى الوظيفي",
+    "company": "الجهة",
+    "institution": "الجهة التعليمية",
+    "degree": "الدرجة",
+    "field": "التخصص",
+    "fields": "مجالات البحث",
+    "startDate": "تاريخ البدء",
+    "endDate": "تاريخ الانتهاء",
+    "description": "الوصف",
+    "saveProfile": "حفظ الملف",
+    "deleteConfirm": "هل أنت متأكد من الحذف؟",
+    "experienceAdded": "تمت إضافة الخبرة بنجاح.",
+    "experienceUpdated": "تم تحديث الخبرة بنجاح.",
+    "educationAdded": "تمت إضافة المؤهل بنجاح.",
+    "educationUpdated": "تم تحديث المؤهل بنجاح.",
+    "fixErrors": "يرجى تصحيح الحقول المحددة قبل الحفظ.",
+    "about": "نبذة",
+    "publications": "المنشورات",
+    "noPublications": "لا توجد منشورات بعد",
+    "experience": "الخبرة",
+    "education": "التعليم"
+  },
+  "researches": {
+    "title": "الأبحاث",
+    "my": "أبحاثي",
+    "create": "إنشاء بحث",
+    "createButton": "إنشاء بحث",
+    "description": "إدارة الأبحاث، حالة النشر، والملفات المرفقة.",
+    "adminDescription": "استعرض وأدر جميع الأبحاث المقدمة.",
+    "browse": {
+      "heading": "تصفح الأوراق البحثية",
+      "subheading": "اكتشف أبحاثًا رائدة من باحثين رائدين حول العالم"
+    },
+    "search": {
+      "placeholder": "ابحث بالعنوان أو الكلمات المفتاحية أو الملخص..."
+    },
+    "resultsCount": "عرض :count نتيجة",
+    "empty": {
+      "title": "لم يتم العثور على أوراق بحثية",
+      "description": "جرب تعديل البحث أو المرشحات"
+    },
+    "emptyState": "لا توجد أبحاث حتى الآن. ابدأ بإنشاء بحث جديد.",
+    "card": {
+      "untitled": "بحث بدون عنوان",
+      "created": "تاريخ الإنشاء :date",
+      "noSummary": "لم يتم إضافة ملخص.",
+      "documentsAllowed": "الملفات مرئية",
+      "documentsBlocked": "الملفات مخفية"
+    },
+    "filters": {
+      "search": "بحث",
+      "searchPlaceholder": "ابحث بالعنوان أو الكلمات المفتاحية",
+      "status": "الحالة",
+      "statusAll": "جميع الحالات",
+      "visibility": "إمكانية العرض",
+      "visibilityAll": "كل خيارات العرض",
+      "visibilityPublic": "عام",
+      "visibilityPrivate": "خاص",
+      "allYears": "جميع السنوات",
+      "reset": "إعادة التعيين",
+      "apply": "تطبيق المرشحات"
+    },
+    "statuses": {
+      "draft": "مسودة",
+      "under_review": "قيد المراجعة",
+      "published": "منشور",
+      "archived": "مؤرشف"
+    },
+    "visibility": {
+      "public": "عام",
+      "private": "خاص"
+    },
+    "actions": {
+      "publish": "نشر",
+      "unpublish": "إلغاء النشر",
+      "makePublic": "جعلها عامة",
+      "makePrivate": "جعلها خاصة"
+    },
+    "form": {
+      "createTitle": "إنشاء بحث جديد",
+      "createSubtitle": "أضف تفاصيل بحثك، وارفق الملفات، واضبط إعدادات العرض.",
+      "editSubtitle": "حدّث تفاصيل بحثك، وإدارة الملفات، وضبط الإعدادات.",
+      "basicInfo": "المعلومات الأساسية",
+      "title_en": "العنوان (بالإنجليزية)",
+      "title_ar": "العنوان (بالعربية)",
+      "titlePlaceholderEn": "اكتب عنوان البحث بالإنجليزية",
+      "titlePlaceholderAr": "اكتب عنوان البحث بالعربية",
+      "abstract_en": "الملخص (بالإنجليزية)",
+      "abstract_ar": "الملخص (بالعربية)",
+      "abstractPlaceholderEn": "اكتب ملخصاً موجزاً باللغة الإنجليزية",
+      "abstractPlaceholderAr": "اكتب ملخصاً موجزاً باللغة العربية",
+      "keywords_en": "الكلمات المفتاحية (بالإنجليزية)",
+      "keywords_ar": "الكلمات المفتاحية (بالعربية)",
+      "keywordsPlaceholderEn": "اكتب كلمات مفتاحية مفصولة بفواصل بالإنجليزية",
+      "keywordsPlaceholderAr": "اكتب كلمات مفتاحية مفصولة بفواصل بالعربية",
+      "keywordsHelp": "افصل بين الكلمات المفتاحية بالفاصلة، مثال: ذكاء اصطناعي، تعليم، سياسات.",
+      "taxonomy": "التصنيفات والوسوم",
+      "taxonomyHelp": "استخدم التصنيفات والوسوم لتسهيل العثور على بحثك.",
+      "categories": "التصنيفات",
+      "noCategories": "لا توجد تصنيفات متاحة.",
+      "tags": "الوسوم",
+      "noTags": "لا توجد وسوم متاحة.",
+      "status": "الحالة",
+      "settings": "الإعدادات",
+      "visibilityHelp": "تحكم فيما إذا كان البحث مرئياً للجميع أو لك فقط.",
+      "files": "الملفات",
+      "dropFilesTitle": "رفع ملفات البحث",
+      "dropFilesSubtitle": "يدعم PDF وWord وExcel وCSV وZIP والصور.",
+      "chooseFiles": "اختيار الملفات",
+      "selectedFiles": "الملفات المختارة",
+      "existingFiles": "الملفات الحالية",
+      "newFiles": "ملفات جديدة",
+      "addMoreFiles": "إضافة المزيد من المستندات",
+      "primaryHint": "اختر ملفاً رئيسياً ليظهر أولاً.",
+      "primaryFile": "الملف الرئيسي",
+      "wallpaper": "صورة الغلاف",
+      "wallpaperHelp": "صورة اختيارية تظهر في بطاقة البحث.",
+      "noWallpaperPreview": "لا توجد صورة",
+      "removeWallpaper": "إزالة صورة الغلاف"
+    },
+    "show": {
+      "overview": "نظرة عامة",
+      "keywords": "الكلمات المفتاحية",
+      "noKeywords": "لا توجد كلمات مفتاحية.",
+      "metadata": "البيانات الوصفية",
+      "status": "الحالة",
+      "visibility": "إمكانية العرض",
+      "createdAt": "تاريخ الإنشاء",
+      "filesSection": "الملفات",
+      "filesHelp": "استعرض أو حمّل الملفات المرفوعة.",
+      "noFiles": "لا توجد ملفات مرفوعة بعد.",
+      "deleteConfirm": "هل تريد حذف هذا البحث؟ سيتم حذف جميع الملفات المرتبطة به."
+    }
   },
   "categories": {
+    "all": "جميع التصنيفات",
     "title": "التصنيفات",
     "description": "إدارة التصنيفات العليا للأبحاث وهيكلها الهرمي.",
     "createTitle": "إنشاء تصنيف",
-    "createDescription": "عرّف الاسم والرابط الأبوي والوصف الاختياري.",
+    "createDescription": "عرّف الاسم، الرابط، التصنيف الأب (اختياري)، والوصف.",
     "editDialogTitle": "تعديل :name",
     "editDialogDescription": "عدل البيانات أو أعد تعيين التصنيف الأب.",
     "table": {
@@ -43,15 +290,14 @@
     "noResults": "لا توجد تصنيفات.",
     "deleteConfirm": "هل تريد حذف هذا التصنيف؟ هذا الإجراء لا يمكن التراجع عنه.",
     "parentNone": "—",
-    "viewButton": "عرض"
+    "viewButton": "عرض",
+    "nameEn": "الاسم (بالإنجليزية)",
+    "nameAr": "الاسم (بالعربية)"
   },
-  "categoryShow": {
-    "parent": "التصنيف الأب",
-    "description": "الوصف",
-    "subcategories": "التصنيفات الفرعية",
-    "none": "لا يوجد",
-    "created": "تاريخ الإنشاء",
-    "updated": "تاريخ التحديث"
+  "filters": {
+    "allYears": "جميع السنوات",
+    "status": "الحالة",
+    "visibility": "إمكانية العرض"
   },
   "tags": {
     "title": "الوسوم",
@@ -66,7 +312,89 @@
       "actions": "الإجراءات"
     },
     "noResults": "لا توجد وسوم.",
-    "deleteConfirm": "هل تريد حذف هذا الوسم؟"
+    "deleteConfirm": "هل تريد حذف هذا الوسم؟",
+    "nameEn": "الاسم (بالإنجليزية)",
+    "nameAr": "الاسم (بالعربية)"
+  },
+  "sort": {
+    "latest": "الأحدث",
+    "oldest": "الأقدم",
+    "titleAsc": "العنوان (أ-ي)",
+    "titleDesc": "العنوان (ي-أ)"
+  },
+  "time": {
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "daysAgo": "منذ :count يوم",
+    "weeksAgo": "منذ :count أسبوع",
+    "present": "حتى الآن"
+  },
+  "contact": {
+    "title": "تواصل معنا",
+    "heading": "ابق على تواصل",
+    "subheading": "هل لديك أسئلة؟ نود سماعك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
+    "form": {
+      "title": "أرسل لنا رسالة",
+      "description": "املأ النموذج أدناه وسنعاود الاتصال بك قريبًا",
+      "name": "الاسم",
+      "namePlaceholder": "اسمك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "الموضوع",
+      "subjectPlaceholder": "كيف يمكننا المساعدة؟",
+      "message": "الرسالة",
+      "messagePlaceholder": "أخبرنا المزيد عن استفسارك...",
+      "send": "إرسال الرسالة",
+      "sending": "جارٍ الإرسال..."
+    },
+    "info": {
+      "title": "معلومات الاتصال",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "address": "العنوان"
+    },
+    "hours": {
+      "title": "ساعات العمل",
+      "weekdays": "الإثنين - الجمعة",
+      "weekend": "السبت - الأحد",
+      "closed": "مغلق"
+    }
+  },
+  "cta": {
+    "heading": "هل أنت مستعد لمشاركة بحثك؟",
+    "subheading": "انضم إلى آلاف الباحثين الذين يحدثون فرقًا. انشر ورقتك البحثية الأولى مجانًا اليوم.",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "button": "ابدأ الآن",
+    "note": "لا حاجة لبطاقة ائتمان • مجاني للأبد للباحثين"
+  },
+  "footer": {
+    "description": "تمكين الباحثين من مشاركة المعرفة والتعاون عالميًا.",
+    "platform": "المنصة",
+    "pricing": "الأسعار",
+    "api": "واجهة برمجية",
+    "documentation": "التوثيق",
+    "resources": "الموارد",
+    "blog": "المدونة",
+    "guidelines": "الإرشادات",
+    "helpCenter": "مركز المساعدة",
+    "community": "المجتمع",
+    "company": "الشركة",
+    "about": "حول",
+    "careers": "الوظائف",
+    "contact": "اتصل بنا",
+    "privacy": "الخصوصية",
+    "copyright": "© 2024 منصة الأبحاث. جميع الحقوق محفوظة."
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "placeholder": "عنصر توضيحي",
+    "profileIncompleteTitle": "الملف الشخصي غير مكتمل",
+    "profileIncompleteDescription": "يرجى إكمال ملفك الشخصي لتتمكن من استخدام جميع المزايا.",
+    "profileIncompleteCta": "إكمال الملف الشخصي"
+  },
+  "profile": {
+    "settings": "الإعدادات",
+    "edit": "تعديل الملف الشخصي"
   },
   "settings": {
     "title": "الإعدادات",
@@ -94,46 +422,6 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "savePassword": "حفظ كلمة المرور"
   },
-  "researcher": {
-    "profileTitle": "ملف الباحث",
-    "profileDescription": "شارك خلفيتك المهنية وخبراتك ومجالات بحثك.",
-    "infoSection": "معلومات الباحث",
-    "infoDescription": "حدّث معلومات ملف الباحث",
-    "bio": "نبذة",
-    "bioPlaceholder": "حدثنا عن نفسك (50 حرفًا على الأقل)",
-    "website": "الموقع الإلكتروني",
-    "phone": "الهاتف",
-    "address": "العنوان",
-    "linkedin": "لينكدإن",
-    "github": "غِت هَب",
-    "researchAreas": "مجالات البحث",
-    "experienceSection": "الخبرات",
-    "experienceDescription": "أضف خبراتك المهنية",
-    "educationSection": "التعليم",
-    "educationDescription": "أضف سجلك التعليمي",
-    "addExperience": "إضافة خبرة",
-    "addEducation": "إضافة مؤهل",
-    "currentlyWorking": "أعمل هنا حالياً",
-    "title": "المسمى الوظيفي",
-    "company": "الجهة",
-    "institution": "الجهة التعليمية",
-    "degree": "الدرجة",
-    "field": "التخصص",
-    "startDate": "تاريخ البدء",
-    "endDate": "تاريخ الانتهاء",
-    "description": "الوصف",
-    "saveProfile": "حفظ الملف",
-    "deleteConfirm": "هل أنت متأكد من الحذف؟",
-    "experienceAdded": "تمت إضافة الخبرة بنجاح.",
-    "experienceUpdated": "تم تحديث الخبرة بنجاح.",
-    "educationAdded": "تمت إضافة المؤهل بنجاح.",
-    "educationUpdated": "تم تحديث المؤهل بنجاح.",
-    "fixErrors": "يرجى تصحيح الحقول المحددة قبل الحفظ."
-  },
-  "notifications": {
-    "success": "نجاح",
-    "error": "خطأ"
-  },
   "twoFactor": {
     "title": "التحقق بخطوتين",
     "description": "إدارة إعدادات التحقق بخطوتين.",
@@ -154,5 +442,27 @@
     "confirmTitle": "هل أنت متأكد أنك تريد حذف حسابك؟",
     "confirmDescription": "بمجرد حذف حسابك سيتم حذف جميع بياناتك بشكل دائم. يرجى إدخال كلمة المرور للتأكيد.",
     "passwordLabel": "كلمة المرور"
+  },
+  "notifications": {
+    "success": "نجاح",
+    "error": "خطأ"
+  },
+  "categoryShow": {
+    "parent": "التصنيف ",
+    "description": "الوصف",
+    "subcategories": "التصنيفات الفرعية",
+    "none": "لا يوجد",
+    "created": "تاريخ الإنشاء",
+    "updated": "تاريخ التحديث"
+  },
+  "papers": {
+    "badge": "أحدث الأبحاث",
+    "heading": "المنشورة حديثاً",
+    "subheading": "اكتشف أحدث الأبحاث في جميع المجالات",
+    "search": "البحث عن أوراق بحثية...",
+    "viewAll": "عرض جميع الأبحاث",
+    "empty": "لم يتم العثور على أبحاث في هذا التصنيف",
+    "noTitle": "بحث بدون عنوان",
+    "noAuthor": "مؤلف غير معروف"
   }
 }

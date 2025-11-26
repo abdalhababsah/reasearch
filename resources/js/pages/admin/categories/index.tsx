@@ -18,6 +18,8 @@ import { useTranslation } from '@/i18n';
 interface CategoryListItem {
     id: number;
     name: string;
+    name_en: string;
+    name_ar: string;
     slug: string;
     description?: string | null;
     parent_id?: number | null;
@@ -47,7 +49,9 @@ interface CategoryIndexProps {
 export default function CategoriesIndex({ categories, parents }: CategoryIndexProps) {
     const [createOpen, setCreateOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState<CategoryListItem | null>(null);
-    const { t } = useTranslation();
+    const { t, direction } = useTranslation();
+    const alignStart = direction === 'rtl' ? 'text-right' : 'text-left';
+    const alignEnd = direction === 'rtl' ? 'text-left' : 'text-right';
 
     const handleDelete = (id: number) => {
         if (confirm(t('categories.deleteConfirm'))) {
@@ -73,7 +77,7 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
         >
             <Head title={t('categories.title')} />
 
-            <div className="space-y-6">
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-semibold">{t('categories.title')}</h1>
@@ -110,16 +114,16 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                         </colgroup>
                         <thead className="bg-muted/40">
                             <tr>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignStart} text-sm font-medium text-muted-foreground`}>
                                     {t('categories.table.name')}
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignStart} text-sm font-medium text-muted-foreground`}>
                                     {t('categories.table.slug')}
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignStart} text-sm font-medium text-muted-foreground`}>
                                     {t('categories.table.parent')}
                                 </th>
-                                <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
+                                <th className={`px-4 py-3 ${alignEnd} text-sm font-medium text-muted-foreground`}>
                                     {t('categories.table.actions')}
                                 </th>
                             </tr>
@@ -135,13 +139,13 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
 
                             {categories.data.map((category) => (
                                 <tr key={category.id}>
-                                    <td className="px-4 py-3 font-medium">{category.name}</td>
-                                    <td className="px-4 py-3 text-muted-foreground">{category.slug}</td>
-                                    <td className="px-4 py-3 text-muted-foreground">
+                                    <td className={`px-4 py-3 font-medium ${alignStart}`}>{category.name}</td>
+                                    <td className={`px-4 py-3 text-muted-foreground ${alignStart}`}>{category.slug}</td>
+                                    <td className={`px-4 py-3 text-muted-foreground ${alignStart}`}>
                                         {category.parent?.name ?? t('categories.parentNone')}
                                     </td>
-                                    <td className="px-4 py-3 text-right">
-                                        <div className="flex flex-wrap justify-end gap-2">
+                                    <td className={`px-4 py-3 ${alignEnd}`}>
+                                        <div className={`flex flex-wrap gap-2 ${direction === 'rtl' ? 'justify-start' : 'justify-end'}`}>
                                             <Button asChild size="sm" variant="ghost">
                                                 <Link href={`/admin/categories/${category.id}`}>
                                                     {t('actions.view')}
@@ -195,7 +199,8 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                                 method="put"
                                 parentOptions={editParentOptions}
                                 defaultValues={{
-                                    name: editingCategory.name,
+                                    name_en: editingCategory.name_en,
+                                    name_ar: editingCategory.name_ar,
                                     slug: editingCategory.slug,
                                     description: editingCategory.description ?? '',
                                     parent_id: editingCategory.parent_id ?? undefined,

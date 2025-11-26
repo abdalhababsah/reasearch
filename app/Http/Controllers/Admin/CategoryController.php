@@ -18,19 +18,23 @@ class CategoryController extends Controller
      */
     public function index(): Response
     {
-        $categories = Category::with('parent:id,name')
+        $locale = app()->getLocale() === 'ar' ? 'ar' : 'en';
+        $nameColumn = "name_{$locale}";
+        $categories = Category::with('parent:id,name_en,name_ar')
             ->latest('id')
             ->paginate(10)
             ->withQueryString()
             ->through(fn (Category $category) => [
                 'id' => $category->id,
-                'name' => $category->name,
+                'name' => $category->{$nameColumn},
+                'name_en' => $category->name_en,
+                'name_ar' => $category->name_ar,
                 'slug' => $category->slug,
                 'description' => $category->description,
                 'parent_id' => $category->parent_id,
                 'parent' => $category->parent ? [
                     'id' => $category->parent->id,
-                    'name' => $category->parent->name,
+                    'name' => $category->parent->{$nameColumn},
                 ] : null,
                 'created_at' => $category->created_at?->toDateTimeString(),
             ]);
@@ -66,21 +70,26 @@ class CategoryController extends Controller
      */
     public function show(Category $category): Response
     {
-        $category->load(['parent:id,name', 'children:id,name,parent_id']);
+        $category->load(['parent:id,name_en,name_ar', 'children:id,name_en,name_ar,parent_id']);
+        $localeName = "name_" . (app()->getLocale() === 'ar' ? 'ar' : 'en');
 
         return Inertia::render('admin/categories/show', [
             'category' => [
                 'id' => $category->id,
-                'name' => $category->name,
+                'name' => $category->{$localeName},
+                'name_en' => $category->name_en,
+                'name_ar' => $category->name_ar,
                 'slug' => $category->slug,
                 'description' => $category->description,
                 'parent' => $category->parent ? [
                     'id' => $category->parent->id,
-                    'name' => $category->parent->name,
+                    'name' => $category->parent->{$localeName},
                 ] : null,
                 'children' => $category->children->map(fn (Category $child) => [
                     'id' => $child->id,
-                    'name' => $child->name,
+                    'name' => $child->{$localeName},
+                    'name_en' => $child->name_en,
+                    'name_ar' => $child->name_ar,
                 ])->values(),
                 'created_at' => $category->created_at?->toDateTimeString(),
                 'updated_at' => $category->updated_at?->toDateTimeString(),
@@ -146,9 +155,16 @@ class CategoryController extends Controller
      */
     protected function parentOptions(?int $excludingId = null)
     {
+        $locale = app()->getLocale() === 'ar' ? 'ar' : 'en';
+        $nameColumn = "name_{$locale}";
+
         return Category::when($excludingId, fn ($query) => $query->where('id', '!=', $excludingId))
-            ->orderBy('name')
-            ->get(['id', 'name'])
+            ->orderBy($nameColumn)
+            ->get(['id', 'name_en', 'name_ar'])
+            ->map(fn (Category $category) => [
+                'id' => $category->id,
+                'name' => $category->{$nameColumn},
+            ])
             ->values();
     }
 }

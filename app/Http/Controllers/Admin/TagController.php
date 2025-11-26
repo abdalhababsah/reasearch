@@ -18,12 +18,17 @@ class TagController extends Controller
      */
     public function index(): Response
     {
+        $locale = app()->getLocale() === 'ar' ? 'ar' : 'en';
+        $nameColumn = "name_{$locale}";
+
         $tags = Tag::latest('id')
             ->paginate(10)
             ->withQueryString()
             ->through(fn (Tag $tag) => [
                 'id' => $tag->id,
-                'name' => $tag->name,
+                'name' => $tag->{$nameColumn},
+                'name_en' => $tag->name_en,
+                'name_ar' => $tag->name_ar,
                 'slug' => $tag->slug,
                 'created_at' => $tag->created_at?->toDateTimeString(),
             ]);
@@ -58,10 +63,14 @@ class TagController extends Controller
      */
     public function show(Tag $tag): Response
     {
+        $localeName = "name_" . (app()->getLocale() === 'ar' ? 'ar' : 'en');
+
         return Inertia::render('admin/tags/show', [
             'tag' => [
                 'id' => $tag->id,
-                'name' => $tag->name,
+                'name' => $tag->{$localeName},
+                'name_en' => $tag->name_en,
+                'name_ar' => $tag->name_ar,
                 'slug' => $tag->slug,
                 'created_at' => $tag->created_at?->toDateTimeString(),
                 'updated_at' => $tag->updated_at?->toDateTimeString(),

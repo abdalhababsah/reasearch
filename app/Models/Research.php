@@ -12,6 +12,14 @@ class Research extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'researches';
+    
+    protected $appends = [
+        'title',
+        'abstract',
+        'keywords',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,13 +27,15 @@ class Research extends Model
      */
     protected $fillable = [
         'researcher_id',
-        'title',
-        'abstract',
-        'keywords',
+        'title_en',
+        'title_ar',
+        'abstract_en',
+        'abstract_ar',
+        'keywords_en',
+        'keywords_ar',
         'status',
         'is_public',
-        'allow_document_view',
-        'allow_dataset_browse',
+        'primary_file_id', 
         'wallpaper_file_id',
         'current_version_id',
         'doi',
@@ -43,11 +53,32 @@ class Research extends Model
     {
         return [
             'is_public' => 'boolean',
-            'allow_document_view' => 'boolean',
-            'allow_dataset_browse' => 'boolean',
             'year' => 'integer',
             'published_at' => 'datetime',
         ];
+    }
+
+    protected function localizedValue(string $attribute): ?string
+    {
+        $locale = app()->getLocale() === 'ar' ? 'ar' : 'en';
+        $column = $attribute . '_' . $locale;
+
+        return $this->attributes[$column] ?? null;
+    }
+
+    public function getTitleAttribute(): ?string
+    {
+        return $this->localizedValue('title');
+    }
+
+    public function getAbstractAttribute(): ?string
+    {
+        return $this->localizedValue('abstract');
+    }
+
+    public function getKeywordsAttribute(): ?string
+    {
+        return $this->localizedValue('keywords');
     }
 
     /**
@@ -72,6 +103,15 @@ class Research extends Model
     public function files(): HasMany
     {
         return $this->hasMany(File::class);
+    }
+
+    /**
+     * Get the primary file (main research document) for the research.
+     * ✅ ADD THIS METHOD
+     */
+    public function primaryFile(): BelongsTo
+    {
+        return $this->belongsTo(File::class, 'primary_file_id');
     }
 
     /**

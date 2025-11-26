@@ -11,7 +11,8 @@ interface TagFormProps {
     action: string;
     method: 'post' | 'put';
     defaultValues?: {
-        name?: string;
+        name_en?: string;
+        name_ar?: string;
         slug?: string;
     };
     submitLabel?: string;
@@ -25,19 +26,21 @@ export default function TagForm({
     submitLabel,
     onSuccess,
 }: TagFormProps) {
-    const [name, setName] = useState(defaultValues?.name ?? '');
+    const [nameEn, setNameEn] = useState(defaultValues?.name_en ?? '');
+    const [nameAr, setNameAr] = useState(defaultValues?.name_ar ?? '');
     const [slug, setSlug] = useState(defaultValues?.slug ?? '');
     const [slugEdited, setSlugEdited] = useState(false);
     const { t } = useTranslation();
 
     useEffect(() => {
-        setName(defaultValues?.name ?? '');
+        setNameEn(defaultValues?.name_en ?? '');
+        setNameAr(defaultValues?.name_ar ?? '');
         setSlug(defaultValues?.slug ?? '');
         setSlugEdited(false);
     }, [defaultValues]);
 
     const handleNameChange = (value: string) => {
-        setName(value);
+        setNameEn(value);
         if (!slugEdited) {
             setSlug(generateSlug(value));
         }
@@ -60,16 +63,29 @@ export default function TagForm({
             {({ processing, errors }) => (
                     <>
                         <div className="grid gap-2">
-                            <Label htmlFor="name">{t('tags.table.name')}</Label>
+                            <Label htmlFor="name_en">{t('tags.nameEn')}</Label>
                         <Input
-                            id="name"
-                            name="name"
+                            id="name_en"
+                            name="name_en"
                             required
-                            value={name}
+                            value={nameEn}
                             onChange={(event) => handleNameChange(event.target.value)}
-                            placeholder={t('tags.table.name')}
+                            placeholder={t('tags.nameEn')}
                         />
-                        <InputError message={errors.name} />
+                        <InputError message={errors.name_en} />
+                    </div>
+
+                    <div className="grid gap-2">
+                            <Label htmlFor="name_ar">{t('tags.nameAr')}</Label>
+                        <Input
+                            id="name_ar"
+                            name="name_ar"
+                            required
+                            value={nameAr}
+                            onChange={(event) => setNameAr(event.target.value)}
+                            placeholder={t('tags.nameAr')}
+                        />
+                        <InputError message={errors.name_ar} />
                     </div>
 
                     <div className="grid gap-2">
