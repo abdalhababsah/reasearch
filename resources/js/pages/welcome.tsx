@@ -14,6 +14,7 @@ import HomeLayout from '@/layouts/home-layout';
 
 // import the demo component
 import AudioLabelingDemo from '@/pages/public/AudioLabelingDemo';
+import CtaSection from '@/components/CtaSection';
 
 type TopResearcher = {
   id: number;
@@ -30,6 +31,7 @@ type RecentResearch = {
   author: string | null;
   category: string | null;
   category_id: number | null;
+  category_ids?: number[];
   created_at: string | null;
   wallpaper_url?: string | null;
   abstract?: string | null;
@@ -134,7 +136,10 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
   const filteredResearches =
     selectedCategory === 'all'
       ? recentResearches
-      : recentResearches.filter((paper) => paper.category_id === selectedCategory);
+      : recentResearches.filter((paper) => {
+          const ids = paper.category_ids ?? (paper.category_id ? [paper.category_id] : []);
+          return ids.includes(selectedCategory as number);
+        });
 
   const cardVariants = {
     hidden: { opacity: 0, y: 60, scale: 0.9, rotateX: -15 },
@@ -472,7 +477,6 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
             {[{ id: 'all' as const, name: t('common.all', { defaultValue: 'All Research' }), count: recentResearches.length }, ...topCategories.map(cat => ({
               id: cat.id,
               name: locale === 'ar' ? cat.name_ar : cat.name_en,
-              count: cat.researches_count
             }))].map((category, i) => (
               <motion.button
                 key={category.id}
@@ -495,7 +499,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                     className={`text-xs ${selectedCategory === category.id ? 'text-white/80' : 'text-muted-foreground'
                       }`}
                   >
-                    ({category.count})
+                    {/* ({category.count}) */}
                   </span>
                 </span>
                 {selectedCategory === category.id && (
@@ -536,12 +540,8 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                             className="h-full w-full object-cover"
                           />
                         ) : (
-                          <div className="relative h-full w-full bg-gradient-to-br from-primary/20 to-primary/5">
-                            <img
-                              src={`https://images.unsplash.com/photo-${1500000000000 + (i * 100000000)}?w=800&h=600&fit=crop`}
-                              alt={paper.title || ''}
-                              className="h-full w-full object-cover opacity-50"
-                            />
+                          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+                            <BookOpen className="h-16 w-16 text-primary/60" />
                           </div>
                         )}
                       </motion.div>
@@ -581,7 +581,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                           transition={{ delay: i * 0.1 + 0.3, type: 'spring' }}
                           className="absolute left-4 top-4"
                         >
-                          <span className="rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold backdrop-blur-sm">
+                          <span className="rounded-full bg-primary text-white px-4 py-1.5 text-xs font-bold backdrop-blur-sm">
                             {paper.category}
                           </span>
                         </motion.div>
@@ -761,7 +761,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                         transition={{ delay: i * 0.1 + 0.3 }}
                         className="absolute right-4 top-4"
                       >
-                        <div className="flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 backdrop-blur-sm">
+                        <div className="flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 backdrop-blur-sm dark:text-primary">
                           <FileText className="h-4 w-4 text-primary" />
                           <span className="text-sm font-bold">{researcher.papers}</span>
                         </div>
@@ -813,61 +813,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-primary py-24 text-white">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=600&fit=crop"
-            alt="Background"
-            className="h-full w-full object-cover opacity-10"
-          />
-        </div>
-
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-4xl"
-          >
-            <h2 className="mb-6 text-5xl font-bold">
-              {t('cta.heading', { defaultValue: 'Start Your Research Journey' })}
-            </h2>
-            <p className="mb-8 text-xl opacity-90">
-              {t('cta.subheading', {
-                defaultValue:
-                  'Join thousands of researchers discovering, publishing, and sharing groundbreaking work.'
-              })}
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  href={register()}
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-primary shadow-2xl transition-all"
-                >
-                  {t('actions.getStarted', { defaultValue: 'Get Started Free' })}
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  href="/researches"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-white px-8 py-4 text-lg font-semibold transition-all hover:bg-white/10"
-                >
-                  <Compass className="h-5 w-5" />
-                  {t('cta.browseResearch', { defaultValue: 'Browse Research' })}
-                </Link>
-              </motion.div>
-            </div>
-
-            <p className="mt-6 text-sm opacity-75">
-              {t('cta.note', {
-                defaultValue: 'No credit card required • Explore 45,000+ papers • Join in 60 seconds'
-              })}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <CtaSection />
     </HomeLayout>
   );
 }

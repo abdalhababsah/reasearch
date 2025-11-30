@@ -7,6 +7,7 @@ import { useTranslation } from '@/i18n';
 import { type SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
 import publicRoutes from '@/routes/public';
+import CtaSection from '@/components/CtaSection';
 
 type Researcher = {
   id: number;
@@ -269,7 +270,7 @@ export default function ResearchersIndex() {
                         transition={{ delay: i * 0.05 + 0.3 }}
                         className="absolute right-4 top-4"
                       >
-                        <div className="flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 backdrop-blur-sm">
+                        <div className="flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 backdrop-blur-sm dark:text-primary">
                           <FileText className="h-4 w-4 text-primary" />
                           <span className="text-sm font-bold">{researcher.papers_count}</span>
                         </div>
@@ -451,53 +452,7 @@ export default function ResearchersIndex() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-primary py-20 text-white">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=600&fit=crop"
-            alt="Background"
-            className="h-full w-full object-cover opacity-10"
-          />
-        </div>
-
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-3xl"
-          >
-            <h2 className="mb-6 text-4xl font-bold">
-              {t('researchers.cta.heading', { defaultValue: 'Join Our Research Community' })}
-            </h2>
-            <p className="mb-8 text-xl opacity-90">
-              {t('researchers.cta.subheading', {
-                defaultValue: 'Create your profile and connect with researchers worldwide',
-              })}
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  href="/register"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-primary shadow-2xl transition-all"
-                >
-                  {t('researchers.cta.createProfile', { defaultValue: 'Create Profile' })}
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-white px-8 py-4 text-lg font-semibold transition-all hover:bg-white/10"
-                >
-                  {t('researchers.cta.learnMore', { defaultValue: 'Learn More' })}
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CtaSection />
     </HomeLayout>
   );
 }

@@ -12,7 +12,7 @@
     "password": "Password",
     "twoFactor": "Two-Factor Auth",
     "appearance": "Appearance",
-    "platform": "ResearchHub",
+    "platform": "DIAS LAP",
     "features": "Features",
     "menu": "Menu",
     "account": "Account",
@@ -526,6 +526,20 @@
       "title": "Looking for Answers?",
       "description": "Check out our comprehensive FAQ section for quick solutions to common questions.",
       "cta": "Visit FAQ"
+    },
+    "office": {
+      "alt": "Office Location",
+      "title": "Visit Our Office",
+      "addressLine1": "123 Discovery Boulevard",
+      "addressLine2": "Science City, ST 12345",
+      "addressLine3": "Dias Lab"
+    },
+    "map": {
+      "heading": "Find Us Here",
+      "subheading": "Located in the heart of Science City",
+      "alt": "Map Location",
+      "title": "Dias Lab HQ",
+      "location": "Science City"
     }
   },
   "cta": {

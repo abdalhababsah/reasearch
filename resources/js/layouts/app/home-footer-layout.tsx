@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Github, Sparkles } from 'lucide-react';
 import { useTranslation } from '@/i18n';
 import { Link } from '@inertiajs/react';
+import AppLogo from '@/components/app-logo';
+import AppLogoIcon from '@/components/app-logo-icon';
 
 export default function HomeFooterLayout() {
   const { t } = useTranslation();
@@ -52,8 +54,8 @@ export default function HomeFooterLayout() {
               className="space-y-6"
             >
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary shadow-lg">
-                  <Sparkles className="h-6 w-6 text-white" />
+                <div className="flex h-24 w-24 items-center justify-center ">
+                  <AppLogoIcon />
                 </div>
                 <span className="text-2xl font-bold">
                   {t('nav.platform', { defaultValue: 'ResearchHub' })}

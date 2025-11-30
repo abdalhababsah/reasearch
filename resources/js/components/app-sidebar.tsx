@@ -84,7 +84,7 @@ export function AppSidebar({ side = 'left' }: { side?: 'left' | 'right' }) {
                 <SidebarHeader>
                     <SidebarMenu>
                         <SidebarMenuItem>
-                            <SidebarMenuButton size="lg" asChild>
+                            <SidebarMenuButton size="lg" className='justify-center' asChild>
                                 <Link href={dashboardHref} prefetch>
                                     <AppLogo />
                                 </Link>

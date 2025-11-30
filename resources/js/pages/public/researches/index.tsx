@@ -410,7 +410,7 @@ export default function ResearchesIndex() {
                     </div>
 
                     {/* Decorative Corner */}
-                    <div className="absolute -right-2 -top-2 h-16 w-16 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all" />
+                    {/* <div className="absolute -right-2 -top-2 h-16 w-16 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all" /> */}
                   </div>
                 </Link>
               </motion.div>

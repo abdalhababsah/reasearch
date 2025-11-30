@@ -5,6 +5,7 @@ import HomeLayout from '@/layouts/home-layout';
 import { useTranslation } from '@/i18n';
 import { type SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
+import CtaSection from '@/components/CtaSection';
 
 declare const route: (name: string, params?: any, absolute?: boolean) => string;
 
@@ -70,7 +71,7 @@ export default function Contact() {
       <section className="relative overflow-hidden bg-background py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px]"></div>
-        
+
         <div className="container relative z-10 mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -95,7 +96,7 @@ export default function Contact() {
               className="mb-6 text-5xl font-bold lg:text-6xl xl:text-7xl"
             >
               {t('contact.heading', { defaultValue: 'Get in' })}{' '}
-             
+
             </motion.h1>
 
             <motion.p
@@ -123,15 +124,11 @@ export default function Contact() {
               <motion.a
                 key={i}
                 href={method.link}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="group relative overflow-hidden rounded-3xl border-2 border-primary/10 bg-background p-8 transition-all hover:border-primary/30 hover:shadow-2xl"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${method.color} opacity-0 transition-opacity group-hover:opacity-5`} />
-                
+
                 <div className="relative z-10 space-y-4">
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
@@ -140,7 +137,7 @@ export default function Contact() {
                   >
                     <method.icon className="h-8 w-8" />
                   </motion.div>
-                  
+
                   <div>
                     <h3 className="mb-2 text-xl font-bold">{method.title}</h3>
                     <p className="mb-3 text-sm text-muted-foreground">{method.description}</p>
@@ -159,12 +156,7 @@ export default function Contact() {
           <div className="mx-auto max-w-6xl">
             <div className="grid gap-12 lg:grid-cols-5">
               {/* Left: Form */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:col-span-3"
-              >
+              <div className="lg:col-span-3">
                 <div className="overflow-hidden rounded-3xl border-2 border-primary/10 bg-background shadow-xl">
                   {/* Header */}
                   <div className="border-b bg-gradient-to-r from-primary/5 to-transparent p-8">
@@ -179,13 +171,7 @@ export default function Contact() {
                     <div className="space-y-6">
                       {/* Name & Email Row */}
                       <div className="grid gap-6 md:grid-cols-2">
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.1 }}
-                          className="space-y-2"
-                        >
+                        <div className="space-y-2">
                           <label htmlFor="name" className="text-sm font-semibold">
                             {t('contact.form.name')} *
                           </label>
@@ -201,15 +187,9 @@ export default function Contact() {
                           {errors.name && (
                             <p className="text-sm text-red-500">{errors.name}</p>
                           )}
-                        </motion.div>
+                        </div>
 
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.2 }}
-                          className="space-y-2"
-                        >
+                        <div className="space-y-2">
                           <label htmlFor="email" className="text-sm font-semibold">
                             {t('contact.form.email')} *
                           </label>
@@ -225,17 +205,11 @@ export default function Contact() {
                           {errors.email && (
                             <p className="text-sm text-red-500">{errors.email}</p>
                           )}
-                        </motion.div>
+                        </div>
                       </div>
 
                       {/* Subject */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                        className="space-y-2"
-                      >
+                      <div className="space-y-2">
                         <label htmlFor="subject" className="text-sm font-semibold">
                           {t('contact.form.subject')} *
                         </label>
@@ -251,16 +225,10 @@ export default function Contact() {
                         {errors.subject && (
                           <p className="text-sm text-red-500">{errors.subject}</p>
                         )}
-                      </motion.div>
+                      </div>
 
                       {/* Message */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
-                        className="space-y-2"
-                      >
+                      <div className="space-y-2">
                         <label htmlFor="message" className="text-sm font-semibold">
                           {t('contact.form.message')} *
                         </label>
@@ -276,15 +244,10 @@ export default function Contact() {
                         {errors.message && (
                           <p className="text-sm text-red-500">{errors.message}</p>
                         )}
-                      </motion.div>
+                      </div>
 
                       {/* Submit Button */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                      >
+                      <div>
                         <motion.button
                           type="submit"
                           disabled={processing}
@@ -296,19 +259,14 @@ export default function Contact() {
                           {processing ? t('contact.form.sending', { defaultValue: 'Sending...' }) : t('contact.form.send')}
                           <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                         </motion.button>
-                      </motion.div>
+                      </div>
                     </div>
                   </form>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Right: Info Cards */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="space-y-6 lg:col-span-2"
-              >
+              <div className="space-y-6 lg:col-span-2">
                 {/* Quick Info Card */}
                 <motion.div
                   whileHover={{ y: -5 }}
@@ -352,7 +310,7 @@ export default function Contact() {
                   whileHover={{ y: -5, scale: 1.02 }}
                   className="group relative overflow-hidden rounded-3xl border-2 border-primary/10 bg-gradient-to-br from-primary/5 to-transparent p-8 shadow-lg transition-all hover:border-primary/30"
                 >
-                    <div className="relative z-10">
+                  <div className="relative z-10">
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
                       <Sparkles className="h-6 w-6 text-primary" />
                     </div>
@@ -365,8 +323,8 @@ export default function Contact() {
                           'Check out our comprehensive FAQ section for quick solutions to common questions.',
                       })}
                     </p>
-                    
-                    <a  href="/faq"
+
+                    <a href="/faq"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all group-hover:gap-3"
                     >
                       {t('contact.faq.cta', { defaultValue: 'Visit FAQ' })}
@@ -383,26 +341,34 @@ export default function Contact() {
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop"
-                      alt="Office Location"
+                      alt={t('contact.office.alt', { defaultValue: 'Office Location' })}
                       className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold text-white">Visit Our Office</h3>
-                    </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-xl font-bold text-white">
+                    {t('contact.office.title', { defaultValue: 'Visit Our Office' })}
+                  </h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <p className="font-medium">
+                      {t('contact.office.addressLine1', { defaultValue: '123 Discovery Boulevard' })}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {t('contact.office.addressLine2', { defaultValue: 'Science City, ST 12345' })}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {t('contact.office.addressLine3', { defaultValue: 'Dias Lab' })}
+                    </p>
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-primary mt-1" />
-                      <div>
-                        <p className="font-medium">123 Research Boulevard</p>
-                        <p className="text-sm text-muted-foreground">Science City, ST 12345</p>
-                        <p className="text-sm text-muted-foreground">United States</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
+            </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -411,18 +377,17 @@ export default function Contact() {
       {/* Map Section */}
       <section className="border-t bg-muted/30 py-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-6xl"
-          >
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-4xl font-bold">Find Us Here</h2>
-              <p className="text-xl text-muted-foreground">
-                Located in the heart of Science City
-              </p>
-            </div>
+            <div className="mx-auto max-w-6xl">
+              <div className="mb-12 text-center">
+                <h2 className="mb-4 text-4xl font-bold">
+                  {t('contact.map.heading', { defaultValue: 'Find Us Here' })}
+                </h2>
+                <p className="text-xl text-muted-foreground">
+                  {t('contact.map.subheading', {
+                    defaultValue: 'Located in the heart of Science City',
+                  })}
+                </p>
+              </div>
 
             <motion.div
               whileHover={{ scale: 1.01 }}
@@ -441,63 +406,24 @@ export default function Contact() {
                         <MapPin className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <div className="font-bold">Research Hub HQ</div>
-                        <div className="text-sm text-muted-foreground">Science City</div>
+                        <div className="font-bold dark:text-primary">
+                          {t('contact.map.title', { defaultValue: 'Dias Lab HQ' })}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {t('contact.map.location', { defaultValue: 'Science City' })}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-primary py-20 text-white">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=600&fit=crop"
-            alt="Background"
-            className="h-full w-full object-cover opacity-10"
-          />
-        </div>
-
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-3xl"
-          >
-            <h2 className="mb-6 text-4xl font-bold">Need Immediate Assistance?</h2>
-            <p className="mb-8 text-xl opacity-90">
-              For urgent matters, reach out to us directly via phone or email
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4">
-              <motion.a
-                href="tel:+1234567890"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-primary shadow-2xl transition-all"
-              >
-                <Phone className="h-5 w-5" />
-                Call Now
-              </motion.a>
-              <motion.a
-                href="mailto:support@researchhub.com"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white px-8 py-4 text-lg font-semibold transition-all hover:bg-white/10"
-              >
-                <Mail className="h-5 w-5" />
-                Email Us
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CtaSection />
     </HomeLayout>
   );
 }

@@ -80,6 +80,7 @@ class HomeController extends Controller
                     'author' => optional($research->researcher)->name,
                     'category' => optional($research->categories->first())->name_en,
                     'category_id' => optional($research->categories->first())->id,
+                    'category_ids' => $research->categories->pluck('id'),
                     'created_at' => $research->created_at,
                     'wallpaper_url' => $research->wallpaperFile
                         ? Storage::disk('public')->url($research->wallpaperFile->storage_path)

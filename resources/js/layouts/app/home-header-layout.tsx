@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Link, router, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Menu, User, LogOut, Settings, FileText, 
-  Users, Mail, ChevronDown, Globe, X, Sparkles,
-  LayoutDashboard, Plus
+  Menu, User, LogOut, Settings, FileText,
+  Users, Mail, ChevronDown, X, Sparkles,
+  LayoutDashboard, Plus, Sun, Moon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslation } from '@/i18n';
+import { useAppearance } from '@/hooks/use-appearance';
 
 type HomeHeaderLayoutProps = {
   isAuthenticated: boolean;
@@ -17,6 +18,7 @@ type HomeHeaderLayoutProps = {
 
 export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }: HomeHeaderLayoutProps) {
   const { t, locale } = useTranslation();
+  const { appearance, updateAppearance } = useAppearance();
   const { url } = usePage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -58,6 +60,13 @@ export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }
     });
   };
 
+  const toggleAppearance = () => {
+    const next = appearance === 'dark' ? 'light' : 'dark';
+    updateAppearance(next as any);
+  };
+
+  const nextLocaleLabel = locale === 'en' ? 'AR' : 'EN';
+
   return (
     <>
       <motion.header
@@ -72,7 +81,7 @@ export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }
               <img
                 src="/logo-large.png"
                 alt={t('nav.platform', { defaultValue: 'Research platform logo' })}
-                className="h-16 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
 
@@ -107,7 +116,18 @@ export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }
             </nav>
 
             {/* Desktop Actions */}
-            <div className="hidden items-center gap-3 lg:flex">
+            <div className="hidden items-center gap-2 lg:flex">
+              {/* Theme Switcher (toggle) */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={toggleAppearance}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-primary/20 font-semibold transition-all hover:border-primary hover:bg-primary/5"
+                aria-label={t('appearance.toggle', { defaultValue: 'Toggle theme' })}
+              >
+                {appearance === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </motion.button>
+
               {/* Language Switcher */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -115,7 +135,7 @@ export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }
                 onClick={toggleLanguage}
                 className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-primary/20 font-semibold transition-all hover:border-primary hover:bg-primary/5"
               >
-                <span className="text-xs uppercase">{locale}</span>
+                <span className="text-xs uppercase">{nextLocaleLabel}</span>
               </motion.button>
 
               {isAuthenticated ? (
@@ -226,10 +246,20 @@ export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={toggleAppearance}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-primary/20 font-semibold"
+                aria-label={t('appearance.toggle', { defaultValue: 'Toggle theme' })}
+              >
+                {appearance === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={toggleLanguage}
                 className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-primary/20 font-semibold"
               >
-                <span className="text-xs uppercase">{locale}</span>
+                <span className="text-xs uppercase">{nextLocaleLabel}</span>
               </motion.button>
 
               <motion.button
