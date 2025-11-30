@@ -9,6 +9,7 @@ import {
 import { home } from '@/routes';
 import { Link } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
+import { useTranslation } from '@/i18n';
 
 export default function AuthCardLayout({
     children,
@@ -19,8 +20,13 @@ export default function AuthCardLayout({
     title?: string;
     description?: string;
 }>) {
+    const { direction } = useTranslation();
+
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+        <div
+            dir={direction}
+            className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10"
+        >
             <div className="flex w-full max-w-md flex-col gap-6">
                 <Link
                     href={home()}

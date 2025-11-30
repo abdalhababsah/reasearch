@@ -211,12 +211,14 @@ export default function ResearcherShow() {
                   className="absolute -bottom-6 left-1/2 -translate-x-1/2 rounded-2xl bg-white dark:bg-gray-900 p-4 shadow-xl border-2 border-primary/20"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-primary">{researches.length}</div>
-                      <div className="text-xs text-muted-foreground">Publications</div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-primary">{researches.length}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {t('researcher.publications', { defaultValue: 'Publications' })}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
               </motion.div>
 
               {/* Profile Info */}

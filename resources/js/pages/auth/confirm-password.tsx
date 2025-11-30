@@ -6,25 +6,33 @@ import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
 import { store } from '@/routes/password/confirm';
 import { Form, Head } from '@inertiajs/react';
+import { useTranslation } from '@/i18n';
 
 export default function ConfirmPassword() {
+    const { t } = useTranslation();
+
     return (
         <AuthLayout
-            title="Confirm your password"
-            description="This is a secure area of the application. Please confirm your password before continuing."
+            title={t('auth.confirmPassword.title', { defaultValue: 'Confirm your password' })}
+            description={t('auth.confirmPassword.description', {
+                defaultValue:
+                    'This is a secure area of the application. Please confirm your password before continuing.',
+            })}
         >
-            <Head title="Confirm password" />
+            <Head title={t('auth.confirmPassword.titleShort', { defaultValue: 'Confirm password' })} />
 
             <Form {...store.form()} resetOnSuccess={['password']}>
                 {({ processing, errors }) => (
                     <div className="space-y-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
+                            <Label htmlFor="password">
+                                {t('auth.confirmPassword.passwordLabel', { defaultValue: 'Password' })}
+                            </Label>
                             <Input
                                 id="password"
                                 type="password"
                                 name="password"
-                                placeholder="Password"
+                                placeholder={t('auth.confirmPassword.passwordPlaceholder', { defaultValue: 'Password' })}
                                 autoComplete="current-password"
                                 autoFocus
                             />
@@ -39,7 +47,7 @@ export default function ConfirmPassword() {
                                 data-test="confirm-password-button"
                             >
                                 {processing && <Spinner />}
-                                Confirm password
+                                {t('auth.confirmPassword.submit', { defaultValue: 'Confirm password' })}
                             </Button>
                         </div>
                     </div>

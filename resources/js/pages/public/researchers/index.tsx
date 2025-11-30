@@ -112,7 +112,7 @@ export default function ResearchersIndex() {
               className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary"
             >
               <Sparkles className="h-4 w-4" />
-              <span>Connect With Brilliant Minds</span>
+              <span>{t('researchers.heroBadge', { defaultValue: 'Connect With Brilliant Minds' })}</span>
             </motion.div>
 
             <motion.h1
@@ -121,7 +121,10 @@ export default function ResearchersIndex() {
               transition={{ delay: 0.3 }}
               className="mb-6 text-5xl font-bold lg:text-6xl xl:text-7xl"
             >
-              Discover <span className="text-primary">Researchers</span>
+              {t('researchers.heroHeading', { defaultValue: 'Discover' })}{' '}
+              <span className="text-primary">
+                {t('researchers.heroHeadingHighlight', { defaultValue: 'Researchers' })}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -130,7 +133,9 @@ export default function ResearchersIndex() {
               transition={{ delay: 0.4 }}
               className="mb-12 text-xl text-muted-foreground lg:text-2xl"
             >
-              Explore profiles of leading researchers and their groundbreaking contributions to science
+              {t('researchers.heroSubheading', {
+                defaultValue: 'Explore profiles of leading researchers and their groundbreaking contributions to science',
+              })}
             </motion.p>
 
             {/* Search Bar */}
@@ -145,7 +150,9 @@ export default function ResearchersIndex() {
                 <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Search by name, institution, or field..."
+                  placeholder={t('researchers.search.placeholder', {
+                    defaultValue: 'Search by name, institution, or field...'
+                  })}
                   value={localSearch}
                   onChange={(e) => setLocalSearch(e.target.value)}
                   className="w-full rounded-2xl border-2 border-primary/10 bg-background px-12 py-4 text-lg transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
@@ -158,7 +165,7 @@ export default function ResearchersIndex() {
                 className="inline-flex items-center gap-2 rounded-2xl bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:shadow-primary/50"
               >
                 <Search className="h-5 w-5" />
-                Search
+                {t('actions.search')}
               </motion.button>
             </motion.form>
           </motion.div>
@@ -170,10 +177,10 @@ export default function ResearchersIndex() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {[
-              { icon: Users, label: 'Total Researchers', value: researchers.data.length + '+' },
-              { icon: FileText, label: 'Publications', value: '45K+' },
-              { icon: Building2, label: 'Institutions', value: '500+' },
-              { icon: TrendingUp, label: 'Active Today', value: '2.4K' }
+              { icon: Users, label: t('researchers.stats.total', { defaultValue: 'Total Researchers' }), value: researchers.data.length + '+' },
+              { icon: FileText, label: t('researchers.stats.publications', { defaultValue: 'Publications' }), value: '45K+' },
+              { icon: Building2, label: t('researchers.stats.institutions', { defaultValue: 'Institutions' }), value: '500+' },
+              { icon: TrendingUp, label: t('researchers.stats.active', { defaultValue: 'Active Today' }), value: '2.4K' }
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -206,21 +213,18 @@ export default function ResearchersIndex() {
           >
             <div>
               <h2 className="text-3xl font-bold">
-                {localSearch ? 'Search Results' : 'All Researchers'}
+                {localSearch
+                  ? t('researchers.results.searchTitle', { defaultValue: 'Search Results' })
+                  : t('researchers.results.allTitle', { defaultValue: 'All Researchers' })}
               </h2>
               <p className="mt-2 text-muted-foreground">
-                Showing {researchers.data.length} researcher{researchers.data.length !== 1 ? 's' : ''}
+                {t('researchers.results.count', {
+                  count: researchers.data.length,
+                  defaultValue: 'Showing :count researcher',
+                }).replace(':count', String(researchers.data.length))}
               </p>
             </div>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 rounded-xl border-2 border-primary/20 px-4 py-2 font-semibold transition-all hover:border-primary hover:bg-primary/5"
-            >
-              <Filter className="h-4 w-4" />
-              Filter
-            </motion.button>
           </motion.div>
 
           {/* Researchers Grid */}
@@ -281,7 +285,9 @@ export default function ResearchersIndex() {
                         >
                           <div className="flex items-center gap-1 rounded-full bg-yellow-500/90 px-3 py-1.5 backdrop-blur-sm">
                             <Star className="h-3 w-3 fill-white text-white" />
-                            <span className="text-xs font-bold text-white">Featured</span>
+                            <span className="text-xs font-bold text-white">
+                              {t('researchers.featured', { defaultValue: 'Featured' })}
+                            </span>
                           </div>
                         </motion.div>
                       )}
@@ -356,7 +362,9 @@ export default function ResearchersIndex() {
                         transition={{ delay: i * 0.05 + 0.9 }}
                         className="flex items-center justify-between pt-2 border-t"
                       >
-                        <span className="text-sm font-semibold text-primary">View Profile</span>
+                        <span className="text-sm font-semibold text-primary">
+                          {t('actions.viewProfile')}
+                        </span>
                         <motion.div
                           animate={{ x: hoveredCard === researcher.id ? 5 : 0 }}
                           transition={{ duration: 0.3 }}
@@ -389,9 +397,13 @@ export default function ResearchersIndex() {
               <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-muted">
                 <Users className="h-12 w-12 text-muted-foreground" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold">No Researchers Found</h3>
+              <h3 className="mb-2 text-2xl font-bold">
+                {t('researchers.empty.title', { defaultValue: 'No Researchers Found' })}
+              </h3>
               <p className="mb-6 text-muted-foreground">
-                Try adjusting your search or browse all researchers
+                {t('researchers.empty.description', {
+                  defaultValue: 'Try adjusting your search or browse all researchers',
+                })}
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -402,7 +414,7 @@ export default function ResearchersIndex() {
                 }}
                 className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl"
               >
-                Clear Search
+                {t('researchers.clearSearch', { defaultValue: 'Clear Search' })}
                 <ArrowRight className="h-4 w-4" />
               </motion.button>
             </motion.div>
@@ -455,9 +467,13 @@ export default function ResearchersIndex() {
             viewport={{ once: true }}
             className="mx-auto max-w-3xl"
           >
-            <h2 className="mb-6 text-4xl font-bold">Join Our Research Community</h2>
+            <h2 className="mb-6 text-4xl font-bold">
+              {t('researchers.cta.heading', { defaultValue: 'Join Our Research Community' })}
+            </h2>
             <p className="mb-8 text-xl opacity-90">
-              Create your profile and connect with researchers worldwide
+              {t('researchers.cta.subheading', {
+                defaultValue: 'Create your profile and connect with researchers worldwide',
+              })}
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
@@ -466,7 +482,7 @@ export default function ResearchersIndex() {
                   href="/register"
                   className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-primary shadow-2xl transition-all"
                 >
-                  Create Profile
+                  {t('researchers.cta.createProfile', { defaultValue: 'Create Profile' })}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>
@@ -475,7 +491,7 @@ export default function ResearchersIndex() {
                   href="/"
                   className="inline-flex items-center gap-2 rounded-full border-2 border-white px-8 py-4 text-lg font-semibold transition-all hover:bg-white/10"
                 >
-                  Learn More
+                  {t('researchers.cta.learnMore', { defaultValue: 'Learn More' })}
                 </Link>
               </motion.div>
             </div>

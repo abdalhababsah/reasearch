@@ -33,7 +33,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: t('contact.info.email', { defaultValue: 'Email Us' }),
-      description: 'Get in touch via email',
+      description: t('contact.info.emailDesc', { defaultValue: 'Get in touch via email' }),
       value: 'support@researchhub.com',
       link: 'mailto:support@researchhub.com',
       color: 'bg-primary'
@@ -41,7 +41,7 @@ export default function Contact() {
     {
       icon: Phone,
       title: t('contact.info.phone', { defaultValue: 'Call Us' }),
-      description: 'Mon-Fri from 9am to 6pm',
+      description: t('contact.info.phoneDesc', { defaultValue: 'Mon-Fri from 9am to 6pm' }),
       value: '+1 (234) 567-890',
       link: 'tel:+1234567890',
       color: 'bg-primary'
@@ -49,7 +49,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: t('contact.info.address', { defaultValue: 'Visit Us' }),
-      description: 'Come say hello',
+      description: t('contact.info.addressDesc', { defaultValue: 'Come say hello' }),
       value: '123 Research Boulevard, Science City',
       link: '#',
       color: 'bg-primary'
@@ -57,8 +57,8 @@ export default function Contact() {
     {
       icon: Clock,
       title: t('contact.hours.title', { defaultValue: 'Office Hours' }),
-      description: 'Our working hours',
-      value: 'Mon-Fri: 9am - 6pm',
+      description: t('contact.hours.description', { defaultValue: 'Our working hours' }),
+      value: t('contact.hours.value', { defaultValue: 'Mon-Fri: 9am - 6pm' }),
       link: '#',
       color: 'bg-primary'
     }
@@ -85,7 +85,7 @@ export default function Contact() {
               className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary"
             >
               <Sparkles className="h-4 w-4" />
-              <span>We're Here to Help</span>
+              <span>{t('contact.badge', { defaultValue: "We're Here to Help" })}</span>
             </motion.div>
 
             <motion.h1
@@ -94,7 +94,8 @@ export default function Contact() {
               transition={{ delay: 0.3 }}
               className="mb-6 text-5xl font-bold lg:text-6xl xl:text-7xl"
             >
-              Get in <span className="text-primary">Touch</span>
+              {t('contact.heading', { defaultValue: 'Get in' })}{' '}
+             
             </motion.h1>
 
             <motion.p
@@ -103,7 +104,10 @@ export default function Contact() {
               transition={{ delay: 0.4 }}
               className="mb-8 text-xl text-muted-foreground lg:text-2xl"
             >
-              Have questions about publishing, collaboration, or need support? Our team is ready to assist you.
+              {t('contact.subheading', {
+                defaultValue:
+                  'Have questions about publishing, collaboration, or need support? Our team is ready to assist you.',
+              })}
             </motion.p>
 
 
@@ -164,9 +168,9 @@ export default function Contact() {
                 <div className="overflow-hidden rounded-3xl border-2 border-primary/10 bg-background shadow-xl">
                   {/* Header */}
                   <div className="border-b bg-gradient-to-r from-primary/5 to-transparent p-8">
-                    <h2 className="mb-2 text-3xl font-bold">Send us a Message</h2>
+                    <h2 className="mb-2 text-3xl font-bold">{t('contact.form.title')}</h2>
                     <p className="text-muted-foreground">
-                      Fill out the form below and we'll get back to you as soon as possible
+                      {t('contact.form.description')}
                     </p>
                   </div>
 
@@ -183,14 +187,14 @@ export default function Contact() {
                           className="space-y-2"
                         >
                           <label htmlFor="name" className="text-sm font-semibold">
-                            Name *
+                            {t('contact.form.name')} *
                           </label>
                           <input
                             id="name"
                             type="text"
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
-                            placeholder="Your full name"
+                            placeholder={t('contact.form.namePlaceholder', { defaultValue: 'Your full name' })}
                             required
                             className="w-full rounded-xl border-2 border-primary/10 bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
                           />
@@ -207,14 +211,14 @@ export default function Contact() {
                           className="space-y-2"
                         >
                           <label htmlFor="email" className="text-sm font-semibold">
-                            Email *
+                            {t('contact.form.email')} *
                           </label>
                           <input
                             id="email"
                             type="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
-                            placeholder="your.email@example.com"
+                            placeholder={t('contact.form.emailPlaceholder')}
                             required
                             className="w-full rounded-xl border-2 border-primary/10 bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
                           />
@@ -233,14 +237,14 @@ export default function Contact() {
                         className="space-y-2"
                       >
                         <label htmlFor="subject" className="text-sm font-semibold">
-                          Subject *
+                          {t('contact.form.subject')} *
                         </label>
                         <input
                           id="subject"
                           type="text"
                           value={data.subject}
                           onChange={(e) => setData('subject', e.target.value)}
-                          placeholder="How can we help you?"
+                          placeholder={t('contact.form.subjectPlaceholder')}
                           required
                           className="w-full rounded-xl border-2 border-primary/10 bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
                         />
@@ -258,13 +262,13 @@ export default function Contact() {
                         className="space-y-2"
                       >
                         <label htmlFor="message" className="text-sm font-semibold">
-                          Message *
+                          {t('contact.form.message')} *
                         </label>
                         <textarea
                           id="message"
                           value={data.message}
                           onChange={(e) => setData('message', e.target.value)}
-                          placeholder="Tell us more about your inquiry..."
+                          placeholder={t('contact.form.messagePlaceholder')}
                           rows={6}
                           required
                           className="w-full rounded-xl border-2 border-primary/10 bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
@@ -289,7 +293,7 @@ export default function Contact() {
                           className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:shadow-primary/50 disabled:opacity-50 disabled:cursor-not-allowed md:w-auto"
                         >
                           <Send className="h-5 w-5" />
-                          {processing ? 'Sending...' : 'Send Message'}
+                          {processing ? t('contact.form.sending', { defaultValue: 'Sending...' }) : t('contact.form.send')}
                           <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                         </motion.button>
                       </motion.div>
@@ -314,19 +318,31 @@ export default function Contact() {
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
                       <MessageCircle className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold">Quick Response</h3>
+                    <h3 className="text-xl font-bold">
+                      {t('contact.quick.title', { defaultValue: 'Quick Response' })}
+                    </h3>
                   </div>
                   <p className="mb-4 text-muted-foreground">
-                    Our dedicated support team typically responds within 24 hours on business days.
+                    {t('contact.quick.description', {
+                      defaultValue: 'Our dedicated support team typically responds within 24 hours on business days.',
+                    })}
                   </p>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center justify-between border-t pt-2">
-                      <span className="text-muted-foreground">Monday - Friday</span>
-                      <span className="font-semibold">9:00 AM - 6:00 PM</span>
+                      <span className="text-muted-foreground">
+                        {t('contact.quick.weekdays', { defaultValue: 'Monday - Friday' })}
+                      </span>
+                      <span className="font-semibold">
+                        {t('contact.quick.hours', { defaultValue: '9:00 AM - 6:00 PM' })}
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Saturday - Sunday</span>
-                      <span className="font-semibold">Closed</span>
+                      <span className="text-muted-foreground">
+                        {t('contact.quick.weekend', { defaultValue: 'Saturday - Sunday' })}
+                      </span>
+                      <span className="font-semibold">
+                        {t('contact.quick.closed', { defaultValue: 'Closed' })}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
@@ -336,19 +352,24 @@ export default function Contact() {
                   whileHover={{ y: -5, scale: 1.02 }}
                   className="group relative overflow-hidden rounded-3xl border-2 border-primary/10 bg-gradient-to-br from-primary/5 to-transparent p-8 shadow-lg transition-all hover:border-primary/30"
                 >
-                  <div className="relative z-10">
+                    <div className="relative z-10">
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
                       <Sparkles className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="mb-2 text-xl font-bold">Looking for Answers?</h3>
+                    <h3 className="mb-2 text-xl font-bold">
+                      {t('contact.faq.title', { defaultValue: 'Looking for Answers?' })}
+                    </h3>
                     <p className="mb-4 text-sm text-muted-foreground">
-                      Check out our comprehensive FAQ section for quick solutions to common questions.
+                      {t('contact.faq.description', {
+                        defaultValue:
+                          'Check out our comprehensive FAQ section for quick solutions to common questions.',
+                      })}
                     </p>
                     
                     <a  href="/faq"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all group-hover:gap-3"
                     >
-                      Visit FAQ
+                      {t('contact.faq.cta', { defaultValue: 'Visit FAQ' })}
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>

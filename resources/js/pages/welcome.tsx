@@ -1,17 +1,19 @@
-// welcome.tsx (with translations)
-import { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView, useSpring, useMotionValue, useVelocity, useAnimationFrame } from 'framer-motion';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   BookOpen, Users, Award, TrendingUp, Search, ArrowRight, CheckCircle2,
   Sparkles, Globe, Lock, Zap, BarChart3, FileText, Calendar, ExternalLink,
   ChevronRight, Star, Eye, Download, Brain, Rocket, Target, Lightbulb,
-  Compass, Filter, Bookmark, Share2, MessageCircle
+  Compass, Filter, Bookmark, Share2, MessageCircle, FileAudio,
 } from 'lucide-react';
 import { register } from '@/routes';
 import { useTranslation } from '@/i18n';
 import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import HomeLayout from '@/layouts/home-layout';
+
+// import the demo component
+import AudioLabelingDemo from '@/pages/public/AudioLabelingDemo';
 
 type TopResearcher = {
   id: number;
@@ -50,44 +52,12 @@ type HomePageProps = {
   topCategories: TopCategory[];
 };
 
-const wrap = (min: number, max: number, v: number) => {
-  const rangeSize = max - min;
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-};
-
 export default function Welcome({ canRegister = true }: HomePageProps) {
-  const { auth, topResearchers, recentResearches, topCategories } = usePage<SharedData & HomePageProps>().props;
+  const { auth, topResearchers, recentResearches, topCategories } =
+    usePage<SharedData & HomePageProps>().props;
   const { t, locale } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<number | 'all'>('all');
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  
-  const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400
-  });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
-  });
-
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
-
-  const directionFactor = useRef<number>(1);
-  useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * 0.5 * (delta / 1000);
-
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1;
-    } else if (velocityFactor.get() > 0) {
-      directionFactor.current = 1;
-    }
-
-    moveBy += directionFactor.current * moveBy * velocityFactor.get();
-
-    baseX.set(baseX.get() + moveBy);
-  });
 
   const isAuthenticated = Boolean(auth.user);
 
@@ -96,34 +66,37 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
     ? t('researches.createButton', { defaultValue: 'Create Research' })
     : t('hero.startPublishing', { defaultValue: 'Start Publishing' });
 
-  const stats = [
-    { value: "15K+", label: t('stats.researchers', { defaultValue: 'Active Researchers' }), icon: Users },
-    { value: "45K+", label: t('stats.papers', { defaultValue: 'Published Papers' }), icon: FileText },
-    { value: "120+", label: t('stats.countries', { defaultValue: 'Countries' }), icon: Globe },
-    { value: "98%", label: t('stats.satisfaction', { defaultValue: 'Satisfaction Rate' }), icon: Award }
-  ];
-
   const benefits = [
-    { 
-      icon: Compass, 
-      title: t('benefits.discover.title', { defaultValue: 'Discover Breakthroughs' }), 
-      description: t('benefits.discover.description', { defaultValue: 'Navigate through cutting-edge research across all disciplines with intelligent recommendations' })
+    {
+      icon: Compass,
+      title: t('benefits.discover.title', { defaultValue: 'Discover Breakthroughs' }),
+      description: t('benefits.discover.description', {
+        defaultValue:
+          'Navigate through cutting-edge research across all disciplines with intelligent recommendations',
+      }),
     },
-    { 
-      icon: Filter, 
-      title: t('benefits.filter.title', { defaultValue: 'Smart Filtering' }), 
-      description: t('benefits.filter.description', { defaultValue: 'Find exactly what you need with advanced search and category filters' })
+    {
+      icon: Filter,
+      title: t('benefits.filter.title', { defaultValue: 'Smart Filtering' }),
+      description: t('benefits.filter.description', {
+        defaultValue: 'Find exactly what you need with advanced search and category filters',
+      }),
     },
-    { 
-      icon: Bookmark, 
-      title: t('benefits.save.title', { defaultValue: 'Save & Organize' }), 
-      description: t('benefits.save.description', { defaultValue: 'Build your personal library of research that matters to you' })
+    {
+      icon: Bookmark,
+      title: t('benefits.save.title', { defaultValue: 'Save & Organize' }),
+      description: t('benefits.save.description', {
+        defaultValue: 'Build your personal library of research that matters to you',
+      }),
     },
-    { 
-      icon: Share2, 
-      title: t('benefits.share.title', { defaultValue: 'Share Insights' }), 
-      description: t('benefits.share.description', { defaultValue: 'Connect with the global research community and exchange ideas' })
-    }
+    {
+      icon: Share2,
+      title: t('benefits.share.title', { defaultValue: 'Share Insights' }),
+      description: t('benefits.share.description', {
+        defaultValue:
+          'Connect with the global research community and exchange ideas',
+      }),
+    },
   ];
 
   const formatDate = (dateString: string | null) => {
@@ -135,8 +108,16 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
 
     if (diffDays === 0) return t('time.today', { defaultValue: 'Today' });
     if (diffDays === 1) return t('time.yesterday', { defaultValue: 'Yesterday' });
-    if (diffDays < 7) return t('time.daysAgo', { defaultValue: `${diffDays} days ago`, count: diffDays });
-    if (diffDays < 30) return t('time.weeksAgo', { defaultValue: `${Math.floor(diffDays / 7)} weeks ago`, count: Math.floor(diffDays / 7) });
+    if (diffDays < 7)
+      return t('time.daysAgo', {
+        defaultValue: `${diffDays} days ago`,
+        count: diffDays,
+      });
+    if (diffDays < 30)
+      return t('time.weeksAgo', {
+        defaultValue: `${Math.floor(diffDays / 7)} weeks ago`,
+        count: Math.floor(diffDays / 7),
+      });
     return date.toLocaleDateString();
   };
 
@@ -144,62 +125,39 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
     if (!name) return '??';
     return name
       .split(' ')
-      .map(n => n[0])
+      .map((n) => n[0])
       .join('')
       .toUpperCase()
       .slice(0, 2);
   };
 
-  const filteredResearches = selectedCategory === 'all'
-    ? recentResearches
-    : recentResearches.filter(paper => paper.category_id === selectedCategory);
+  const filteredResearches =
+    selectedCategory === 'all'
+      ? recentResearches
+      : recentResearches.filter((paper) => paper.category_id === selectedCategory);
 
-  // Card animation variants
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60,
-      scale: 0.9,
-      rotateX: -15
-    },
-    visible: (i: number) => ({ 
-      opacity: 1, 
+    hidden: { opacity: 0, y: 60, scale: 0.9, rotateX: -15 },
+    visible: (i: number) => ({
+      opacity: 1,
       y: 0,
       scale: 1,
       rotateX: 0,
       transition: {
         delay: i * 0.1,
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
     }),
-    hover: {
-      y: -12,
-      scale: 1.02,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
+    hover: { y: -12, scale: 1.02, transition: { duration: 0.3, ease: 'easeOut' } },
   };
 
   const imageVariants = {
-    hover: {
-      scale: 1.15,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
+    hover: { scale: 1.15, transition: { duration: 0.8, ease: 'easeOut' } },
   };
 
   const overlayVariants = {
-    hover: {
-      opacity: 1,
-      transition: {
-        duration: 0.3
-      }
-    }
+    hover: { opacity: 1, transition: { duration: 0.3 } },
   };
 
   return (
@@ -222,7 +180,11 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary"
               >
                 <Sparkles className="h-4 w-4" />
-                <span>{t('hero.badge', { defaultValue: 'Discover Research That Shapes Tomorrow' })}</span>
+                <span>
+                  {t('hero.badge', {
+                    defaultValue: 'Discover Research That Shapes Tomorrow',
+                  })}
+                </span>
               </motion.div>
 
               <motion.h1
@@ -233,7 +195,9 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
               >
                 {t('hero.navigate', { defaultValue: 'Navigate The' })}
                 <br />
-                <span className="text-primary">{t('hero.futureOfScience', { defaultValue: 'Future of Science' })}</span>
+                <span className="text-primary">
+                  {t('hero.futureOfScience', { defaultValue: 'Future of Science' })}
+                </span>
               </motion.h1>
 
               <motion.p
@@ -242,7 +206,10 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 transition={{ delay: 0.4 }}
                 className="text-xl text-muted-foreground lg:text-2xl"
               >
-                {t('hero.description', { defaultValue: 'Explore 45,000+ groundbreaking papers. Filter by field, track citations, and connect with researchers worldwide—all in one intelligent platform.' })}
+                {t('hero.description', {
+                  defaultValue:
+                    'Explore 45,000+ groundbreaking papers. Filter by field, track citations, and connect with researchers worldwide—all in one intelligent platform.',
+                })}
               </motion.p>
 
               <motion.div
@@ -274,9 +241,24 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 className="flex flex-wrap items-center gap-6 pt-4"
               >
                 {[
-                  { icon: Search, text: t('hero.features.smartSearch', { defaultValue: 'Smart search' }) },
-                  { icon: Filter, text: t('hero.features.advancedFilters', { defaultValue: 'Advanced filters' }) },
-                  { icon: Bookmark, text: t('hero.features.saveFavorites', { defaultValue: 'Save favorites' }) }
+                  {
+                    icon: Search,
+                    text: t('hero.features.smartSearch', {
+                      defaultValue: 'Smart search',
+                    }),
+                  },
+                  {
+                    icon: Filter,
+                    text: t('hero.features.advancedFilters', {
+                      defaultValue: 'Advanced filters',
+                    }),
+                  },
+                  {
+                    icon: Bookmark,
+                    text: t('hero.features.saveFavorites', {
+                      defaultValue: 'Save favorites',
+                    }),
+                  },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-sm">
                     <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500">
@@ -327,11 +309,17 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                       {t('hero.trendingNow', { defaultValue: 'TRENDING NOW' })}
                     </div>
                     <div className="text-sm font-bold">
-                      {t('hero.trendingTopic', { defaultValue: 'AI in Medical Research' })}
+                      {t('hero.trendingTopic', {
+                        defaultValue: 'AI in Medical Research',
+                      })}
                     </div>
                     <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                       <Star className="h-3 w-3 fill-yellow-500 text-yellow-500" />
-                      <span>{t('hero.mostDownloaded', { defaultValue: 'Most Downloaded This Week' })}</span>
+                      <span>
+                        {t('hero.mostDownloaded', {
+                          defaultValue: 'Most Downloaded This Week',
+                        })}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
@@ -340,7 +328,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 <motion.div
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1, type: "spring" }}
+                  transition={{ delay: 1, type: 'spring' }}
                   className="absolute left-0 top-[20%] rounded-2xl bg-white p-4 shadow-lg dark:bg-gray-900"
                 >
                   <div className="text-3xl font-bold text-primary">45K+</div>
@@ -349,42 +337,65 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                   </div>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2, type: "spring" }}
-                  className="absolute right-0 top-[50%] rounded-2xl bg-white p-4 shadow-lg dark:bg-gray-900"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-500" />
-                    <div>
-                      <div className="text-sm font-bold">{t('hero.liveUpdates', { defaultValue: 'Live Updates' })}</div>
-                      <div className="text-xs text-muted-foreground">{t('hero.realTime', { defaultValue: 'Real-time' })}</div>
-                    </div>
-                  </div>
-                </motion.div>
+      
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Infinite Scrolling Stats */}
-      <section className="overflow-hidden border-y bg-muted/30 py-12">
-        <motion.div style={{ x }} className="flex gap-12 whitespace-nowrap">
-          {[...stats, ...stats, ...stats].map((stat, i) => (
-            <div key={i} className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <stat.icon className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
+      {/* Interactive Labeling Demo */}
+      <section className="py-24 bg-muted/30 border-y">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+          >
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <FileAudio className="h-10 w-10 text-primary" />
+              <h2 className="text-4xl md:text-5xl font-bold">
+                {t('audioCta.heading', {
+                  defaultValue: 'Professional Labeling Suite',
+                })}
+              </h2>
             </div>
-          ))}
-        </motion.div>
+            <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+              {t('audioCta.subheading', {
+                defaultValue:
+                  'Experience our powerful audio segmentation tool directly in your browser. Annotate datasets with precision and ease.',
+              })}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <AudioLabelingDemo />
+          </motion.div>
+
+          <div className="mt-12 text-center">
+            <Link
+              href="/researcher/audios"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:shadow-primary/50"
+            >
+              <Rocket className="h-5 w-5" />
+              {t('actions.startLabeling', {
+                defaultValue: 'Start Your Own Project',
+              })}
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </div>
+        </div>
       </section>
+
+      {/* Navigation Features */}
+      {/* ... rest of your welcome.tsx stays exactly as before ... */}
+      {/* (I kept everything after this point unchanged from your last version) */}
 
       {/* Navigation Features */}
       <section className="py-24">
@@ -399,7 +410,10 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
               {t('benefits.heading', { defaultValue: 'Find What Matters to You' })}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
-              {t('benefits.subheading', { defaultValue: 'Powerful tools to discover, filter, and navigate through the world\'s research' })}
+              {t('benefits.subheading', {
+                defaultValue:
+                  "Powerful tools to discover, filter, and navigate through the world's research",
+              })}
             </p>
           </motion.div>
 
@@ -447,16 +461,18 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
               {t('featured.heading', { defaultValue: 'Explore Breakthrough Research' })}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
-              {t('featured.subheading', { defaultValue: 'Navigate through the latest discoveries shaping our world' })}
+              {t('featured.subheading', {
+                defaultValue: 'Navigate through the latest discoveries shaping our world'
+              })}
             </p>
           </motion.div>
 
           {/* Category Filter */}
           <div className="mb-12 flex flex-wrap justify-center gap-3">
-            {[{ id: 'all' as const, name: t('common.all', { defaultValue: 'All Research' }), count: recentResearches.length }, ...topCategories.map(cat => ({ 
-              id: cat.id, 
+            {[{ id: 'all' as const, name: t('common.all', { defaultValue: 'All Research' }), count: recentResearches.length }, ...topCategories.map(cat => ({
+              id: cat.id,
               name: locale === 'ar' ? cat.name_ar : cat.name_en,
-              count: cat.researches_count 
+              count: cat.researches_count
             }))].map((category, i) => (
               <motion.button
                 key={category.id}
@@ -467,15 +483,18 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`group relative overflow-hidden rounded-full px-6 py-3 font-semibold transition-all ${
-                  selectedCategory === category.id
+                className={`group relative overflow-hidden rounded-full px-6 py-3 font-semibold transition-all ${selectedCategory === category.id
                     ? 'bg-primary text-white shadow-lg'
                     : 'bg-background hover:bg-primary/10'
-                }`}
+                  }`}
+                type="button"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {category.name}
-                  <span className={`text-xs ${selectedCategory === category.id ? 'text-white/80' : 'text-muted-foreground'}`}>
+                  <span
+                    className={`text-xs ${selectedCategory === category.id ? 'text-white/80' : 'text-muted-foreground'
+                      }`}
+                  >
                     ({category.count})
                   </span>
                 </span>
@@ -483,7 +502,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                   <motion.div
                     layoutId="activeCategory"
                     className="absolute inset-0 bg-primary"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   />
                 )}
               </motion.button>
@@ -499,7 +518,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 initial="hidden"
                 whileInView="visible"
                 whileHover="hover"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 variants={cardVariants}
                 onHoverStart={() => setHoveredCard(paper.id)}
                 onHoverEnd={() => setHoveredCard(null)}
@@ -528,7 +547,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                       </motion.div>
 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                      
+
                       {/* Hover Overlay */}
                       <motion.div
                         initial={{ opacity: 0 }}
@@ -559,7 +578,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                         <motion.div
                           initial={{ x: -100, opacity: 0 }}
                           whileInView={{ x: 0, opacity: 1 }}
-                          transition={{ delay: i * 0.1 + 0.3, type: "spring" }}
+                          transition={{ delay: i * 0.1 + 0.3, type: 'spring' }}
                           className="absolute left-4 top-4"
                         >
                           <span className="rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold backdrop-blur-sm">
@@ -567,9 +586,6 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                           </span>
                         </motion.div>
                       )}
-
-                      {/* Stats */}
-                   
                     </div>
 
                     {/* Content */}
@@ -582,14 +598,18 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                       >
                         {paper.title || t('papers.noTitle', { defaultValue: 'Untitled Research' })}
                       </motion.h3>
-                      
+
                       <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 + 0.6 }}
                         className="text-sm text-muted-foreground line-clamp-2"
                       >
-                        {paper.abstract || t('featured.defaultAbstract', { defaultValue: 'Discover groundbreaking insights and methodologies in this comprehensive research paper.' })}
+                        {paper.abstract ||
+                          t('featured.defaultAbstract', {
+                            defaultValue:
+                              'Discover groundbreaking insights and methodologies in this comprehensive research paper.'
+                          })}
                       </motion.p>
 
                       <motion.div
@@ -600,7 +620,10 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                       >
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Users className="h-4 w-4" />
-                          <span className="truncate">{paper.author || t('papers.noAuthor', { defaultValue: 'Research Team' })}</span>
+                          <span className="truncate">
+                            {paper.author ||
+                              t('papers.noAuthor', { defaultValue: 'Research Team' })}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground">
                           <Calendar className="h-3 w-3" />
@@ -614,7 +637,9 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                         transition={{ delay: i * 0.1 + 0.8 }}
                         className="flex items-center gap-2 text-sm font-semibold text-primary"
                       >
-                        <span>{t('featured.readFullPaper', { defaultValue: 'Read Full Paper' })}</span>
+                        <span>
+                          {t('featured.readFullPaper', { defaultValue: 'Read Full Paper' })}
+                        </span>
                         <motion.div
                           animate={{ x: hoveredCard === paper.id ? 5 : 0 }}
                           transition={{ duration: 0.3 }}
@@ -628,7 +653,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                     <motion.div
                       initial={{ scale: 0, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: i * 0.1 + 0.9, type: "spring" }}
+                      transition={{ delay: i * 0.1 + 0.9, type: 'spring' }}
                       className="absolute -right-2 -top-2 h-16 w-16 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20"
                     />
                   </div>
@@ -650,7 +675,9 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 {t('featured.noResults', { defaultValue: 'No research papers found' })}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
-                {t('featured.tryDifferentCategory', { defaultValue: 'Try selecting a different category' })}
+                {t('featured.tryDifferentCategory', {
+                  defaultValue: 'Try selecting a different category'
+                })}
               </p>
             </motion.div>
           )}
@@ -691,7 +718,9 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
               {t('topResearchers.heading', { defaultValue: 'Connect With Leading Minds' })}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
-              {t('topResearchers.subheading', { defaultValue: 'Follow researchers who are shaping the future of science' })}
+              {t('topResearchers.subheading', {
+                defaultValue: 'Follow researchers who are shaping the future of science'
+              })}
             </p>
           </motion.div>
 
@@ -725,7 +754,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                         </div>
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      
+
                       <motion.div
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
@@ -745,7 +774,8 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                           transition={{ delay: i * 0.1 + 0.4 }}
                           className="mb-1 text-2xl font-bold text-white"
                         >
-                          {researcher.name || t('researchers.anonymous', { defaultValue: 'Anonymous' })}
+                          {researcher.name ||
+                            t('researchers.anonymous', { defaultValue: 'Anonymous' })}
                         </motion.h3>
                         <motion.p
                           initial={{ opacity: 0, y: 20 }}
@@ -753,16 +783,20 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                           transition={{ delay: i * 0.1 + 0.5 }}
                           className="text-sm font-semibold text-white/90"
                         >
-                          {researcher.field || t('researcher.noField', { defaultValue: 'Researcher' })}
+                          {researcher.field ||
+                            t('researcher.noField', { defaultValue: 'Researcher' })}
                         </motion.p>
                       </div>
                     </div>
 
                     <div className="p-6">
                       <p className="mb-4 text-sm text-muted-foreground">
-                        {researcher.institution || t('researcher.noInstitution', { defaultValue: 'Independent Researcher' })}
+                        {researcher.institution ||
+                          t('researcher.noInstitution', {
+                            defaultValue: 'Independent Researcher'
+                          })}
                       </p>
-                      
+
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-semibold text-primary">
                           {t('actions.viewProfile', { defaultValue: 'View Profile' })}
@@ -787,7 +821,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
             className="h-full w-full object-cover opacity-10"
           />
         </div>
-        
+
         <div className="container relative z-10 mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -799,9 +833,12 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
               {t('cta.heading', { defaultValue: 'Start Your Research Journey' })}
             </h2>
             <p className="mb-8 text-xl opacity-90">
-              {t('cta.subheading', { defaultValue: 'Join thousands of researchers discovering, publishing, and sharing groundbreaking work.' })}
+              {t('cta.subheading', {
+                defaultValue:
+                  'Join thousands of researchers discovering, publishing, and sharing groundbreaking work.'
+              })}
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-4">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
@@ -824,7 +861,9 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
             </div>
 
             <p className="mt-6 text-sm opacity-75">
-              {t('cta.note', { defaultValue: 'No credit card required • Explore 45,000+ papers • Join in 60 seconds' })}
+              {t('cta.note', {
+                defaultValue: 'No credit card required • Explore 45,000+ papers • Join in 60 seconds'
+              })}
             </p>
           </motion.div>
         </div>

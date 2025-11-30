@@ -10,6 +10,7 @@ import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/react';
+import { useTranslation } from '@/i18n';
 
 interface LoginProps {
     status?: string;
@@ -22,12 +23,16 @@ export default function Login({
     canResetPassword,
     canRegister,
 }: LoginProps) {
+    const { t, direction } = useTranslation();
+
     return (
         <AuthLayout
-            title="Log in to your account"
-            description="Enter your email and password below to log in"
+            title={t('auth.login.title', { defaultValue: 'Log in to your account' })}
+            description={t('auth.login.description', {
+                defaultValue: 'Enter your email and password below to log in',
+            })}
         >
-            <Head title="Log in" />
+            <Head title={t('auth.login.headTitle', { defaultValue: 'Log in' })} />
 
             <Form
                 {...store.form()}
@@ -38,7 +43,9 @@ export default function Login({
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">
+                                    {t('auth.login.email', { defaultValue: 'Email address' })}
+                                </Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -47,21 +54,27 @@ export default function Login({
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="email"
-                                    placeholder="email@example.com"
+                                    placeholder={t('auth.login.emailPlaceholder', {
+                                        defaultValue: 'email@example.com',
+                                    })}
                                 />
                                 <InputError message={errors.email} />
                             </div>
 
                             <div className="grid gap-2">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">
+                                        {t('auth.login.password', { defaultValue: 'Password' })}
+                                    </Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
-                                            className="ml-auto text-sm"
+                                            className={`${direction === 'rtl' ? 'mr-auto' : 'ml-auto'} text-sm`}
                                             tabIndex={5}
                                         >
-                                            Forgot password?
+                                            {t('auth.login.forgotPassword', {
+                                                defaultValue: 'Forgot password?',
+                                            })}
                                         </TextLink>
                                     )}
                                 </div>
@@ -72,18 +85,22 @@ export default function Login({
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder={t('auth.login.passwordPlaceholder', {
+                                        defaultValue: 'Password',
+                                    })}
                                 />
                                 <InputError message={errors.password} />
                             </div>
 
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center gap-3">
                                 <Checkbox
                                     id="remember"
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember">
+                                    {t('auth.login.remember', { defaultValue: 'Remember me' })}
+                                </Label>
                             </div>
 
                             <Button
@@ -94,15 +111,17 @@ export default function Login({
                                 data-test="login-button"
                             >
                                 {processing && <Spinner />}
-                                Log in
+                                {t('actions.login')}
                             </Button>
                         </div>
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
+                                {t('auth.login.noAccount', {
+                                    defaultValue: "Don't have an account?",
+                                })}{' '}
                                 <TextLink href={register()} tabIndex={5}>
-                                    Sign up
+                                    {t('auth.login.signUp', { defaultValue: 'Sign up' })}
                                 </TextLink>
                             </div>
                         )}

@@ -326,11 +326,10 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
                                                     return (
                                                         <label
                                                             key={cat.id}
-                                                            className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition cursor-pointer ${
-                                                                checked
+                                                            className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition cursor-pointer ${checked
                                                                     ? 'border-primary bg-primary/10 text-primary'
                                                                     : 'border-border bg-background hover:bg-muted'
-                                                            }`}
+                                                                }`}
                                                         >
                                                             <Checkbox
                                                                 checked={checked}
@@ -376,11 +375,10 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
                                                     return (
                                                         <label
                                                             key={tag.id}
-                                                            className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition cursor-pointer ${
-                                                                checked
+                                                            className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition cursor-pointer ${checked
                                                                     ? 'border-primary bg-primary/10 text-primary'
                                                                     : 'border-border bg-background hover:bg-muted'
-                                                            }`}
+                                                                }`}
                                                         >
                                                             <Checkbox
                                                                 checked={checked}
@@ -423,7 +421,7 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
                                 </p>
                                 <p className="mt-1 text-xs text-muted-foreground">
                                     {t('researches.form.dropFilesSubtitle', {
-                                        defaultValue: 'PDF, Word, Excel, CSV, ZIP, or images.',
+                                        defaultValue: 'Any file type: documents, code, archives, datasets, etc.',
                                     })}
                                 </p>
                                 <div className="mt-3 flex justify-center">
@@ -434,8 +432,8 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
                                             multiple
                                             className="hidden"
                                             onChange={handleFilesChange}
-                                            accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.zip,.rar,.txt,image/*"
                                         />
+
                                     </label>
                                 </div>
                                 <InputError message={errors.files as string} />

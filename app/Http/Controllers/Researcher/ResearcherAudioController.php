@@ -41,7 +41,7 @@ class ResearcherAudioController extends Controller
         $query->orderBy($sortField, $sortDirection);
 
         // Pagination
-        $perPage = (int) $request->get('per_page', 15);
+        $perPage = (int) $request->get('per_page', 5);
         $audios = $query->paginate($perPage)->withQueryString();
 
         $audiosData = $audios->getCollection()->map(function (ResearcherAudio $audio) {
@@ -124,61 +124,88 @@ class ResearcherAudioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'audio_file' => 'required|file|mimes:mp3,wav,ogg,m4a,flac|max:102400', // Max 100MB
-            'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
+            'audio_files'   => 'required|array',
+            'audio_files.*' => 'file|mimes:mp3,wav,ogg,m4a,flac|max:102400', // 100MB each
+            'title'         => 'nullable|string|max:255',
+            'description'   => 'nullable|string',
         ]);
-
+    
         try {
             DB::beginTransaction();
-
-            $file = $request->file('audio_file');
-            $originalFilename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            
-            // Generate unique stored filename
-            $storedFilename = Str::random(40) . '.' . $extension;
-            
-            // Store in storage/app/public/researcher-audios/{user_id}/
-            $storagePath = $file->storeAs(
-                "researcher-audios/{$request->user()->id}",
-                $storedFilename,
-                'public'
-            );
-
-            // Extract audio metadata using getID3
-            $audioInfo = $this->extractAudioMetadata($file->getRealPath());
-
-            // Create audio record
-            $audio = ResearcherAudio::create([
-                'user_id' => $request->user()->id,
-                'original_filename' => $originalFilename,
-                'stored_filename' => $storedFilename,
-                'storage_path' => $storagePath,
-                'mime_type' => $file->getMimeType(),
-                'file_size_bytes' => $file->getSize(),
-                'duration_seconds' => $audioInfo['duration'] ?? null,
-                'metadata' => $audioInfo['metadata'] ?? null,
-                'title' => $request->title ?? pathinfo($originalFilename, PATHINFO_FILENAME),
-                'description' => $request->description,
-                'uploaded_at' => now(),
-            ]);
-
-            DB::commit();
-
-            return back()->with('success', 'Audio file uploaded successfully!');
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            
-            // Clean up uploaded file if exists
-            if (isset($storagePath) && Storage::disk('public')->exists($storagePath)) {
-                Storage::disk('public')->delete($storagePath);
+    
+            $userId = $request->user()->id;
+            /** @var \Illuminate\Http\UploadedFile[] $files */
+            $files = $request->file('audio_files', []);
+    
+            $storedPaths = [];
+            $createdCount = 0;
+    
+            foreach ($files as $file) {
+                if (! $file) {
+                    continue;
+                }
+    
+                $originalFilename = $file->getClientOriginalName();
+                $extension        = $file->getClientOriginalExtension();
+    
+                // Generate unique stored filename
+                $storedFilename = Str::random(40) . '.' . $extension;
+    
+                // Store in storage/app/public/researcher-audios/{user_id}/
+                $storagePath = $file->storeAs(
+                    "researcher-audios/{$userId}",
+                    $storedFilename,
+                    'public'
+                );
+    
+                $storedPaths[] = $storagePath;
+    
+                // Extract audio metadata using getID3
+                $audioInfo = $this->extractAudioMetadata($file->getRealPath());
+    
+                // Create audio record
+                ResearcherAudio::create([
+                    'user_id'          => $userId,
+                    'original_filename'=> $originalFilename,
+                    'stored_filename'  => $storedFilename,
+                    'storage_path'     => $storagePath,
+                    'mime_type'        => $file->getMimeType(),
+                    'file_size_bytes'  => $file->getSize(),
+                    'duration_seconds' => $audioInfo['duration'] ?? null,
+                    'metadata'         => $audioInfo['metadata'] ?? null,
+                    // If no title provided, fallback to each file's base name
+                    'title'            => $request->filled('title')
+                        ? $request->title
+                        : pathinfo($originalFilename, PATHINFO_FILENAME),
+                    'description'      => $request->description,
+                    'status'           => 'draft',
+                    'uploaded_at'      => now(),
+                ]);
+    
+                $createdCount++;
             }
-
-            return back()->with('error', 'Failed to upload audio file: ' . $e->getMessage());
+    
+            DB::commit();
+    
+            return back()->with(
+                'success',
+                $createdCount . ' audio file' . ($createdCount === 1 ? '' : 's') . ' uploaded successfully!'
+            );
+    
+        } catch (\Throwable $e) {
+            DB::rollBack();
+    
+            // Clean up any files that were stored
+            foreach ($storedPaths as $path) {
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
+    
+            return back()->with('error', 'Failed to upload audio files: ' . $e->getMessage());
         }
     }
+    
 
     /**
      * Update audio metadata

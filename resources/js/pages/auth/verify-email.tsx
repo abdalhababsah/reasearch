@@ -6,19 +6,27 @@ import AuthLayout from '@/layouts/auth-layout';
 import { logout } from '@/routes';
 import { send } from '@/routes/verification';
 import { Form, Head } from '@inertiajs/react';
+import { useTranslation } from '@/i18n';
 
 export default function VerifyEmail({ status }: { status?: string }) {
+    const { t, direction } = useTranslation();
+
     return (
         <AuthLayout
-            title="Verify email"
-            description="Please verify your email address by clicking on the link we just emailed to you."
+            title={t('auth.verify.title', { defaultValue: 'Verify email' })}
+            description={t('auth.verify.description', {
+                defaultValue:
+                    'Please verify your email address by clicking on the link we just emailed to you.',
+            })}
         >
-            <Head title="Email verification" />
+            <Head title={t('auth.verify.headTitle', { defaultValue: 'Email verification' })} />
 
             {status === 'verification-link-sent' && (
                 <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    A new verification link has been sent to the email address
-                    you provided during registration.
+                    {t('auth.verify.linkSent', {
+                        defaultValue:
+                            'A new verification link has been sent to the email address you provided during registration.',
+                    })}
                 </div>
             )}
 
@@ -27,14 +35,18 @@ export default function VerifyEmail({ status }: { status?: string }) {
                     <>
                         <Button disabled={processing} variant="secondary">
                             {processing && <Spinner />}
-                            Resend verification email
+                            {t('auth.verify.resend', {
+                                defaultValue: 'Resend verification email',
+                            })}
                         </Button>
 
                         <TextLink
                             href={logout()}
-                            className="mx-auto block text-sm"
+                            className={`mx-auto block text-sm ${
+                                direction === 'rtl' ? 'text-right' : 'text-left'
+                            }`}
                         >
-                            Log out
+                            {t('actions.logout')}
                         </TextLink>
                     </>
                 )}

@@ -156,7 +156,6 @@ export default function HomeHeaderLayout({ isAuthenticated, canRegister = true }
                               {[
                                 { href: '/dashboard', icon: LayoutDashboard, label: t('dashboard.title', { defaultValue: 'Dashboard' }) },
                                 { href: '/researcher/researches', icon: FileText, label: t('researches.my', { defaultValue: 'My Research' }) },
-                                { href: '/profile', icon: Settings, label: t('profile.settings', { defaultValue: 'Settings' }) },
                               ].map((item) => (
                                 <Link
                                   key={item.href}

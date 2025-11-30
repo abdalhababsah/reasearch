@@ -50,7 +50,90 @@
     "filter": "Filter",
     "forward": "Next",
     "download": "Download",
-    "openNewTab": "Open in New Tab"
+    "openNewTab": "Open in New Tab",
+    "fullscreen": "Fullscreen",
+    "contact": "Contact",
+    "play": "Play",
+    "pause": "Pause",
+    "startLabeling": "Start Labeling",
+    "share": "Share"
+  },
+  "auth": {
+    "confirmPassword": {
+      "title": "Confirm your password",
+      "titleShort": "Confirm password",
+      "description": "This is a secure area of the application. Please confirm your password before continuing.",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Password",
+      "submit": "Confirm password"
+    },
+    "register": {
+      "headTitle": "Register",
+      "title": "Create an account",
+      "description": "Enter your details below to create your account",
+      "name": "Name",
+      "namePlaceholder": "Full name",
+      "email": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Password",
+      "passwordConfirm": "Confirm password",
+      "passwordConfirmPlaceholder": "Confirm password",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?"
+    },
+    "login": {
+      "headTitle": "Log in",
+      "title": "Log in to your account",
+      "description": "Enter your email and password below to log in",
+      "email": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Password",
+      "forgotPassword": "Forgot password?",
+      "remember": "Remember me",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "reset": {
+      "headTitle": "Reset password",
+      "title": "Reset password",
+      "description": "Please enter your new password below",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Password",
+      "passwordConfirm": "Confirm password",
+      "passwordConfirmPlaceholder": "Confirm password",
+      "submit": "Reset password"
+    },
+    "forgot": {
+      "headTitle": "Forgot password",
+      "title": "Forgot password",
+      "description": "Enter your email to receive a password reset link",
+      "email": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "submit": "Email password reset link",
+      "backPrompt": "Or, return to",
+      "backLink": "log in"
+    },
+    "verify": {
+      "headTitle": "Email verification",
+      "title": "Verify email",
+      "description": "Please verify your email address by clicking on the link we just emailed to you.",
+      "linkSent": "A new verification link has been sent to the email address you provided during registration.",
+      "resend": "Resend verification email"
+    },
+    "twoFactorChallenge": {
+      "headTitle": "Two-Factor Authentication",
+      "authTitle": "Authentication Code",
+      "authDescription": "Enter the authentication code provided by your authenticator application.",
+      "useRecovery": "login using a recovery code",
+      "recoveryTitle": "Recovery Code",
+      "recoveryDescription": "Please confirm access to your account by entering one of your emergency recovery codes.",
+      "useAuthCode": "login using an authentication code",
+      "recoveryPlaceholder": "Enter recovery code",
+      "or": "or you can "
+    }
   },
   "hero": {
     "badge": "Discover Research That Shapes Tomorrow",
@@ -112,9 +195,22 @@
     "badge": "Our Community",
     "heading": "Meet Leading Researchers",
     "subheading": "Connect with brilliant minds pushing the boundaries of knowledge",
+    "heroHeading": "Discover",
+    "heroHeadingHighlight": "Researchers",
     "browse": {
       "heading": "Discover Researchers",
       "subheading": "Connect with leading researchers and explore their groundbreaking work"
+    },
+    "stats": {
+      "total": "Total Researchers",
+      "publications": "Publications",
+      "institutions": "Institutions",
+      "active": "Active Today"
+    },
+    "results": {
+      "searchTitle": "Search Results",
+      "allTitle": "All Researchers",
+      "count": "Showing :count researcher"
     },
     "search": {
       "placeholder": "Search by name, institution, or field..."
@@ -127,7 +223,17 @@
     "browseAll": "Browse All Researchers",
     "anonymous": "Anonymous",
     "noField": "Field not specified",
-    "noInstitution": "Institution not specified"
+    "noInstitution": "Institution not specified",
+    "heroBadge": "Connect With Brilliant Minds",
+    "heroSubheading": "Explore profiles of leading researchers and their groundbreaking contributions to science",
+    "featured": "Featured",
+    "clearSearch": "Clear Search",
+    "cta": {
+      "heading": "Join Our Research Community",
+      "subheading": "Create your profile and connect with researchers worldwide",
+      "createProfile": "Create Profile",
+      "learnMore": "Learn More"
+    }
   },
   "researcher": {
     "noField": "Field not specified",
@@ -174,6 +280,8 @@
     "fixErrors": "Please fix the highlighted fields before saving.",
     "about": "About",
     "publications": "Publications",
+    "publicationsDesc": "published research papers",
+    "noPublicationsDesc": "Publications will appear here once published",
     "noPublications": "No publications yet",
     "experience": "Experience",
     "education": "Education"
@@ -186,6 +294,7 @@
     "description": "Manage your submissions, visibility, and supporting files.",
     "adminDescription": "Review and manage all research submissions.",
     "browse": {
+      "badge": "Featured Papers",
       "heading": "Browse Research Papers",
       "subheading": "Discover groundbreaking research from leading researchers worldwide"
     },
@@ -263,7 +372,7 @@
       "visibilityHelp": "Control whether this research is visible to everyone or only to you.",
       "files": "Files",
       "dropFilesTitle": "Upload research documents",
-      "dropFilesSubtitle": "PDF, Word, Excel, CSV, ZIP, or images.",
+      "dropFilesSubtitle": "Any file type: documents, code, archives, datasets, etc.",
       "chooseFiles": "Choose files",
       "selectedFiles": "Selected files",
       "existingFiles": "Existing Files",
@@ -278,12 +387,15 @@
     },
     "show": {
       "overview": "Overview",
+      "details": "Details",
       "keywords": "Keywords",
       "noKeywords": "No keywords provided.",
       "metadata": "Metadata",
       "status": "Status",
+      "visibilityLabel": "Visibility",
       "visibility": "Visibility",
       "createdAt": "Created",
+      "files": "Files",
       "filesSection": "Files",
       "filesHelp": "Preview or download the uploaded files.",
       "noFiles": "No files uploaded yet.",
@@ -291,6 +403,23 @@
       "fileVisible": "Visible",
       "fileHidden": "Hidden"
     }
+  },
+  "research": {
+    "publication": "Research Publication",
+    "author": "Author",
+    "abstract": "Abstract",
+    "keywords": "Keywords",
+    "tags": "Research Tags",
+    "year": "Year",
+    "files": "Files",
+    "categories": "Categories",
+    "filesAndDocuments": "Files & Documents",
+    "filesAvailable": "files available for download",
+    "documents": "Documents",
+    "items": "items",
+    "searchFiles": "Search files...",
+    "noFiles": "No Files Available",
+    "noFilesDesc": "Files and documents will be available once uploaded by the author."
   },
   "categories": {
     "all": "All Categories",
@@ -370,13 +499,33 @@
       "title": "Contact Information",
       "email": "Email",
       "phone": "Phone",
-      "address": "Address"
+      "address": "Address",
+      "emailDesc": "Get in touch via email",
+      "phoneDesc": "Mon-Fri from 9am to 6pm",
+      "addressDesc": "Come say hello"
     },
     "hours": {
       "title": "Office Hours",
       "weekdays": "Monday - Friday",
       "weekend": "Saturday - Sunday",
+      "closed": "Closed",
+      "description": "Our working hours",
+      "value": "Mon-Fri: 9am - 6pm"
+    },
+    "badge": "We're Here to Help",
+    "headingHighlight": "Touch",
+    "quick": {
+      "title": "Quick Response",
+      "description": "Our dedicated support team typically responds within 24 hours on business days.",
+      "weekdays": "Monday - Friday",
+      "hours": "9:00 AM - 6:00 PM",
+      "weekend": "Saturday - Sunday",
       "closed": "Closed"
+    },
+    "faq": {
+      "title": "Looking for Answers?",
+      "description": "Check out our comprehensive FAQ section for quick solutions to common questions.",
+      "cta": "Visit FAQ"
     }
   },
   "cta": {
@@ -403,6 +552,10 @@
     "careers": "Careers",
     "contact": "Contact",
     "privacy": "Privacy",
+    "newsletterHeading": "Stay Updated",
+    "newsletterSubheading": "Get the latest research insights and platform updates delivered to your inbox.",
+    "newsletterPlaceholder": "Enter your email",
+    "newsletterCta": "Subscribe",
     "copyright": "© 2024 ResearchHub. All rights reserved."
   },
   "dashboard": {
@@ -461,6 +614,11 @@
     "settings": "Settings",
     "edit": "Edit Profile"
   },
+  "appearance": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
   "settings": {
     "title": "Settings",
     "description": "Manage your profile and account settings",
@@ -496,7 +654,25 @@
     "disabledDescription": "Enable two-factor authentication to require a secure pin during login from a TOTP-compatible app.",
     "disableButton": "Disable 2FA",
     "continueSetup": "Continue Setup",
-    "enableButton": "Enable 2FA"
+    "enableButton": "Enable 2FA",
+    "recovery": {
+      "title": "2FA Recovery Codes",
+      "description": "Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password manager.",
+      "view": "View Recovery Codes",
+      "hide": "Hide Recovery Codes",
+      "regenerate": "Regenerate Codes",
+      "warning": "Each recovery code can be used once to access your account and will be removed after use. If you need more, click Regenerate Codes above."
+    },
+    "setup": {
+      "enableTitle": "Enable Two-Factor Authentication",
+      "enableDescription": "To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app",
+      "enabledTitle": "Two-Factor Authentication Enabled",
+      "enabledDescription": "Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.",
+      "verifyTitle": "Verify Authentication Code",
+      "verifyDescription": "Enter the 6-digit code from your authenticator app",
+      "manualEntry": "or, enter the code manually",
+      "confirm": "Confirm"
+    }
   },
   "deleteAccount": {
     "title": "Delete account",
@@ -507,6 +683,83 @@
     "confirmTitle": "Are you sure you want to delete your account?",
     "confirmDescription": "Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
     "passwordLabel": "Password"
+  },
+  "auth": {
+    "confirmPassword": {
+      "title": "Confirm your password",
+      "titleShort": "Confirm password",
+      "description": "This is a secure area of the application. Please confirm your password before continuing.",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Password",
+      "submit": "Confirm password"
+    },
+    "register": {
+      "headTitle": "Register",
+      "title": "Create an account",
+      "description": "Enter your details below to create your account",
+      "name": "Name",
+      "namePlaceholder": "Full name",
+      "email": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Password",
+      "passwordConfirm": "Confirm password",
+      "passwordConfirmPlaceholder": "Confirm password",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?"
+    },
+    "login": {
+      "headTitle": "Log in",
+      "title": "Log in to your account",
+      "description": "Enter your email and password below to log in",
+      "email": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Password",
+      "forgotPassword": "Forgot password?",
+      "remember": "Remember me",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "reset": {
+      "headTitle": "Reset password",
+      "title": "Reset password",
+      "description": "Please enter your new password below",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Password",
+      "passwordConfirm": "Confirm password",
+      "passwordConfirmPlaceholder": "Confirm password",
+      "submit": "Reset password"
+    },
+    "forgot": {
+      "headTitle": "Forgot password",
+      "title": "Forgot password",
+      "description": "Enter your email to receive a password reset link",
+      "email": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "submit": "Email password reset link",
+      "backPrompt": "Or, return to",
+      "backLink": "log in"
+    },
+    "verify": {
+      "headTitle": "Email verification",
+      "title": "Verify email",
+      "description": "Please verify your email address by clicking on the link we just emailed to you.",
+      "linkSent": "A new verification link has been sent to the email address you provided during registration.",
+      "resend": "Resend verification email"
+    },
+    "twoFactorChallenge": {
+      "headTitle": "Two-Factor Authentication",
+      "authTitle": "Authentication Code",
+      "authDescription": "Enter the authentication code provided by your authenticator application.",
+      "useRecovery": "login using a recovery code",
+      "recoveryTitle": "Recovery Code",
+      "recoveryDescription": "Please confirm access to your account by entering one of your emergency recovery codes.",
+      "useAuthCode": "login using an authentication code",
+      "recoveryPlaceholder": "Enter recovery code",
+      "or": "or you can "
+    }
   },
   "notifications": {
     "success": "Success",
@@ -647,5 +900,40 @@
       "notesPlaceholder": "Add notes about this segment (optional)",
       "deleteSegmentConfirm": "Delete this segment?"
     }
+  },
+  "audioDemo": {
+    "title": "Labeling Studio Demo",
+    "subtitle": "Try creating and resizing segments on the waveform (no real audio).",
+    "badge": "Interactive Demo",
+    "selectLabel": "Select Label",
+    "play": "Play",
+    "pause": "Pause",
+    "tip": "Tip: Select a label above, then click and drag on the waveform to create a segment.",
+    "segmentsTitle": "Segments",
+    "noSegments": "No segments created yet.",
+    "notesPlaceholder": "Add notes...",
+    "labels": {
+      "speaker1": "Speaker 1",
+      "speaker1Desc": "Main Speaker",
+      "speaker2": "Speaker 2",
+      "speaker2Desc": "Interviewer",
+      "noise": "Noise",
+      "noiseDesc": "Background Noise"
+    },
+    "segmentNotes": {
+      "speaker1": "Example: Speaker 1 segment",
+      "speaker2": "Example: Speaker 2 segment",
+      "noise": "Example: background noise"
+    },
+    "saveDraft": "Save draft",
+    "exportJson": "Export JSON",
+    "cta": {
+      "heading": "Label audio 3x faster",
+      "subheading": "Upload files, create segments, and export your labeled data in minutes."
+    }
+  },
+  "audioCta": {
+    "heading": "Level up your audio labeling",
+    "subheading": "Upload, segment, and export labeled audio faster with our streamlined workflow."
   }
 }

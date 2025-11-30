@@ -7,7 +7,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useTranslation } from '@/i18n';
 import { Upload, X, FileAudio, Loader2 } from 'lucide-react';
-// import { Progress } from '@/components/ui/progress';
 import { Progress } from "@/components/ui/progress";
 
 interface AudioUploadFormProps {
@@ -24,19 +23,26 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
     const [selectedFiles, setSelectedFiles] = useState<FileWithPreview[]>([]);
     const [uploadProgress, setUploadProgress] = useState(0);
 
-    const { data, setData, post, processing, errors, reset } = useForm({
-        audio_files: [] as File[],
+    const { data, setData, post, processing, errors, reset } = useForm<{
+        audio_files: File[];
+        title: string;
+        description: string;
+        is_public: boolean;
+    }>({
+        audio_files: [],
         title: '',
         description: '',
         is_public: false,
     });
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            const files = Array.from(e.target.files);
-            setSelectedFiles([...selectedFiles, ...files]);
-            setData('audio_files', [...selectedFiles, ...files]);
-        }
+        if (!e.target.files) return;
+
+        const files = Array.from(e.target.files) as FileWithPreview[];
+        const updated = [...selectedFiles, ...files];
+
+        setSelectedFiles(updated);
+        setData('audio_files', updated); // this is what Inertia will send
     };
 
     const removeFile = (index: number) => {
@@ -61,22 +67,13 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
-        if (selectedFiles.length === 0) {
+        if (data.audio_files.length === 0) {
             alert(t('audios.validation.noFiles'));
             return;
         }
 
-        const formData = new FormData();
-        selectedFiles.forEach((file, index) => {
-            formData.append(`audio_files[${index}]`, file);
-        });
-        formData.append('title', data.title);
-        formData.append('description', data.description);
-        formData.append('is_public', data.is_public ? '1' : '0');
-
         post('/researcher/audios', {
-            data: formData,
-            forceFormData: true,
+            forceFormData: true, // Inertia converts the form state to FormData (including File[])
             onProgress: (progress) => {
                 setUploadProgress(progress.percentage || 0);
             },
@@ -84,7 +81,7 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
                 reset();
                 setSelectedFiles([]);
                 setUploadProgress(0);
-                onSuccess?.();
+                onSuccess?.(); // 🔥 this should close your dialog again
             },
             onError: () => {
                 setUploadProgress(0);
@@ -104,7 +101,9 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
                     className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/25 bg-muted/10 p-8 transition-colors hover:border-muted-foreground/50 hover:bg-muted/20"
                 >
                     <Upload className="h-12 w-12 text-muted-foreground/50" />
-                    <p className="mt-2 text-sm font-medium">{t('audios.form.clickToUpload')}</p>
+                    <p className="mt-2 text-sm font-medium">
+                        {t('audios.form.clickToUpload')}
+                    </p>
                     <p className="mt-1 text-xs text-muted-foreground">
                         {t('audios.form.supportedFormats')}: MP3, WAV, OGG, M4A, FLAC
                     </p>
@@ -121,24 +120,30 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
                     className="hidden"
                 />
                 {errors.audio_files && (
-                    <p className="mt-1 text-sm text-destructive">{errors.audio_files}</p>
+                    <p className="mt-1 text-sm text-destructive">
+                        {errors.audio_files}
+                    </p>
                 )}
             </div>
 
             {/* Selected Files List */}
             {selectedFiles.length > 0 && (
                 <div className="space-y-2">
-                    <Label>{t('audios.form.selectedFiles')} ({selectedFiles.length})</Label>
+                    <Label>
+                        {t('audios.form.selectedFiles')} ({selectedFiles.length})
+                    </Label>
                     <div className="max-h-60 space-y-2 overflow-y-auto rounded-lg border p-3">
                         {selectedFiles.map((file, index) => (
                             <div
-                                key={index}
+                                key={`${file.name}-${index}`}
                                 className="flex items-center justify-between rounded-md bg-muted/50 p-3"
                             >
                                 <div className="flex items-center gap-3 flex-1 min-w-0">
                                     <FileAudio className="h-5 w-5 flex-shrink-0 text-blue-500" />
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium truncate">{file.name}</p>
+                                        <p className="text-sm font-medium truncate">
+                                            {file.name}
+                                        </p>
                                         <p className="text-xs text-muted-foreground">
                                             {formatFileSize(file.size)}
                                         </p>
@@ -163,8 +168,12 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
             {processing && uploadProgress > 0 && (
                 <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">{t('audios.form.uploading')}</span>
-                        <span className="font-medium">{Math.round(uploadProgress)}%</span>
+                        <span className="text-muted-foreground">
+                            {t('audios.form.uploading')}
+                        </span>
+                        <span className="font-medium">
+                            {Math.round(uploadProgress)}%
+                        </span>
                     </div>
                     <Progress value={uploadProgress} className="h-2" />
                 </div>
@@ -185,11 +194,17 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
                         placeholder={t('audios.form.titlePlaceholder')}
                         disabled={processing}
                     />
-                    {errors.title && <p className="mt-1 text-sm text-destructive">{errors.title}</p>}
+                    {errors.title && (
+                        <p className="mt-1 text-sm text-destructive">
+                            {errors.title}
+                        </p>
+                    )}
                 </div>
 
                 <div>
-                    <Label htmlFor="description">{t('audios.form.description')}</Label>
+                    <Label htmlFor="description">
+                        {t('audios.form.description')}
+                    </Label>
                     <Textarea
                         id="description"
                         value={data.description}
@@ -199,22 +214,10 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
                         disabled={processing}
                     />
                     {errors.description && (
-                        <p className="mt-1 text-sm text-destructive">{errors.description}</p>
+                        <p className="mt-1 text-sm text-destructive">
+                            {errors.description}
+                        </p>
                     )}
-                </div>
-
-                <div className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        id="is_public"
-                        checked={data.is_public}
-                        onChange={(e) => setData('is_public', e.target.checked)}
-                        disabled={processing}
-                        className="h-4 w-4"
-                    />
-                    <Label htmlFor="is_public" className="cursor-pointer font-normal">
-                        {t('audios.form.makePublic')}
-                    </Label>
                 </div>
             </div>
 
@@ -222,7 +225,7 @@ export default function AudioUploadForm({ onSuccess }: AudioUploadFormProps) {
             <div className="flex justify-end gap-2">
                 <Button
                     type="submit"
-                    disabled={processing || selectedFiles.length === 0}
+                    disabled={processing || data.audio_files.length === 0}
                     className="min-w-32"
                 >
                     {processing ? (

@@ -129,14 +129,18 @@ export default function HomeFooterLayout() {
           className="mt-16 rounded-3xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8"
         >
           <div className="mx-auto max-w-2xl text-center">
-            <h3 className="mb-3 text-2xl font-bold">Stay Updated</h3>
+            <h3 className="mb-3 text-2xl font-bold">
+              {t('footer.newsletterHeading', { defaultValue: 'Stay Updated' })}
+            </h3>
             <p className="mb-6 text-muted-foreground">
-              Get the latest research insights and platform updates delivered to your inbox.
+              {t('footer.newsletterSubheading', {
+                defaultValue: 'Get the latest research insights and platform updates delivered to your inbox.',
+              })}
             </p>
             <form className="flex gap-3">
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('footer.newsletterPlaceholder', { defaultValue: 'Enter your email' })}
                 className="flex-1 rounded-xl border-2 border-primary/20 bg-background px-6 py-3 transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
               />
               <motion.button
@@ -145,7 +149,7 @@ export default function HomeFooterLayout() {
                 type="submit"
                 className="rounded-xl bg-primary px-8 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:shadow-primary/50"
               >
-                Subscribe
+                {t('footer.newsletterCta', { defaultValue: 'Subscribe' })}
               </motion.button>
             </form>
           </div>

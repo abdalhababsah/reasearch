@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
+import { useTranslation } from '@/i18n';
 
 interface ResetPasswordProps {
     token: string;
@@ -14,12 +15,16 @@ interface ResetPasswordProps {
 }
 
 export default function ResetPassword({ token, email }: ResetPasswordProps) {
+    const { t } = useTranslation();
+
     return (
         <AuthLayout
-            title="Reset password"
-            description="Please enter your new password below"
+            title={t('auth.reset.title', { defaultValue: 'Reset password' })}
+            description={t('auth.reset.description', {
+                defaultValue: 'Please enter your new password below',
+            })}
         >
-            <Head title="Reset password" />
+            <Head title={t('auth.reset.headTitle', { defaultValue: 'Reset password' })} />
 
             <Form
                 {...update.form()}
@@ -29,7 +34,9 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                 {({ processing, errors }) => (
                     <div className="grid gap-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email">
+                                {t('auth.reset.email', { defaultValue: 'Email' })}
+                            </Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -46,7 +53,9 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
+                            <Label htmlFor="password">
+                                {t('auth.reset.password', { defaultValue: 'Password' })}
+                            </Label>
                             <Input
                                 id="password"
                                 type="password"
@@ -54,14 +63,18 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 autoComplete="new-password"
                                 className="mt-1 block w-full"
                                 autoFocus
-                                placeholder="Password"
+                                placeholder={t('auth.reset.passwordPlaceholder', {
+                                    defaultValue: 'Password',
+                                })}
                             />
                             <InputError message={errors.password} />
                         </div>
 
                         <div className="grid gap-2">
                             <Label htmlFor="password_confirmation">
-                                Confirm password
+                                {t('auth.reset.passwordConfirm', {
+                                    defaultValue: 'Confirm password',
+                                })}
                             </Label>
                             <Input
                                 id="password_confirmation"
@@ -69,7 +82,9 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 name="password_confirmation"
                                 autoComplete="new-password"
                                 className="mt-1 block w-full"
-                                placeholder="Confirm password"
+                                placeholder={t('auth.reset.passwordConfirmPlaceholder', {
+                                    defaultValue: 'Confirm password',
+                                })}
                             />
                             <InputError
                                 message={errors.password_confirmation}
@@ -84,7 +99,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                             data-test="reset-password-button"
                         >
                             {processing && <Spinner />}
-                            Reset password
+                            {t('auth.reset.submit', { defaultValue: 'Reset password' })}
                         </Button>
                     </div>
                 )}

@@ -49,7 +49,79 @@
     "filter": "تصفية",
     "forward": "التالي",
     "download": "تحميل",
-    "openNewTab": "فتح في علامة تبويب جديدة"
+    "openNewTab": "فتح في علامة تبويب جديدة",
+    "fullscreen": "تكبير الشاشة",
+    "contact": "تواصل",
+    "play": "تشغيل",
+    "pause": "إيقاف مؤقت",
+    "startLabeling": "ابدأ الوسم",
+    "share": "مشاركة"
+  },
+  "auth": {
+    "confirmPassword": {
+      "title": "تأكيد كلمة المرور",
+      "titleShort": "تأكيد كلمة المرور",
+      "description": "هذه منطقة آمنة في التطبيق. يرجى تأكيد كلمة المرور قبل المتابعة.",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "submit": "تأكيد كلمة المرور"
+    },
+    "register": {
+      "headTitle": "إنشاء حساب",
+      "title": "إنشاء حساب",
+      "description": "أدخل بياناتك لإنشاء حسابك",
+      "name": "الاسم",
+      "namePlaceholder": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "email@example.com",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "passwordConfirm": "تأكيد كلمة المرور",
+      "passwordConfirmPlaceholder": "تأكيد كلمة المرور",
+      "submit": "إنشاء الحساب",
+      "haveAccount": "لديك حساب بالفعل؟"
+    },
+    "login": {
+      "headTitle": "تسجيل الدخول",
+      "title": "تسجيل الدخول إلى حسابك",
+      "description": "أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "email@example.com",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "remember": "تذكرني",
+      "noAccount": "لا تملك حساباً؟",
+      "signUp": "إنشاء حساب"
+    },
+    "reset": {
+      "headTitle": "إعادة تعيين كلمة المرور",
+      "title": "إعادة تعيين كلمة المرور",
+      "description": "يرجى إدخال كلمة المرور الجديدة أدناه",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "passwordConfirm": "تأكيد كلمة المرور",
+      "passwordConfirmPlaceholder": "تأكيد كلمة المرور",
+      "submit": "إعادة تعيين كلمة المرور"
+    },
+    "forgot": {
+      "headTitle": "نسيت كلمة المرور",
+      "title": "نسيت كلمة المرور",
+      "description": "أدخل بريدك الإلكتروني لإرسال رابط إعادة تعيين كلمة المرور",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "email@example.com",
+      "submit": "إرسال رابط إعادة التعيين",
+      "backPrompt": "أو ارجع إلى",
+      "backLink": "تسجيل الدخول"
+    },
+    "verify": {
+      "headTitle": "تأكيد البريد الإلكتروني",
+      "title": "تأكيد البريد الإلكتروني",
+      "description": "يرجى تأكيد بريدك الإلكتروني بالنقر على الرابط الذي أرسلناه لك.",
+      "linkSent": "تم إرسال رابط تحقق جديد إلى البريد الإلكتروني الذي أدخلته أثناء التسجيل.",
+      "resend": "إعادة إرسال رابط التحقق"
+    }
   },
   "hero": {
     "badge": "اكتشف الأبحاث التي تشكل الغد",
@@ -147,9 +219,22 @@
     "badge": "مجتمعنا",
     "heading": "تعرف على الباحثين الرائدين",
     "subheading": "تواصل مع العقول اللامعة التي تدفع حدود المعرفة",
+    "heroHeading": "اكتشف",
+    "heroHeadingHighlight": "الباحثين",
     "browse": {
       "heading": "اكتشف الباحثين",
       "subheading": "تواصل مع الباحثين الرائدين واستكشف أعمالهم الرائدة"
+    },
+    "stats": {
+      "total": "إجمالي الباحثين",
+      "publications": "المنشورات",
+      "institutions": "المؤسسات",
+      "active": "نشطون اليوم"
+    },
+    "results": {
+      "searchTitle": "نتائج البحث",
+      "allTitle": "جميع الباحثين",
+      "count": "عرض :count باحث"
     },
     "search": {
       "placeholder": "ابحث بالاسم أو المؤسسة أو المجال..."
@@ -162,7 +247,17 @@
     "browseAll": "تصفح جميع الباحثين",
     "anonymous": "مجهول",
     "noField": "المجال غير محدد",
-    "noInstitution": "المؤسسة غير محددة"
+    "noInstitution": "المؤسسة غير محددة",
+    "heroBadge": "تواصل مع العقول اللامعة",
+    "heroSubheading": "استكشف ملفات الباحثين الرواد ومساهماتهم العلمية",
+    "featured": "مميز",
+    "clearSearch": "مسح البحث",
+    "cta": {
+      "heading": "انضم إلى مجتمع الباحثين",
+      "subheading": "أنشئ ملفك وتواصل مع الباحثين حول العالم",
+      "createProfile": "إنشاء ملف",
+      "learnMore": "اعرف المزيد"
+    }
   },
   "researcher": {
     "noField": "المجال غير محدد",
@@ -209,6 +304,8 @@
     "fixErrors": "يرجى تصحيح الحقول المحددة قبل الحفظ.",
     "about": "نبذة",
     "publications": "المنشورات",
+    "publicationsDesc": "أبحاث منشورة",
+    "noPublicationsDesc": "ستظهر المنشورات هنا عند نشرها",
     "noPublications": "لا توجد منشورات بعد",
     "experience": "الخبرة",
     "education": "التعليم"
@@ -221,8 +318,53 @@
     "description": "إدارة الأبحاث، حالة النشر، والملفات المرفقة.",
     "adminDescription": "استعرض وأدر جميع الأبحاث المقدمة.",
     "browse": {
+      "badge": "أوراق مميزة",
       "heading": "تصفح الأوراق البحثية",
       "subheading": "اكتشف أبحاثًا رائدة من باحثين رائدين حول العالم"
+    },
+    "research": {
+      "show": {
+        "back": "عودة إلى الأبحاث",
+        "published": "منشور",
+        "in": "في",
+        "by": "بواسطة",
+        "year": "السنة",
+        "journal": "المجلة",
+        "doi": "DOI",
+        "abstract": "الملخص",
+        "keywords": "الكلمات المفتاحية",
+        "categories": "التصنيفات",
+        "tags": "الوسوم",
+        "files": "الملفات",
+        "related": "أبحاث ذات صلة",
+        "download": "تحميل",
+        "view": "عرض",
+        "noWallpaper": "لا توجد صورة غلاف",
+        "fileViewModes": {
+          "grid": "عرض شبكي",
+          "list": "عرض قائم"
+        },
+        "fileSearch": "بحث في الملفات...",
+        "fileSize": "حجم الملف",
+        "noFiles": "لا توجد ملفات مرفوعة",
+        "docPreview": "معاينة الملف",
+        "share": "مشاركة",
+        "bookmark": "حفظ",
+        "readTime": "زمن القراءة",
+        "community": {
+          "views": "المشاهدات",
+          "likes": "الإعجابات",
+          "comments": "التعليقات",
+          "citations": "الاستشهادات"
+        },
+        "author": {
+          "title": "عن المؤلف",
+          "contact": "تواصل",
+          "institution": "المؤسسة",
+          "headline": "الصفة",
+          "bio": "نبذة"
+        }
+      }
     },
     "search": {
       "placeholder": "ابحث بالعنوان أو الكلمات المفتاحية أو الملخص..."
@@ -313,12 +455,15 @@
     },
     "show": {
       "overview": "نظرة عامة",
+      "details": "التفاصيل",
       "keywords": "الكلمات المفتاحية",
       "noKeywords": "لا توجد كلمات مفتاحية.",
       "metadata": "البيانات الوصفية",
       "status": "الحالة",
+      "visibilityLabel": "إمكانية العرض",
       "visibility": "إمكانية العرض",
       "createdAt": "تاريخ الإنشاء",
+      "files": "الملفات",
       "filesSection": "الملفات",
       "filesHelp": "استعرض أو حمّل الملفات المرفوعة.",
       "noFiles": "لا توجد ملفات مرفوعة بعد.",
@@ -326,6 +471,23 @@
       "fileVisible": "ظاهر",
       "fileHidden": "مخفي"
     }
+  },
+  "research": {
+    "publication": "نشر البحث",
+    "author": "المؤلف",
+    "abstract": "الملخص",
+    "keywords": "الكلمات المفتاحية",
+    "tags": "وسوم البحث",
+    "year": "السنة",
+    "files": "الملفات",
+    "categories": "التصنيفات",
+    "filesAndDocuments": "الملفات والمستندات",
+    "filesAvailable": "ملفات متاحة للتنزيل",
+    "documents": "الوثائق",
+    "items": "عناصر",
+    "searchFiles": "ابحث في الملفات...",
+    "noFiles": "لا توجد ملفات متاحة",
+    "noFilesDesc": "ستكون الملفات والمستندات متاحة عند رفعها من قبل المؤلف."
   },
   "categories": {
     "all": "جميع التصنيفات",
@@ -405,13 +567,33 @@
       "title": "معلومات الاتصال",
       "email": "البريد الإلكتروني",
       "phone": "الهاتف",
-      "address": "العنوان"
+      "address": "العنوان",
+      "emailDesc": "تواصل عبر البريد الإلكتروني",
+      "phoneDesc": "الاثنين-الجمعة من 9 ص حتى 6 م",
+      "addressDesc": "تفضل بزيارتنا"
     },
     "hours": {
       "title": "ساعات العمل",
       "weekdays": "الإثنين - الجمعة",
       "weekend": "السبت - الأحد",
+      "closed": "مغلق",
+      "description": "ساعات العمل لدينا",
+      "value": "الاثنين-الجمعة: 9 ص - 6 م"
+    },
+    "badge": "نحن هنا للمساعدة",
+    "headingHighlight": "تواصل",
+    "quick": {
+      "title": "استجابة سريعة",
+      "description": "فريق الدعم يرد عادة خلال 24 ساعة في أيام العمل.",
+      "weekdays": "الاثنين - الجمعة",
+      "hours": "9:00 ص - 6:00 م",
+      "weekend": "السبت - الأحد",
       "closed": "مغلق"
+    },
+    "faq": {
+      "title": "تبحث عن إجابات؟",
+      "description": "اطلع على قسم الأسئلة الشائعة لحلول سريعة للأسئلة المتكررة.",
+      "cta": "زيارة الأسئلة الشائعة"
     }
   },
   "cta": {
@@ -441,6 +623,10 @@
     "careers": "الوظائف",
     "contact": "اتصل بنا",
     "privacy": "الخصوصية",
+    "newsletterHeading": "ابق على اطلاع",
+    "newsletterSubheading": "استلم أحدث الرؤى البحثية وتحديثات المنصة مباشرة إلى بريدك.",
+    "newsletterPlaceholder": "أدخل بريدك الإلكتروني",
+    "newsletterCta": "اشترك",
     "copyright": "© 2024 منصة الأبحاث. جميع الحقوق محفوظة."
   },
   "dashboard": {
@@ -499,6 +685,11 @@
     "settings": "الإعدادات",
     "edit": "تعديل الملف الشخصي"
   },
+  "appearance": {
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "حسب النظام"
+  },
   "settings": {
     "title": "الإعدادات",
     "description": "إدارة ملفك الشخصي وإعدادات الحساب",
@@ -534,7 +725,102 @@
     "disabledDescription": "فعّل التحقق بخطوتين لتطلب رمزاً آمناً من تطبيق TOTP عند تسجيل الدخول.",
     "disableButton": "تعطيل التحقق بخطوتين",
     "continueSetup": "متابعة الإعداد",
-    "enableButton": "تفعيل التحقق بخطوتين"
+    "enableButton": "تفعيل التحقق بخطوتين",
+    "recovery": {
+      "title": "رموز الاسترداد للخطوتين",
+      "description": "تتيح لك رموز الاسترداد استعادة الدخول إذا فقدت جهاز التحقق. احتفظ بها في مدير كلمات مرور آمن.",
+      "view": "عرض رموز الاسترداد",
+      "hide": "إخفاء رموز الاسترداد",
+      "regenerate": "إعادة توليد الرموز",
+      "warning": "يمكن استخدام كل رمز استرداد مرة واحدة للوصول إلى حسابك وسيُزال بعد الاستخدام. إذا احتجت المزيد، اضغط إعادة توليد الرموز أعلاه."
+    },
+    "setup": {
+      "enableTitle": "تفعيل التحقق بخطوتين",
+      "enableDescription": "لإكمال التفعيل، امسح رمز QR أو أدخل مفتاح الإعداد في تطبيق المصادقة",
+      "enabledTitle": "تم تفعيل التحقق بخطوتين",
+      "enabledDescription": "تم التفعيل. امسح رمز QR أو أدخل مفتاح الإعداد في تطبيق المصادقة.",
+      "verifyTitle": "تأكيد رمز المصادقة",
+      "verifyDescription": "أدخل الرمز المكوّن من 6 أرقام من تطبيق المصادقة",
+      "manualEntry": "أو أدخل الكود يدوياً",
+      "confirm": "تأكيد"
+    }
+  },
+  "auth": {
+    "confirmPassword": {
+      "title": "تأكيد كلمة المرور",
+      "titleShort": "تأكيد كلمة المرور",
+      "description": "هذه منطقة آمنة في التطبيق. يرجى تأكيد كلمة المرور قبل المتابعة.",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "submit": "تأكيد كلمة المرور"
+    },
+    "register": {
+      "headTitle": "إنشاء حساب",
+      "title": "إنشاء حساب",
+      "description": "أدخل بياناتك لإنشاء حسابك",
+      "name": "الاسم",
+      "namePlaceholder": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "email@example.com",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "passwordConfirm": "تأكيد كلمة المرور",
+      "passwordConfirmPlaceholder": "تأكيد كلمة المرور",
+      "submit": "إنشاء الحساب",
+      "haveAccount": "لديك حساب بالفعل؟"
+    },
+    "login": {
+      "headTitle": "تسجيل الدخول",
+      "title": "تسجيل الدخول إلى حسابك",
+      "description": "أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "email@example.com",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "remember": "تذكرني",
+      "noAccount": "لا تملك حساباً؟",
+      "signUp": "إنشاء حساب"
+    },
+    "reset": {
+      "headTitle": "إعادة تعيين كلمة المرور",
+      "title": "إعادة تعيين كلمة المرور",
+      "description": "يرجى إدخال كلمة المرور الجديدة أدناه",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "passwordConfirm": "تأكيد كلمة المرور",
+      "passwordConfirmPlaceholder": "تأكيد كلمة المرور",
+      "submit": "إعادة تعيين كلمة المرور"
+    },
+    "forgot": {
+      "headTitle": "نسيت كلمة المرور",
+      "title": "نسيت كلمة المرور",
+      "description": "أدخل بريدك الإلكتروني لإرسال رابط إعادة تعيين كلمة المرور",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "email@example.com",
+      "submit": "إرسال رابط إعادة التعيين",
+      "backPrompt": "أو ارجع إلى",
+      "backLink": "تسجيل الدخول"
+    },
+    "verify": {
+      "headTitle": "تأكيد البريد الإلكتروني",
+      "title": "تأكيد البريد الإلكتروني",
+      "description": "يرجى تأكيد بريدك الإلكتروني بالنقر على الرابط الذي أرسلناه لك.",
+      "linkSent": "تم إرسال رابط تحقق جديد إلى البريد الإلكتروني الذي أدخلته أثناء التسجيل.",
+      "resend": "إعادة إرسال رابط التحقق"
+    },
+    "twoFactorChallenge": {
+      "headTitle": "التحقق بخطوتين",
+      "authTitle": "رمز المصادقة",
+      "authDescription": "أدخل رمز المصادقة من تطبيق المصادقة لديك.",
+      "useRecovery": "تسجيل الدخول باستخدام رمز استرداد",
+      "recoveryTitle": "رمز الاسترداد",
+      "recoveryDescription": "يرجى تأكيد الوصول لحسابك بإدخال أحد رموز الاسترداد الطارئة.",
+      "useAuthCode": "تسجيل الدخول باستخدام رمز مصادقة",
+      "recoveryPlaceholder": "أدخل رمز الاسترداد",
+      "or": "أو يمكنك "
+    }
   },
   "deleteAccount": {
     "title": "حذف الحساب",
@@ -646,5 +932,40 @@
     "empty": "لم يتم العثور على أبحاث في هذا التصنيف",
     "noTitle": "بحث بدون عنوان",
     "noAuthor": "مؤلف غير معروف"
+  },
+  "audioDemo": {
+    "title": "عرض توضيحي لوسم الصوت",
+    "subtitle": "جرّب إنشاء المقاطع وتغيير حجمها على الموجة (بدون صوت حقيقي).",
+    "badge": "عرض تفاعلي",
+    "selectLabel": "اختر وسمًا",
+    "play": "تشغيل",
+    "pause": "إيقاف مؤقت",
+    "tip": "نصيحة: اختر وسمًا بالأعلى ثم انقر واسحب على الموجة لإنشاء مقطع.",
+    "segmentsTitle": "المقاطع",
+    "noSegments": "لم يتم إنشاء مقاطع بعد.",
+    "notesPlaceholder": "أضف ملاحظات...",
+    "labels": {
+      "speaker1": "المتحدث 1",
+      "speaker1Desc": "المتحدث الرئيسي",
+      "speaker2": "المتحدث 2",
+      "speaker2Desc": "المحاور",
+      "noise": "ضجيج",
+      "noiseDesc": "ضجيج الخلفية"
+    },
+    "segmentNotes": {
+      "speaker1": "مثال: مقطع للمتحدث الأول",
+      "speaker2": "مثال: مقطع للمتحدث الثاني",
+      "noise": "مثال: ضجيج خلفية"
+    },
+    "saveDraft": "حفظ كمسودة",
+    "exportJson": "تصدير JSON",
+    "cta": {
+      "heading": "وسم الصوت أسرع بثلاث مرات",
+      "subheading": "ارفع الملفات، أنشئ المقاطع، وصدّر البيانات المعلّمة في دقائق."
+    }
+  },
+  "audioCta": {
+    "heading": "ارتقِ بوسم الصوت لديك",
+    "subheading": "ارفع وسم مقاطع الصوت وصدّر بياناتك المعلّمة بسرعة عبر سير عمل مبسّط."
   }
 }

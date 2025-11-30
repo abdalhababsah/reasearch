@@ -67,7 +67,7 @@ class HomeController extends Controller
             ->values();
 
         $recentResearches = Research::query()
-            ->with(['categories', 'researcher'])
+            ->with(['categories', 'researcher', 'wallpaperFile'])
             ->where('is_public', true)
             ->where('status', 'published')
             ->latest()
@@ -81,6 +81,9 @@ class HomeController extends Controller
                     'category' => optional($research->categories->first())->name_en,
                     'category_id' => optional($research->categories->first())->id,
                     'created_at' => $research->created_at,
+                    'wallpaper_url' => $research->wallpaperFile
+                        ? Storage::disk('public')->url($research->wallpaperFile->storage_path)
+                        : null,
                 ];
             })
             ->values();
