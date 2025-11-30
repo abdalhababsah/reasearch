@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { useTranslation } from '@/i18n';
-import { Download, Eye, FileIcon, ArrowLeft, ExternalLink } from 'lucide-react';
+import { Download, Eye, FileIcon, ArrowLeft, ExternalLink, ArrowLeftToLine, ArrowRightToLine } from 'lucide-react';
 
 interface Category {
   id: number;
@@ -61,6 +61,7 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
   const { t } = useTranslation();
   const [currentView, setCurrentView] = useState<'list' | 'viewer'>('list');
   const [selectedFile, setSelectedFile] = useState<ResearchFile | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   const handleUpdate = (newStatus: string, newVisibility: boolean) => {
     router.put(`/admin/researches/${research.id}`, {
@@ -81,15 +82,35 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
     handleUpdate('draft', false);
   };
 
-  const handleViewFile = (file: ResearchFile) => {
+  const handleViewFile = (file: ResearchFile, index: number) => {
     if (!file.url) return;
     setSelectedFile(file);
+    setSelectedIndex(index);
     setCurrentView('viewer');
   };
 
   const handleBackToList = () => {
     setCurrentView('list');
     setSelectedFile(null);
+    setSelectedIndex(-1);
+  };
+
+  const handleNavigate = (direction: 'prev' | 'next') => {
+    if (selectedIndex === -1) return;
+    const files = research.files ?? [];
+    if (!files.length) return;
+
+    const nextIndex =
+      direction === 'next'
+        ? (selectedIndex + 1) % files.length
+        : (selectedIndex - 1 + files.length) % files.length;
+
+    const nextFile = files[nextIndex];
+    if (nextFile?.url) {
+      setSelectedIndex(nextIndex);
+      setSelectedFile(nextFile);
+      setCurrentView('viewer');
+    }
   };
 
   const handleDownloadFile = (file: ResearchFile) => {
@@ -190,7 +211,7 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
             </div>
 
             {/* Overview */}
-            <section className="rounded-xl border bg-card p-6 shadow-sm">
+            <section className=" border bg-card p-6 shadow-sm">
               <h2 className="text-lg font-semibold">
                 {t('researches.show.overview', { defaultValue: 'Overview' })}
               </h2>
@@ -200,7 +221,7 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
             </section>
 
             {/* Metadata */}
-            <section className="rounded-xl border bg-card p-6 shadow-sm space-y-3">
+            <section className=" border bg-card p-6 shadow-sm space-y-3">
               <h3 className="text-base font-semibold">
                 {t('researches.show.metadata', { defaultValue: 'Metadata' })}
               </h3>
@@ -231,7 +252,7 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
         )}
 
         {/* Files Section - Always Visible */}
-        <section className="rounded-xl border bg-card shadow-sm flex flex-col min-h-[600px]">
+        <section className=" border bg-card shadow-sm flex flex-col min-h-[600px]">
           {/* File Explorer Header */}
           <div className="flex items-center justify-between p-4 border-b bg-muted/30">
             <div className="flex items-center gap-3">
@@ -256,6 +277,14 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
             {/* Action buttons when viewing file */}
             {currentView === 'viewer' && selectedFile && (
               <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={() => handleNavigate('prev')} className="gap-2">
+                  <ArrowLeftToLine className="h-4 w-4" />
+                  {t('actions.back', { defaultValue: 'Back' })}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => handleNavigate('next')} className="gap-2">
+                  {t('actions.forward', { defaultValue: 'Next' })}
+                  <ArrowRightToLine className="h-4 w-4" />
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"
@@ -284,13 +313,13 @@ export default function AdminResearchShow({ research, statusOptions }: ResearchS
               /* File List View */
               research.files && research.files.length ? (
                 <div className="space-y-2">
-                  {research.files.map((file) => (
+                  {research.files.map((file, idx) => (
                     <button
                       key={file.id}
-                      onClick={() => handleViewFile(file)}
-                      disabled={!file.url}
-                      className="w-full flex items-center justify-between gap-4 rounded-lg border bg-background p-4 transition-all hover:bg-muted/50 hover:shadow-md active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed text-left"
-                    >
+                      onClick={() => handleViewFile(file, idx)}
+                  disabled={!file.url}
+                  className="w-full flex items-center justify-between gap-4 rounded-lg border bg-background p-4 transition-all hover:bg-muted/50 hover:shadow-md active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                >
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         <div className="flex-shrink-0 text-2xl">
                           {getFileIcon(file.mime_type)}

@@ -18,12 +18,12 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
     const { state } = useSidebar();
 
     return (
-        <SidebarGroup className="px-2 py-0">
-            <div className="flex h-10 items-center justify-center">
+        <SidebarGroup className="py-0">
+            {/* <div className="flex h-10 items-center justify-center">
                 {state === 'collapsed' && (
                     <AppLogoIcon className="h-8 w-auto" />
                 )}
-            </div>
+            </div> */}
             {/* <SidebarGroupLabel>{t('nav.platform')}</SidebarGroupLabel> */}
             <SidebarMenu>
                 {items.map((item) => (

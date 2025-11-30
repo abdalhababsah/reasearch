@@ -156,6 +156,9 @@ class ResearchController extends Controller
         $research->categories()->sync($categoryIds);
         $research->tags()->sync($tagIds);
 
+        // Update visibility for existing files
+        $this->applyExistingFileVisibility($request, $research);
+
         // Handle file removals
         $removeFileIds = $request->input('remove_file_ids', []);
         if (!empty($removeFileIds)) {
@@ -318,6 +321,30 @@ class ResearchController extends Controller
 
             $research->wallpaper_file_id = $file->id;
             $research->save();
+        }
+    }
+
+    /**
+     * Apply visibility updates for existing files using a map of file_id => boolean.
+     */
+    protected function applyExistingFileVisibility(Request $request, Research $research): void
+    {
+        $visibilityMap = $request->input('existing_file_visibility', []);
+        if (empty($visibilityMap) || !is_array($visibilityMap)) {
+            return;
+        }
+
+        $fileIds = array_keys($visibilityMap);
+        $files = File::where('research_id', $research->id)
+            ->whereIn('id', $fileIds)
+            ->get();
+
+        foreach ($files as $file) {
+            $desiredVisibility = (bool) ($visibilityMap[$file->id] ?? $file->is_visible);
+            if ($desiredVisibility !== (bool) $file->is_visible) {
+                $file->is_visible = $desiredVisibility;
+                $file->save();
+            }
         }
     }
 

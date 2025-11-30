@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Research;
-use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -41,6 +40,7 @@ class HomeController extends Controller
             ->values();
 
         $topResearchers = User::query()
+            ->with('researcherProfile')
             ->withCount(['researches' => function ($query) {
                 $query->where('is_public', true)
                     ->where('status', 'published');
@@ -59,6 +59,9 @@ class HomeController extends Controller
                     'institution' => optional($user->researcherProfile)->institution,
                     'field' => optional($user->researcherProfile)->headline,
                     'papers' => $user->researches_count,
+                    'profile_image' => $user->researcherProfile && $user->researcherProfile->profile_image
+                        ? Storage::disk('public')->url($user->researcherProfile->profile_image)
+                        : null,
                 ];
             })
             ->values();
@@ -81,7 +84,7 @@ class HomeController extends Controller
                 ];
             })
             ->values();
-// dd($topResearchers);
+
         return Inertia::render('welcome', [
             'canRegister' => Features::enabled(Features::registration()),
             'topCategories' => $topCategories,
@@ -197,7 +200,7 @@ class HomeController extends Controller
     public function showResearch(Research $research): Response
     {
         // Only show public, published researches
-        abort_if(!$research->is_public || $research->status !== 'published', 404);
+        abort_if(! $research->is_public || $research->status !== 'published', 404);
 
         $research->load([
             'researcher.researcherProfile',
@@ -320,12 +323,13 @@ class HomeController extends Controller
      */
     public function showResearcher(User $researcher): Response
     {
+
         $researcher->load([
             'researcherProfile.experiences',
             'researcherProfile.educations',
             'researcherProfile.majors',
         ]);
-
+        // dd($researcher);
         // Get researcher's public researches
         $researches = Research::query()
             ->with(['categories', 'tags', 'wallpaperFile'])
@@ -357,6 +361,7 @@ class HomeController extends Controller
                 ];
             });
 
+        // dd($researches);
         return Inertia::render('public/researchers/show', [
             'researcher' => [
                 'id' => $researcher->id,
@@ -366,12 +371,18 @@ class HomeController extends Controller
                     'institution' => $researcher->researcherProfile->institution,
                     'headline' => $researcher->researcherProfile->headline,
                     'bio' => $researcher->researcherProfile->bio,
+                    'profile_image' => $researcher->researcherProfile->profile_image
+                        ? Storage::disk('public')->url($researcher->researcherProfile->profile_image)
+                        : null,
                     'website' => $researcher->researcherProfile->website,
+                    'phone' => $researcher->researcherProfile->phone,
+                    'address' => $researcher->researcherProfile->address,
                     'orcid' => $researcher->researcherProfile->orcid,
                     'google_scholar' => $researcher->researcherProfile->google_scholar,
-                    'linkedin' => $researcher->researcherProfile->linkedin,
+                    'linkedin_url' => $researcher->researcherProfile->linkedin_url,
+                    'github_url' => $researcher->researcherProfile->github_url,
                     'twitter' => $researcher->researcherProfile->twitter,
-                    'experiences' => $researcher->researcherProfile->experiences->map(fn ($exp) => [
+                    'experiences' => $researcher->researcherProfile->experiences->sortByDesc('is_current')->values()->map(fn ($exp) => [
                         'id' => $exp->id,
                         'title' => $exp->title,
                         'company' => $exp->company,
@@ -381,10 +392,10 @@ class HomeController extends Controller
                         'is_current' => $exp->is_current,
                         'description' => $exp->description,
                     ]),
-                    'educations' => $researcher->researcherProfile->educations->map(fn ($edu) => [
+                    'educations' => $researcher->researcherProfile->educations->sortByDesc('start_date')->values()->map(fn ($edu) => [
                         'id' => $edu->id,
                         'degree' => $edu->degree,
-                        'field' => $edu->field,
+                        'field' => $edu->field_of_study,
                         'institution' => $edu->institution,
                         'location' => $edu->location,
                         'start_date' => $edu->start_date?->toDateString(),
@@ -393,8 +404,7 @@ class HomeController extends Controller
                     ]),
                     'majors' => $researcher->researcherProfile->majors->map(fn ($major) => [
                         'id' => $major->id,
-                        'name_en' => $major->name_en,
-                        'name_ar' => $major->name_ar,
+                        'name' => $major->name,
                     ]),
                 ] : null,
             ],

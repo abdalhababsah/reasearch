@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::table('researches', function (Blueprint $table) {
             // Add the column after wallpaper_file_id
             $table->foreignId('primary_file_id')
-                  ->nullable()
-                  ->after('allow_dataset_browse') // Or after('wallpaper_file_id') if you prefer
+                  ->nullable() // Or after('wallpaper_file_id') if you prefer
                   ->constrained('files')
                   ->onDelete('set null');
         });

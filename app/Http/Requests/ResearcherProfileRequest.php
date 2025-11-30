@@ -27,6 +27,7 @@ class ResearcherProfileRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:255'],
             'linkedin_url' => ['nullable', 'url', 'max:255'],
+            'profile_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
             'github_url' => ['nullable', 'url', 'max:255'],
             'major_ids' => ['nullable', 'array'],
             'major_ids.*' => ['exists:researcher_majors,id'],

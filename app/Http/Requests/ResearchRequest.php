@@ -36,6 +36,10 @@ class ResearchRequest extends FormRequest
             'files' => ['nullable', 'array'],
             'files.*' => ['file', 'max:102400'], // 100MB max per file
             'primary_file_index' => ['nullable', 'integer', 'min:0'],
+            'file_visibility' => ['nullable', 'array'],
+            'file_visibility.*' => ['boolean'],
+            'existing_file_visibility' => ['nullable', 'array'],
+            'existing_file_visibility.*' => ['boolean'],
             
             // Categories and Tags
             'category_ids' => ['nullable', 'array'],

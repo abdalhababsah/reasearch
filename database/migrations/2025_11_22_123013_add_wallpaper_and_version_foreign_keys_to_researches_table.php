@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('researches', function (Blueprint $table) {
-            $table->foreignId('wallpaper_file_id')->nullable()->after('allow_dataset_browse')->constrained('files')->onDelete('set null');
+            $table->foreignId('wallpaper_file_id')->nullable()->constrained('files')->onDelete('set null');
             $table->foreignId('current_version_id')->nullable()->after('wallpaper_file_id')->constrained('research_versions')->onDelete('set null');
         });
     }

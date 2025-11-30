@@ -1,6 +1,7 @@
-import { router, Form } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import { FormEvent, useEffect, useState } from 'react';
 import { Plus, Trash2, Edit2, X } from 'lucide-react';
+import { Image as ImageIcon } from 'lucide-react';
 
 import HeadingSmall from '@/components/heading-small';
 import InputError from '@/components/input-error';
@@ -84,6 +85,18 @@ export default function ResearcherProfileForm({
     majors,
     selected_majors,
 }: ResearcherProfileData) {
+    const { data, setData, post, processing, errors } = useForm({
+        bio: profile?.bio ?? '',
+        website: profile?.website ?? '',
+        phone: profile?.phone ?? '',
+        address: profile?.address ?? '',
+        linkedin_url: profile?.linkedin_url ?? '',
+        github_url: profile?.github_url ?? '',
+        profile_image: null as File | null,
+        remove_profile_image: false,
+        major_ids: selected_majors ?? [],
+        _method: 'patch',
+    });
     const [editingExperience, setEditingExperience] = useState<number | null>(null);
     const [editingEducation, setEditingEducation] = useState<number | null>(null);
     const [newExperience, setNewExperience] = useState<Experience>({ ...defaultExperience });
@@ -95,7 +108,16 @@ export default function ResearcherProfileForm({
     const [educationFeedback, setEducationFeedback] = useState<FlashMessage>(null);
     const [experienceProcessing, setExperienceProcessing] = useState(false);
     const [educationProcessing, setEducationProcessing] = useState(false);
+    const [profileImagePreview, setProfileImagePreview] = useState<string | null>(profile?.profile_image_url || null);
     const { t } = useTranslation();
+
+    useEffect(() => {
+        return () => {
+            if (profileImagePreview && profileImagePreview.startsWith('blob:')) {
+                URL.revokeObjectURL(profileImagePreview);
+            }
+        };
+    }, [profileImagePreview]);
 
     const hasInvalidDateOrder = (start?: string, end?: string): boolean => {
         if (!start || !end) {
@@ -282,6 +304,14 @@ export default function ResearcherProfileForm({
         }
     };
 
+    const handleProfileSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        post('/researcher/profile/update', {
+            preserveScroll: true,
+            forceFormData: true,
+        });
+    };
+
     return (
         <div className="space-y-8 p-6">
             {/* Profile Information */}
@@ -291,125 +321,194 @@ export default function ResearcherProfileForm({
                     description={t('researcher.infoDescription')}
                 />
 
-                <Form
-                    method="patch"
-                    action="/researcher/profile/update"
-                    options={{
-                        preserveScroll: true,
-                    }}
+                <form
+                    onSubmit={handleProfileSubmit}
+                    encType="multipart/form-data"
                     className="space-y-6"
-                    data={{
-                        major_ids: selectedMajors,
-                    }}
                 >
-                    {({ processing, errors }) => (
-                        <>
-                            <div className="grid gap-2">
-                                <Label htmlFor="bio">{t('researcher.bio')} *</Label>
-                                <Textarea
-                                    id="bio"
-                                    name="bio"
-                                    defaultValue={profile?.bio || ''}
-                                    required
-                                    rows={6}
-                                    placeholder={t('researcher.bioPlaceholder')}
-                                />
-                                <InputError message={errors.bio} />
+                    <div className="rounded-xl border bg-card p-5 shadow-sm">
+                        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="relative h-52 w-52 overflow-hidden rounded-xl border bg-background shadow-sm">
+                                {profileImagePreview ? (
+                                    <img
+                                        src={profileImagePreview}
+                                        alt={t('researcher.profileImageAlt', { defaultValue: 'Profile image' })}
+                                        className="h-full w-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+                                        <ImageIcon className="h-10 w-10" />
+                                    </div>
+                                )}
+                                <label
+                                    htmlFor="profile_image"
+                                    className="absolute top-2 right-2 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md transition hover:brightness-110"
+                                >
+                                    <ImageIcon className="h-4 w-4" />
+                                    <input
+                                        id="profile_image"
+                                        name="profile_image"
+                                        type="file"
+                                        accept="image/*"
+                                        className="sr-only"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0] ?? null;
+                                            setData('profile_image', file as any);
+                                            setData('remove_profile_image', false);
+                                            if (file) {
+                                                const url = URL.createObjectURL(file);
+                                                setProfileImagePreview((prev) => {
+                                                    if (prev && prev.startsWith('blob:')) {
+                                                        URL.revokeObjectURL(prev);
+                                                    }
+                                                    return url;
+                                                });
+                                            } else {
+                                                setProfileImagePreview(profile?.profile_image_url || null);
+                                            }
+                                        }}
+                                    />
+                                </label>
                             </div>
 
-                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div className="grid gap-2">
-                                        <Label htmlFor="website">{t('researcher.website')}</Label>
-                                    <Input
-                                        id="website"
-                                        type="url"
-                                        name="website"
-                                        defaultValue={profile?.website || ''}
-                                        placeholder="https://example.com"
-                                    />
-                                    <InputError message={errors.website} />
+                            <div className="flex flex-col items-start gap-2 sm:items-end">
+                                <div className="text-sm text-muted-foreground">
+                                    <p className="font-medium text-foreground">{t('researcher.profileImage')}</p>
+                                    <p className="text-xs">{t('researcher.profileImageHelp')}</p>
                                 </div>
-
-                                <div className="grid gap-2">
-                                        <Label htmlFor="phone">{t('researcher.phone')}</Label>
-                                    <Input
-                                        id="phone"
-                                        name="phone"
-                                        defaultValue={profile?.phone || ''}
-                                        placeholder="+966-555-123-456"
-                                    />
-                                    <InputError message={errors.phone} />
-                                </div>
+                                <InputError message={errors.profile_image} />
+                                {profileImagePreview && (
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => {
+                                            if (profileImagePreview?.startsWith('blob:')) {
+                                                URL.revokeObjectURL(profileImagePreview);
+                                            }
+                                            setProfileImagePreview(null);
+                                            setData('profile_image', null);
+                                            setData('remove_profile_image', true);
+                                        }}
+                                    >
+                                        {t('actions.remove')}
+                                    </Button>
+                                )}
                             </div>
+                        </div>
+                    </div>
 
-                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div className="grid gap-2">
-                                        <Label htmlFor="address">{t('researcher.address')}</Label>
-                                    <Input
-                                        id="address"
-                                        name="address"
-                                        defaultValue={profile?.address || ''}
-                                        placeholder="Riyadh, Saudi Arabia"
+                    <div className="grid gap-2">
+                        <Label htmlFor="bio">{t('researcher.bio')} *</Label>
+                        <Textarea
+                            id="bio"
+                            name="bio"
+                            required
+                            rows={6}
+                            placeholder={t('researcher.bioPlaceholder')}
+                            value={data.bio}
+                            onChange={(e) => setData('bio', e.target.value)}
+                        />
+                        <InputError message={errors.bio} />
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div className="grid gap-2">
+                            <Label htmlFor="website">{t('researcher.website')}</Label>
+                            <Input
+                                id="website"
+                                type="url"
+                                name="website"
+                                placeholder="https://example.com"
+                                value={data.website}
+                                onChange={(e) => setData('website', e.target.value)}
+                            />
+                            <InputError message={errors.website} />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="phone">{t('researcher.phone')}</Label>
+                            <Input
+                                id="phone"
+                                name="phone"
+                                placeholder="+966-555-123-456"
+                                value={data.phone}
+                                onChange={(e) => setData('phone', e.target.value)}
+                            />
+                            <InputError message={errors.phone} />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div className="grid gap-2">
+                            <Label htmlFor="address">{t('researcher.address')}</Label>
+                            <Input
+                                id="address"
+                                name="address"
+                                placeholder="Riyadh, Saudi Arabia"
+                                value={data.address}
+                                onChange={(e) => setData('address', e.target.value)}
+                            />
+                            <InputError message={errors.address} />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="linkedin_url">{t('researcher.linkedin')}</Label>
+                            <Input
+                                id="linkedin_url"
+                                type="url"
+                                name="linkedin_url"
+                                placeholder="https://linkedin.com/in/username"
+                                value={data.linkedin_url}
+                                onChange={(e) => setData('linkedin_url', e.target.value)}
+                            />
+                            <InputError message={errors.linkedin_url} />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div className="grid gap-2">
+                            <Label htmlFor="github_url">{t('researcher.github')}</Label>
+                            <Input
+                                id="github_url"
+                                type="url"
+                                name="github_url"
+                                placeholder="https://github.com/username"
+                                value={data.github_url}
+                                onChange={(e) => setData('github_url', e.target.value)}
+                            />
+                            <InputError message={errors.github_url} />
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <Label>{t('researcher.researchAreas')}</Label>
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+                            {majors.map((major) => (
+                                <label
+                                    key={major.id}
+                                    className="flex cursor-pointer items-center space-x-3 rounded-lg border border-input bg-background p-4 text-sm font-medium shadow-sm transition hover:border-primary"
+                                >
+                                    <Checkbox
+                                        checked={data.major_ids.includes(major.id)}
+                                        onCheckedChange={(checked) => {
+                                            setData(
+                                                'major_ids',
+                                                checked
+                                                    ? [...data.major_ids, major.id]
+                                                    : data.major_ids.filter((id) => id !== major.id)
+                                            );
+                                        }}
                                     />
-                                    <InputError message={errors.address} />
-                                </div>
+                                    <span>{major.name}</span>
+                                </label>
+                            ))}
+                        </div>
+                        <InputError message={errors.major_ids} />
+                    </div>
 
-                                <div className="grid gap-2">
-                                        <Label htmlFor="linkedin_url">{t('researcher.linkedin')}</Label>
-                                    <Input
-                                        id="linkedin_url"
-                                        type="url"
-                                        name="linkedin_url"
-                                        defaultValue={profile?.linkedin_url || ''}
-                                        placeholder="https://linkedin.com/in/username"
-                                    />
-                                    <InputError message={errors.linkedin_url} />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div className="grid gap-2">
-                                        <Label htmlFor="github_url">{t('researcher.github')}</Label>
-                                    <Input
-                                        id="github_url"
-                                        type="url"
-                                        name="github_url"
-                                        defaultValue={profile?.github_url || ''}
-                                        placeholder="https://github.com/username"
-                                    />
-                                    <InputError message={errors.github_url} />
-                                </div>
-                            </div>
-
-                            <div className="space-y-4">
-                                <Label>{t('researcher.researchAreas')}</Label>
-                                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-                                    {majors.map((major) => (
-                                        <label
-                                            key={major.id}
-                                            className="flex cursor-pointer items-center space-x-3 rounded-lg border border-input bg-background p-4 text-sm font-medium shadow-sm transition hover:border-primary"
-                                        >
-                                            <Checkbox
-                                                checked={selectedMajors.includes(major.id)}
-                                                onCheckedChange={(checked) => {
-                                                    setSelectedMajors((prev) =>
-                                                        checked
-                                                            ? [...prev, major.id]
-                                                            : prev.filter((id) => id !== major.id)
-                                                    );
-                                                }}
-                                            />
-                                            <span>{major.name}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                                <InputError message={errors.major_ids} />
-                            </div>
-
-                            <Button disabled={processing}>{t('researcher.saveProfile')}</Button>
-                        </>
-                    )}
-                </Form>
+                    <Button disabled={processing}>{t('researcher.saveProfile')}</Button>
+                </form>
             </div>
 
             {/* Experiences */}
@@ -481,13 +580,13 @@ export default function ResearcherProfileForm({
                 </div>
 
                 <div className="rounded-lg border border-dashed p-4">
-                        <button
-                            type="button"
-                            onClick={openNewExperienceForm}
-                            className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
-                        >
-                            <Plus className="h-4 w-4" /> {t('researcher.addExperience')}
-                        </button>
+                    <button
+                        type="button"
+                        onClick={openNewExperienceForm}
+                        className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
+                    >
+                        <Plus className="h-4 w-4" /> {t('researcher.addExperience')}
+                    </button>
                 </div>
 
                 {editingExperience === 0 && (
@@ -569,13 +668,13 @@ export default function ResearcherProfileForm({
                 </div>
 
                 <div className="rounded-lg border border-dashed p-4">
-                        <button
-                            type="button"
-                            onClick={openNewEducationForm}
-                            className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
-                        >
-                            <Plus className="h-4 w-4" /> {t('researcher.addEducation')}
-                        </button>
+                    <button
+                        type="button"
+                        onClick={openNewEducationForm}
+                        className="flex w-full items-center justify-center gap-2 text-sm text-muted-foreground"
+                    >
+                        <Plus className="h-4 w-4" /> {t('researcher.addEducation')}
+                    </button>
                 </div>
 
                 {editingEducation === 0 && (

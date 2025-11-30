@@ -11,24 +11,33 @@ import {
     useSidebar,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { dashboard as adminDashboard } from '@/routes/admin';
+import { dashboard as researcherDashboard } from '@/routes/researcher';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { FileText, FolderTree, LayoutGrid, Tags } from 'lucide-react';
+import { FileText, FolderTree, LayoutGrid, Tags, FileAudio2 } from 'lucide-react';
 import { useMemo } from 'react';
 import AppLogo from './app-logo';
 import { useTranslation } from '@/i18n';
+import AppLogoIcon from './app-logo-icon';
 
 export function AppSidebar({ side = 'left' }: { side?: 'left' | 'right' }) {
     const { auth } = usePage<SharedData>().props;
     const isAdmin = auth?.user?.role?.name === 'admin';
+    const isResearcher = auth?.user?.role?.name === 'researcher';
     const { t } = useTranslation();
     const { state } = useSidebar();
+    const dashboardHref = isAdmin
+        ? adminDashboard()
+        : isResearcher
+            ? researcherDashboard()
+            : dashboard();
 
     const mainNavItems = useMemo<NavItem[]>(() => {
         const base: NavItem[] = [
             {
                 title: t('nav.dashboard'),
-                href: dashboard(),
+                href: dashboardHref,
                 icon: LayoutGrid,
             },
         ];
@@ -52,31 +61,45 @@ export function AppSidebar({ side = 'left' }: { side?: 'left' | 'right' }) {
                 },
             );
         } else {
-            base.push({
-                title: t('nav.researches'),
-                href: '/researcher/researches',
-                icon: FileText,
-            });
+            base.push(
+                {
+                    title: t('nav.researches'),
+                    href: '/researcher/researches',
+                    icon: FileText,
+                },
+                {
+                    title: t('nav.audios'),
+                    href: '/researcher/audios',
+                    icon: FileAudio2,
+                }
+            );
         }
 
         return base;
-    }, [isAdmin, t]);
+    }, [dashboardHref, isAdmin, t]);
 
     return (
         <Sidebar collapsible="icon" variant="inset" side={side}>
-            <SidebarHeader>
-                {state === 'expanded' && (
+            {state === 'expanded' && (
+                <SidebarHeader>
                     <SidebarMenu>
                         <SidebarMenuItem>
                             <SidebarMenuButton size="lg" asChild>
-                                <Link href={dashboard()} prefetch>
+                                <Link href={dashboardHref} prefetch>
                                     <AppLogo />
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
-                )}
-            </SidebarHeader>
+                </SidebarHeader>
+            )}
+            {state === 'collapsed' && (
+                <SidebarHeader>
+                    <div className="flex h-10 items-center justify-center">
+                        <AppLogoIcon className="h-8 w-auto" />
+                    </div>
+                </SidebarHeader>
+            )}
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />

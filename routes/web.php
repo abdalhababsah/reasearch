@@ -7,6 +7,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Researcher\ResearchController as ResearcherResearchController;
+use App\Http\Controllers\Researcher\ResearcherAudioController;
+use App\Http\Controllers\Researcher\ResearcherAudioLabelController;
+use App\Http\Controllers\Researcher\ResearcherAudioSegmentController;
 use App\Http\Controllers\ResearcherProfileController;
 use App\Http\Middleware\EnsureResearcherProfileComplete;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +41,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
         
         Route::prefix('researcher')->name('researcher.')->group(function () {
             Route::resource('researches', ResearcherResearchController::class);
+            
+            // Audio Management Routes
+            Route::prefix('audios')->name('audios.')->group(function () {
+                Route::get('/', [ResearcherAudioController::class, 'index'])->name('index');
+                Route::post('/', [ResearcherAudioController::class, 'store'])->name('store');
+                Route::get('/{audio}', [ResearcherAudioController::class, 'show'])->name('show');
+                Route::put('/{audio}', [ResearcherAudioController::class, 'update'])->name('update');
+                Route::delete('/{audio}', [ResearcherAudioController::class, 'destroy'])->name('destroy');
+                
+                // Audio Segmentation Routes
+                Route::get('/{audio}/label', [ResearcherAudioSegmentController::class, 'edit'])->name('label');
+                Route::put('/{audio}/segments', [ResearcherAudioSegmentController::class, 'update'])->name('segments.update');
+                Route::get('/{audio}/segments', [ResearcherAudioSegmentController::class, 'index'])->name('segments.index');
+                Route::get('/{audio}/export', [ResearcherAudioSegmentController::class, 'export'])->name('export');
+            });
+            
+            // Audio Label Management Routes
+            Route::prefix('audio-labels')->name('audio-labels.')->group(function () {
+                Route::get('/', [ResearcherAudioLabelController::class, 'index'])->name('index');
+                Route::post('/', [ResearcherAudioLabelController::class, 'store'])->name('store');
+                Route::put('/{label}', [ResearcherAudioLabelController::class, 'update'])->name('update');
+                Route::delete('/{label}', [ResearcherAudioLabelController::class, 'destroy'])->name('destroy');
+                Route::patch('/{label}/toggle-active', [ResearcherAudioLabelController::class, 'toggleActive'])->name('toggle-active');
+            });
         });
     });
     

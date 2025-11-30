@@ -1,3 +1,4 @@
+// home-layout.tsx (updated)
 import { ReactNode } from 'react';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from '@/i18n';
@@ -26,7 +27,7 @@ export default function HomeLayout({
       <Head title={pageTitle} />
       <div dir={dir} className="min-h-screen bg-background">
         <HomeHeaderLayout isAuthenticated={isAuthenticated} canRegister={canRegister} />
-        <main>{children}</main>
+        <main className="relative">{children}</main>
         <HomeFooterLayout />
       </div>
     </>

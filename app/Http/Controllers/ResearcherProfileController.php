@@ -12,6 +12,8 @@ use App\Models\ResearcherProfile;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -33,11 +35,13 @@ class ResearcherProfileController extends Controller
     public function formProps(User $user): array
     {
         $profile = $user->researcherProfile;
+        $majors = ResearcherMajor::orderBy('name')->get();
 
         return [
             'profile' => $profile ? [
                 'id' => $profile->id,
                 'bio' => $profile->bio,
+                'profile_image_url' => $profile->profile_image_url,
                 'website' => $profile->website,
                 'phone' => $profile->phone,
                 'address' => $profile->address,
@@ -66,7 +70,7 @@ class ResearcherProfileController extends Controller
                     'description' => $edu->description,
                 ];
             }) : [],
-            'majors' => ResearcherMajor::all()->map(function ($major) {
+            'majors' => $majors->map(function ($major) {
                 return [
                     'id' => $major->id,
                     'name' => $major->name,
@@ -95,9 +99,31 @@ class ResearcherProfileController extends Controller
             }
         }
         unset($data['major_ids']);
-
+    
         $profile = $user->researcherProfile;
-
+    
+        // Handle profile image upload
+        if ($request->hasFile('profile_image')) {
+            // Delete old image if exists
+            if ($profile && $profile->profile_image) {
+                Storage::disk('public')->delete($profile->profile_image);
+            }
+    
+            $path = $request->file('profile_image')->store('profile-images', 'public');
+            $data['profile_image'] = $path;
+        }
+    
+        // Handle profile image removal
+        if ($request->boolean('remove_profile_image')) {
+            if ($profile && $profile->profile_image) {
+                Storage::disk('public')->delete($profile->profile_image);
+            }
+            $data['profile_image'] = null;
+        }
+    
+        // Remove these flags from data array as they're not database columns
+        unset($data['remove_profile_image']);
+    
         if ($profile) {
             $profile->update($data);
         } else {
@@ -106,10 +132,10 @@ class ResearcherProfileController extends Controller
                 ...$data,
             ]);
         }
-
+    
         // Sync majors
         $user->majors()->sync($majorIds);
-
+    
         return redirect()->route('profile.edit')
             ->with('success', 'Profile updated successfully.');
     }

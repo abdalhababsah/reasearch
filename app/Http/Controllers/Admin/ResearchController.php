@@ -87,8 +87,6 @@ class ResearchController extends Controller
                 'abstract' => $research->abstract,
                 'status' => $research->status,
                 'is_public' => $research->is_public,
-                'allow_document_view' => $research->allow_document_view,
-                'allow_dataset_browse' => $research->allow_dataset_browse,
                 'created_at' => $research->created_at?->toDateTimeString(),
                 'author' => $research->researcher ? [
                     'id' => $research->researcher->id,

@@ -100,4 +100,27 @@ class User extends Authenticatable
             ->using(ResearcherMajorUser::class)
             ->withTimestamps();
     }
+    /**
+     * Get all audio files uploaded by this researcher
+     */
+    public function audios(): HasMany
+    {
+        return $this->hasMany(ResearcherAudio::class);
+    }
+
+    /**
+     * Get all custom audio labels created by this researcher
+     */
+    public function audioLabels(): HasMany
+    {
+        return $this->hasMany(ResearcherAudioLabel::class);
+    }
+
+    /**
+     * Get active audio labels for this researcher
+     */
+    public function activeAudioLabels(): HasMany
+    {
+        return $this->audioLabels()->where('is_active', true);
+    }
 }

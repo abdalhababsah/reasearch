@@ -5,6 +5,7 @@
     "researchers": "Researchers",
     "contact": "Contact",
     "dashboard": "Dashboard",
+    "audios": "Audios",
     "categories": "Categories",
     "tags": "Tags",
     "profile": "Profile",
@@ -16,6 +17,7 @@
     "menu": "Menu",
     "account": "Account",
     "myAccount": "My Account",
+    "settings": "Settings",
     "deleteAccount": {
       "title": "Delete account"
     }
@@ -24,11 +26,13 @@
     "label": "Language"
   },
   "actions": {
+    "explore": "Explore",
     "create": "Create",
     "save": "Save",
     "saving": "Saving...",
     "update": "Update",
     "delete": "Delete",
+    "label": "Label",
     "view": "View",
     "edit": "Edit",
     "back": "Back",
@@ -43,21 +47,31 @@
     "readMore": "Read more",
     "viewProfile": "View Profile",
     "clearFilters": "Clear Filters",
-    "filter": "Filter"
+    "filter": "Filter",
+    "forward": "Next",
+    "download": "Download",
+    "openNewTab": "Open in New Tab"
   },
   "hero": {
-    "badge": "Join 15,000+ researchers",
-    "where": "Where",
-    "ideas": "Ideas",
-    "become": "Become",
-    "impact": "Impact",
-    "description": "The next-generation platform for researchers to publish groundbreaking work, collaborate across borders, and accelerate scientific discovery.",
-    "free": "No publishing fees",
-    "openAccess": "Open access forever",
-    "rapidReview": "Rapid peer review",
-    "recentPublication": "Recent Publication"
+    "badge": "Discover Research That Shapes Tomorrow",
+    "navigate": "Navigate The",
+    "futureOfScience": "Future of Science",
+    "description": "Explore 45,000+ groundbreaking papers. Filter by field, track citations, and connect with researchers worldwide—all in one intelligent platform.",
+    "startPublishing": "Start Publishing",
+    "startExploring": "Start Exploring",
+    "trendingNow": "TRENDING NOW",
+    "trendingTopic": "AI in Medical Research",
+    "mostDownloaded": "Most Downloaded This Week",
+    "liveUpdates": "Live Updates",
+    "realTime": "Real-time",
+    "features": {
+      "smartSearch": "Smart search",
+      "advancedFilters": "Advanced filters",
+      "saveFavorites": "Save favorites"
+    }
   },
   "stats": {
+    "publications": "Publications",
     "researchers": "Active Researchers",
     "papers": "Published Papers",
     "countries": "Countries",
@@ -116,12 +130,17 @@
     "noInstitution": "Institution not specified"
   },
   "researcher": {
+    "noField": "Field not specified",
+    "noInstitution": "Institution not specified",
     "papers": "Papers",
     "viewProfile": "View Profile",
     "profileTitle": "Researcher profile",
     "profileDescription": "Share your background, experiences, and research areas.",
     "infoSection": "Profile Information",
     "infoDescription": "Update your researcher profile information",
+    "profileImage": "Profile image",
+    "profileImageHelp": "Upload a clear headshot (JPG or PNG).",
+    "profileImageAlt": "Profile image",
     "bio": "Biography",
     "bioPlaceholder": "Tell us about yourself (minimum 50 characters)",
     "website": "Website",
@@ -268,7 +287,9 @@
       "filesSection": "Files",
       "filesHelp": "Preview or download the uploaded files.",
       "noFiles": "No files uploaded yet.",
-      "deleteConfirm": "Delete this research? All files will be removed."
+      "deleteConfirm": "Delete this research? All files will be removed.",
+      "fileVisible": "Visible",
+      "fileHidden": "Hidden"
     }
   },
   "categories": {
@@ -359,6 +380,7 @@
     }
   },
   "cta": {
+    "browseResearch": "Browse Research",
     "heading": "Ready to Share Your Research?",
     "subheading": "Join thousands of researchers making an impact. Publish your first paper for free today.",
     "emailPlaceholder": "Enter your email",
@@ -388,7 +410,52 @@
     "placeholder": "Placeholder",
     "profileIncompleteTitle": "Profile Incomplete",
     "profileIncompleteDescription": "Please complete your profile to unlock all features.",
-    "profileIncompleteCta": "Complete Profile"
+    "profileIncompleteCta": "Complete Profile",
+    "overview": "Overview",
+    "files": {
+      "document": "Documents",
+      "dataset": "Datasets",
+      "image": "Images",
+      "other": "Other files"
+    },
+    "admin": {
+      "totalResearches": "Total researches",
+      "published": "Published",
+      "underReview": "Under review",
+      "researchers": "Researchers",
+      "admins": "Admins",
+      "public": "Public",
+      "private": "Private",
+      "categories": "Categories",
+      "tags": "Tags",
+      "researchBreakdown": "Research breakdown",
+      "researchBreakdownHint": "Status and visibility of all submissions.",
+      "people": "People & taxonomy",
+      "peopleHint": "Researchers, admins, categories, and tags.",
+      "recentSubmissions": "Recent submissions",
+      "recentSubmissionsHint": "Latest research added to the platform.",
+      "noRecent": "No recent submissions yet.",
+      "fileBreakdown": "File breakdown",
+      "fileBreakdownHint": "Distribution of uploaded research files (total: :total).",
+      "versions": "Research versions"
+    },
+    "researcher": {
+      "myResearches": "My researches",
+      "liveNow": "Live on the platform",
+      "awaiting": "Awaiting decisions",
+      "files": "Files uploaded",
+      "versions": "Versions",
+      "versionsCount": ":count versions",
+      "statusOverview": "Status overview",
+      "statusOverviewHint": "Where your work sits in the workflow.",
+      "visibility": "Visibility",
+      "visibilityHint": "Public vs private visibility for your work.",
+      "recentUpdates": "Recent updates",
+      "recentUpdatesHint": "Latest activity across your research.",
+      "noRecent": "No recent activity yet.",
+      "fileBreakdown": "My file breakdown",
+      "fileBreakdownHint": "How your attachments are distributed (total: :total)."
+    }
   },
   "profile": {
     "settings": "Settings",
@@ -462,5 +529,123 @@
     "empty": "No research papers found in this category",
     "noTitle": "Untitled Research",
     "noAuthor": "Unknown Author"
+  },
+  "benefits": {
+    "heading": "Find What Matters to You",
+    "subheading": "Powerful tools to discover, filter, and navigate through the world's research",
+    "discover": {
+      "title": "Discover Breakthroughs",
+      "description": "Navigate through cutting-edge research across all disciplines with intelligent recommendations"
+    },
+    "filter": {
+      "title": "Smart Filtering",
+      "description": "Find exactly what you need with advanced search and category filters"
+    },
+    "save": {
+      "title": "Save & Organize",
+      "description": "Build your personal library of research that matters to you"
+    },
+    "share": {
+      "title": "Share Insights",
+      "description": "Connect with the global research community and exchange ideas"
+    }
+  },
+  "featured": {
+    "badge": "Trending Research",
+    "heading": "Explore Breakthrough Research",
+    "subheading": "Navigate through the latest discoveries shaping our world",
+    "clickToExplore": "Click to Explore",
+    "viewFullPaper": "View full research paper",
+    "defaultAbstract": "Discover groundbreaking insights and methodologies in this comprehensive research paper.",
+    "readFullPaper": "Read Full Paper",
+    "noResults": "No research papers found",
+    "tryDifferentCategory": "Try selecting a different category",
+    "exploreAll": "Explore All Research"
+  },
+  "topResearchers": {
+    "heading": "Connect With Leading Minds",
+    "subheading": "Follow researchers who are shaping the future of science"
+  },
+  "common": {
+    "all": "All Research"
+  },
+  "audios": {
+    "title": "Audio Library",
+    "description": "Manage uploaded audio files for segmentation and export",
+    "uploadTitle": "Upload audio",
+    "uploadDescription": "Add audio files to segment, label, and export",
+    "uploadPrompt": "Upload an audio file to get started",
+    "noResults": "No audio files yet",
+    "deleteConfirm": "Delete :filename?",
+    "status": {
+      "draft": "Draft",
+      "labeled": "Labeled",
+      "exported": "Exported"
+    },
+    "stats": {
+      "total": "Total files",
+      "labeled": "Labeled",
+      "draft": "Draft"
+    },
+    "table": {
+      "file": "File",
+      "duration": "Duration",
+      "segments": "Segments",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "form": {
+      "files": "Audio files",
+      "clickToUpload": "Click to upload or drag and drop",
+      "supportedFormats": "Supported formats",
+      "maxSize": "Max size",
+      "perFile": "per file",
+      "selectedFiles": "Selected files",
+      "uploading": "Uploading",
+      "optionalMetadata": "Optional metadata (applies to all files)",
+      "title": "Title",
+      "titlePlaceholder": "Optional title for these files",
+      "description": "Description",
+      "descriptionPlaceholder": "Add an optional description",
+      "makePublic": "Make files public",
+      "upload": "Upload",
+      "validation": {
+        "noFiles": "Please select at least one audio file."
+      }
+    },
+    "visibility": {
+      "label": "Visibility",
+      "public": "Public",
+      "private": "Private"
+    },
+    "show": {
+      "filename": "Filename",
+      "fileSize": "File size",
+      "mimeType": "MIME type",
+      "audioPlayer": "Audio player",
+      "audioNotSupported": "Your browser does not support audio playback."
+    },
+    "label": {
+      "title": "Label Audio",
+      "selectLabel": "Select a label",
+      "selectLabelPrompt": "Choose or create a label, then drag on the waveform to add a segment.",
+      "addLabel": "Add label",
+      "createLabel": "Create label",
+      "createLabelDescription": "Add a new label to tag your audio segments.",
+      "labelName": "Label name",
+      "labelNamePlaceholder": "e.g. Introduction",
+      "labelColor": "Label color",
+      "labelDescription": "Description",
+      "labelDescriptionPlaceholder": "Optional description for this label",
+      "creating": "Creating...",
+      "waveformHelp": "Select a label, then click and drag on the waveform to create a segment.",
+      "save": "Save segments",
+      "saving": "Saving...",
+      "export": "Export JSON",
+      "segments": "Segments",
+      "noSegments": "No segments added yet.",
+      "notesPlaceholder": "Add notes about this segment (optional)",
+      "deleteSegmentConfirm": "Delete this segment?"
+    }
   }
 }

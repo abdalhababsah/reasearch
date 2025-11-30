@@ -5,6 +5,7 @@
     "researchers": "الباحثون",
     "contact": "تواصل معنا",
     "dashboard": "لوحة التحكم",
+    "audios": "الصوتيات",
     "categories": "التصنيفات",
     "tags": "الوسوم",
     "profile": "الملف الشخصي",
@@ -16,6 +17,7 @@
     "menu": "القائمة",
     "account": "الحساب",
     "myAccount": "حسابي",
+    "settings": "الإعدادات",
     "deleteAccount": {
       "title": "حذف الحساب"
     }
@@ -29,6 +31,7 @@
     "saving": "جارٍ الحفظ...",
     "update": "تحديث",
     "delete": "حذف",
+    "label": "وسم",
     "view": "عرض",
     "edit": "تعديل",
     "back": "رجوع",
@@ -43,21 +46,67 @@
     "readMore": "اقرأ المزيد",
     "viewProfile": "عرض الملف الشخصي",
     "clearFilters": "مسح المرشحات",
-    "filter": "تصفية"
+    "filter": "تصفية",
+    "forward": "التالي",
+    "download": "تحميل",
+    "openNewTab": "فتح في علامة تبويب جديدة"
   },
   "hero": {
-    "badge": "انضم إلى أكثر من 15,000 باحث",
-    "where": "حيث",
-    "ideas": "الأفكار",
-    "become": "تصبح",
-    "impact": "تأثيراً",
-    "description": "المنصة الرائدة للباحثين لنشر الأعمال الرائدة، والتعاون عبر الحدود، وتسريع الاكتشاف العلمي.",
-    "free": "بدون رسوم نشر",
-    "openAccess": "وصول مفتوح للأبد",
-    "rapidReview": "مراجعة سريعة من النظراء",
-    "recentPublication": "نشر حديث"
+    "badge": "اكتشف الأبحاث التي تشكل الغد",
+    "navigate": "تصفح",
+    "futureOfScience": "مستقبل العلوم",
+    "description": "استكشف أكثر من 45,000 بحث رائد. صنّف حسب المجال، تتبع الاستشهادات، وتواصل مع الباحثين حول العالم - كل ذلك في منصة واحدة ذكية.",
+    "startPublishing": "ابدأ النشر",
+    "startExploring": "ابدأ الاستكشاف",
+    "trendingNow": "الأكثر رواجاً الآن",
+    "trendingTopic": "الذكاء الاصطناعي في الأبحاث الطبية",
+    "mostDownloaded": "الأكثر تحميلاً هذا الأسبوع",
+    "liveUpdates": "تحديثات مباشرة",
+    "realTime": "فوري",
+    "features": {
+      "smartSearch": "بحث ذكي",
+      "advancedFilters": "مرشحات متقدمة",
+      "saveFavorites": "حفظ المفضلات"
+    }
+  },
+  "benefits": {
+    "heading": "اعثر على ما يهمك",
+    "subheading": "أدوات قوية لاكتشاف وتصفية والتنقل عبر أبحاث العالم",
+    "discover": {
+      "title": "اكتشف الاختراقات",
+      "description": "تصفح الأبحاث المتطورة عبر جميع التخصصات مع توصيات ذكية"
+    },
+    "filter": {
+      "title": "تصفية ذكية",
+      "description": "اعثر على ما تحتاجه بالضبط مع البحث المتقدم ومرشحات الفئات"
+    },
+    "save": {
+      "title": "احفظ ونظم",
+      "description": "ابنِ مكتبتك الشخصية من الأبحاث التي تهمك"
+    },
+    "share": {
+      "title": "شارك الأفكار",
+      "description": "تواصل مع مجتمع الأبحاث العالمي وتبادل الأفكار"
+    }
+  },
+  "featured": {
+    "badge": "أبحاث رائجة",
+    "heading": "استكشف الأبحاث الرائدة",
+    "subheading": "تصفح أحدث الاكتشافات التي تشكل عالمنا",
+    "clickToExplore": "انقر للاستكشاف",
+    "viewFullPaper": "عرض البحث الكامل",
+    "defaultAbstract": "اكتشف رؤى ومنهجيات رائدة في هذا البحث الشامل.",
+    "readFullPaper": "اقرأ البحث الكامل",
+    "noResults": "لم يتم العثور على أبحاث",
+    "tryDifferentCategory": "جرب اختيار فئة مختلفة",
+    "exploreAll": "استكشف جميع الأبحاث"
+  },
+  "topResearchers": {
+    "heading": "تواصل مع العقول الرائدة",
+    "subheading": "تابع الباحثين الذين يشكلون مستقبل العلوم"
   },
   "stats": {
+    "publications": "المنشورات",
     "researchers": "باحث نشط",
     "papers": "بحث منشور",
     "countries": "دولة",
@@ -116,14 +165,17 @@
     "noInstitution": "المؤسسة غير محددة"
   },
   "researcher": {
-     "noField": "المجال غير محدد",
-  "noInstitution": "المؤسسة غير محددة",
+    "noField": "المجال غير محدد",
+    "noInstitution": "المؤسسة غير محددة",
     "papers": "أبحاث",
     "viewProfile": "عرض الملف الشخصي",
     "profileTitle": "ملف الباحث",
     "profileDescription": "شارك خلفيتك المهنية وخبراتك ومجالات بحثك.",
     "infoSection": "معلومات الباحث",
     "infoDescription": "حدّث معلومات ملف الباحث",
+    "profileImage": "صورة الملف الشخصي",
+    "profileImageHelp": "حمّل صورة شخصية واضحة (JPG أو PNG).",
+    "profileImageAlt": "صورة الملف الشخصي",
     "bio": "السيرة الذاتية",
     "bioPlaceholder": "حدثنا عن نفسك (50 حرفًا على الأقل)",
     "website": "الموقع الإلكتروني",
@@ -270,7 +322,9 @@
       "filesSection": "الملفات",
       "filesHelp": "استعرض أو حمّل الملفات المرفوعة.",
       "noFiles": "لا توجد ملفات مرفوعة بعد.",
-      "deleteConfirm": "هل تريد حذف هذا البحث؟ سيتم حذف جميع الملفات المرتبطة به."
+      "deleteConfirm": "هل تريد حذف هذا البحث؟ سيتم حذف جميع الملفات المرتبطة به.",
+      "fileVisible": "ظاهر",
+      "fileHidden": "مخفي"
     }
   },
   "categories": {
@@ -361,11 +415,15 @@
     }
   },
   "cta": {
+    "browseResearch": "تصفح الأبحاث",
     "heading": "هل أنت مستعد لمشاركة بحثك؟",
     "subheading": "انضم إلى آلاف الباحثين الذين يحدثون فرقًا. انشر ورقتك البحثية الأولى مجانًا اليوم.",
     "emailPlaceholder": "أدخل بريدك الإلكتروني",
     "button": "ابدأ الآن",
     "note": "لا حاجة لبطاقة ائتمان • مجاني للأبد للباحثين"
+  },
+  "common": {
+    "all": "جميع الأبحاث"
   },
   "footer": {
     "description": "تمكين الباحثين من مشاركة المعرفة والتعاون عالميًا.",
@@ -390,7 +448,52 @@
     "placeholder": "عنصر توضيحي",
     "profileIncompleteTitle": "الملف الشخصي غير مكتمل",
     "profileIncompleteDescription": "يرجى إكمال ملفك الشخصي لتتمكن من استخدام جميع المزايا.",
-    "profileIncompleteCta": "إكمال الملف الشخصي"
+    "profileIncompleteCta": "إكمال الملف الشخصي",
+    "overview": "نظرة عامة",
+    "files": {
+      "document": "المستندات",
+      "dataset": "مجموعات البيانات",
+      "image": "الصور",
+      "other": "ملفات أخرى"
+    },
+    "admin": {
+      "totalResearches": "إجمالي الأبحاث",
+      "published": "منشورة",
+      "underReview": "قيد المراجعة",
+      "researchers": "الباحثون",
+      "admins": "المديرون",
+      "public": "عام",
+      "private": "خاص",
+      "categories": "التصنيفات",
+      "tags": "الوسوم",
+      "researchBreakdown": "تفصيل الأبحاث",
+      "researchBreakdownHint": "حالة وظهور جميع الأبحاث.",
+      "people": "المستخدمون والتصنيفات",
+      "peopleHint": "الباحثون، المديرون، التصنيفات والوسوم.",
+      "recentSubmissions": "أحدث الأبحاث",
+      "recentSubmissionsHint": "آخر الأبحاث المضافة للنظام.",
+      "noRecent": "لا توجد أبحاث حديثة بعد.",
+      "fileBreakdown": "تفصيل الملفات",
+      "fileBreakdownHint": "توزيع ملفات الأبحاث (الإجمالي: :total).",
+      "versions": "إصدارات الأبحاث"
+    },
+    "researcher": {
+      "myResearches": "أبحاثي",
+      "liveNow": "منشور على المنصة",
+      "awaiting": "بانتظار القرار",
+      "files": "الملفات المرفوعة",
+      "versions": "الإصدارات",
+      "versionsCount": ":count إصدار",
+      "statusOverview": "حالة الأبحاث",
+      "statusOverviewHint": "مكان وجود أعمالك في سير العمل.",
+      "visibility": "الظهور",
+      "visibilityHint": "الأبحاث العامة مقابل الخاصة.",
+      "recentUpdates": "أحدث التحديثات",
+      "recentUpdatesHint": "آخر نشاط على أبحاثك.",
+      "noRecent": "لا يوجد نشاط حديث بعد.",
+      "fileBreakdown": "تفصيل ملفاتي",
+      "fileBreakdownHint": "توزيع مرفقاتك (الإجمالي: :total)."
+    }
   },
   "profile": {
     "settings": "الإعدادات",
@@ -454,6 +557,85 @@
     "none": "لا يوجد",
     "created": "تاريخ الإنشاء",
     "updated": "تاريخ التحديث"
+  },
+  "audios": {
+    "title": "مكتبة الصوتيات",
+    "description": "إدارة ملفات الصوت المرفوعة للتقسيم والتصدير",
+    "uploadTitle": "رفع صوت",
+    "uploadDescription": "أضف ملفات صوتية لتقسيمها ووضع العلامات وتصديرها",
+    "uploadPrompt": "قم برفع ملف صوتي للبدء",
+    "noResults": "لا توجد ملفات صوتية بعد",
+    "deleteConfirm": "حذف :filename؟",
+    "status": {
+      "draft": "مسودة",
+      "labeled": "موسومة",
+      "exported": "مُصدَّرة"
+    },
+    "stats": {
+      "total": "إجمالي الملفات",
+      "labeled": "موسومة",
+      "draft": "مسودة"
+    },
+    "table": {
+      "file": "الملف",
+      "duration": "المدة",
+      "segments": "المقاطع",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    },
+    "form": {
+      "files": "ملفات الصوت",
+      "clickToUpload": "انقر للرفع أو اسحب وأفلت",
+      "supportedFormats": "الصيغ المدعومة",
+      "maxSize": "الحد الأقصى للحجم",
+      "perFile": "لكل ملف",
+      "selectedFiles": "الملفات المحددة",
+      "uploading": "جارٍ الرفع",
+      "optionalMetadata": "بيانات اختيارية (تطبق على كل الملفات)",
+      "title": "العنوان",
+      "titlePlaceholder": "عنوان اختياري لهذه الملفات",
+      "description": "الوصف",
+      "descriptionPlaceholder": "أضف وصفاً اختيارياً",
+      "makePublic": "اجعل الملفات عامة",
+      "upload": "رفع",
+      "validation": {
+        "noFiles": "يرجى اختيار ملف صوتي واحد على الأقل."
+      }
+    },
+    "visibility": {
+      "label": "الظهور",
+      "public": "عام",
+      "private": "خاص"
+    },
+    "show": {
+      "filename": "اسم الملف",
+      "fileSize": "حجم الملف",
+      "mimeType": "نوع MIME",
+      "audioPlayer": "مشغل الصوت",
+      "audioNotSupported": "المتصفح لا يدعم تشغيل الصوت."
+    },
+    "label": {
+      "title": "وسم الصوت",
+      "selectLabel": "اختر وسمًا",
+      "selectLabelPrompt": "اختر أو أنشئ وسمًا ثم اسحب على الموجة لإضافة مقطع.",
+      "addLabel": "إضافة وسم",
+      "createLabel": "إنشاء وسم",
+      "createLabelDescription": "أضف وسمًا جديدًا لوضع العلامات على مقاطع الصوت.",
+      "labelName": "اسم الوسم",
+      "labelNamePlaceholder": "مثال: المقدمة",
+      "labelColor": "لون الوسم",
+      "labelDescription": "الوصف",
+      "labelDescriptionPlaceholder": "وصف اختياري لهذا الوسم",
+      "creating": "جارٍ الإنشاء...",
+      "waveformHelp": "اختر وسمًا ثم انقر واسحب على الموجة لإنشاء مقطع.",
+      "save": "حفظ المقاطع",
+      "saving": "جارٍ الحفظ...",
+      "export": "تصدير JSON",
+      "segments": "المقاطع",
+      "noSegments": "لا توجد مقاطع بعد.",
+      "notesPlaceholder": "أضف ملاحظات حول هذا المقطع (اختياري)",
+      "deleteSegmentConfirm": "حذف هذا المقطع؟"
+    }
   },
   "papers": {
     "badge": "أحدث الأبحاث",

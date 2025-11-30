@@ -49,6 +49,7 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
         category_ids: [] as number[],
         tag_ids: [] as number[],
         files: [] as File[],
+        file_visibility: [] as boolean[],
         primary_file_index: null as number | null,
         wallpaper: null as File | null,
     });
@@ -85,7 +86,9 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
         if (!files.length) return;
 
         const next = [...(data.files ?? []), ...files];
+        const visibility = [...(data.file_visibility ?? []), ...files.map(() => true)];
         setData('files', next as any);
+        setData('file_visibility', visibility as any);
 
         // If no primary is selected yet, set first file as primary
         if (data.primary_file_index === null && next.length > 0) {
@@ -114,7 +117,9 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
 
     const removeFileAt = (index: number) => {
         const next = (data.files ?? []).filter((_, i) => i !== index);
+        const nextVisibility = (data.file_visibility ?? []).filter((_, i) => i !== index);
         setData('files', next as any);
+        setData('file_visibility', nextVisibility as any);
 
         if (data.primary_file_index === index) {
             setData('primary_file_index', next.length ? 0 : null);
@@ -473,6 +478,19 @@ export default function ResearchCreate({ statuses, categories, tags }: ResearchC
                                                     </div>
                                                     <span className="text-[11px] text-muted-foreground">
                                                         {(file.type || '—') + ' · ' + formatBytes(file.size)}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <Checkbox
+                                                        checked={data.file_visibility?.[index] ?? true}
+                                                        onCheckedChange={(checked) => {
+                                                            const next = [...(data.file_visibility ?? [])];
+                                                            next[index] = Boolean(checked);
+                                                            setData('file_visibility', next as any);
+                                                        }}
+                                                    />
+                                                    <span className="text-[11px] text-muted-foreground">
+                                                        {t('researches.show.fileVisible')}
                                                     </span>
                                                 </div>
                                                 <Button
