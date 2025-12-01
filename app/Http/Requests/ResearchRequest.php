@@ -29,6 +29,8 @@ class ResearchRequest extends FormRequest
             'abstract_ar' => ['nullable', 'string'],
             'keywords_en' => ['nullable', 'string', 'max:255'],
             'keywords_ar' => ['nullable', 'string', 'max:255'],
+            'doi' => ['nullable', 'string', 'max:255'],
+            'journal_name' => ['nullable', 'string', 'max:255'],
             'status' => ['nullable', Rule::in(['draft', 'under_review', 'published', 'archived'])],
             'is_public' => ['nullable', 'boolean'],
             

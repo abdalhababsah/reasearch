@@ -49,14 +49,15 @@ interface CategoryIndexProps {
 export default function CategoriesIndex({ categories, parents }: CategoryIndexProps) {
     const [createOpen, setCreateOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState<CategoryListItem | null>(null);
+    const [deletingCategory, setDeletingCategory] = useState<CategoryListItem | null>(null);
     const { t, direction } = useTranslation();
     const alignStart = direction === 'rtl' ? 'text-right' : 'text-left';
     const alignEnd = direction === 'rtl' ? 'text-left' : 'text-right';
 
     const handleDelete = (id: number) => {
-        if (confirm(t('categories.deleteConfirm'))) {
-            router.delete(`/admin/categories/${id}`);
-        }
+        router.delete(`/admin/categories/${id}`, {
+            onSuccess: () => setDeletingCategory(null),
+        });
     };
 
     const editParentOptions = useMemo(() => {
@@ -161,7 +162,7 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                                             <Button
                                                 size="sm"
                                                 variant="destructive"
-                                                onClick={() => handleDelete(category.id)}
+                                                onClick={() => setDeletingCategory(category)}
                                             >
                                                 {t('actions.delete')}
                                             </Button>
@@ -209,6 +210,33 @@ export default function CategoriesIndex({ categories, parents }: CategoryIndexPr
                                 onSuccess={() => setEditingCategory(null)}
                             />
                         )}
+                    </DialogContent>
+                </Dialog>
+
+                <Dialog
+                    open={Boolean(deletingCategory)}
+                    onOpenChange={(open) => {
+                        if (!open) setDeletingCategory(null);
+                    }}
+                >
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>{t('categories.deleteConfirm')}</DialogTitle>
+                            <DialogDescription>
+                                {t('categories.deleteConfirm', { defaultValue: 'Delete this category?' })}
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="flex justify-end gap-2">
+                            <Button variant="outline" onClick={() => setDeletingCategory(null)}>
+                                {t('actions.cancel', { defaultValue: 'Cancel' })}
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={() => deletingCategory && handleDelete(deletingCategory.id)}
+                            >
+                                {t('actions.delete')}
+                            </Button>
+                        </div>
                     </DialogContent>
                 </Dialog>
             </div>

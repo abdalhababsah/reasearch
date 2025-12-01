@@ -361,6 +361,10 @@
       "keywordsPlaceholderEn": "Comma-separated keywords in English",
       "keywordsPlaceholderAr": "Comma-separated keywords in Arabic",
       "keywordsHelp": "Separate keywords with commas, e.g. AI, education, policy.",
+      "doi": "DOI",
+      "doiPlaceholder": "e.g. 10.1234/abcd.efgh",
+      "journal_name": "Journal Name",
+      "journalNamePlaceholder": "Journal of Emerging Research",
       "taxonomy": "Categories & tags",
       "taxonomyHelp": "Use categories and tags to make your research easier to discover.",
       "categories": "Categories",
@@ -387,6 +391,7 @@
     },
     "show": {
       "overview": "Overview",
+      "abstract": "Abstract",
       "details": "Details",
       "keywords": "Keywords",
       "noKeywords": "No keywords provided.",
@@ -419,6 +424,7 @@
     "items": "items",
     "searchFiles": "Search files...",
     "noFiles": "No Files Available",
+    "previewFallback": "Discover groundbreaking insights and methodologies in this research.",
     "noFilesDesc": "Files and documents will be available once uploaded by the author."
   },
   "categories": {

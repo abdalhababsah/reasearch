@@ -250,14 +250,14 @@ export default function Dashboard({ stats }: { stats: DashboardStats }) {
                                     </span>
                                 </div>
                             ))}
-                            <div className="rounded-lg border border-primary/40 bg-primary/5 p-3">
+                            {/* <div className="rounded-lg border border-primary/40 bg-primary/5 p-3">
                                 <p className="text-sm font-medium text-primary">
                                     {t('dashboard.admin.versions')}
                                 </p>
                                 <p className="text-2xl font-semibold leading-tight">
                                     {formatter.format(stats.totals.researchVersions)}
                                 </p>
-                            </div>
+                            </div> */}
                         </CardContent>
                     </Card>
                 </div>

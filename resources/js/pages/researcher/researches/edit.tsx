@@ -90,6 +90,8 @@ export default function ResearchEdit({
         abstract_ar: research.raw.abstract_ar || '',
         keywords_en: research.raw.keywords_en || '',
         keywords_ar: research.raw.keywords_ar || '',
+        doi: research.raw.doi || '',
+        journal_name: research.raw.journal_name || '',
         status: research.raw.status || 'draft',
         is_public: research.raw.is_public,
         category_ids: selectedCategories as number[],
@@ -406,6 +408,32 @@ export default function ResearchEdit({
                                         {t('researches.form.keywordsHelp')}
                                     </p>
                                     <InputError message={errors.keywords_ar} />
+                                </div>
+                            </div>
+
+                            <div className="grid gap-4 md:grid-cols-2">
+                                <div>
+                                    <label className="block text-xs font-medium mb-1 uppercase tracking-wide">
+                                        {t('researches.form.doi', { defaultValue: 'DOI' })}
+                                    </label>
+                                    <Input
+                                        value={data.doi}
+                                        onChange={(e) => setData('doi', e.target.value)}
+                                        placeholder={t('researches.form.doiPlaceholder', { defaultValue: 'e.g. 10.1234/abcd.efgh' })}
+                                    />
+                                    <InputError message={errors.doi} />
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-medium mb-1 uppercase tracking-wide">
+                                        {t('researches.form.journal_name', { defaultValue: 'Journal Name' })}
+                                    </label>
+                                    <Input
+                                        value={data.journal_name}
+                                        onChange={(e) => setData('journal_name', e.target.value)}
+                                        placeholder={t('researches.form.journalNamePlaceholder', { defaultValue: 'Journal of Emerging Research' })}
+                                    />
+                                    <InputError message={errors.journal_name} />
                                 </div>
                             </div>
                         </section>

@@ -40,14 +40,15 @@ interface TagIndexProps {
 export default function TagIndex({ tags }: TagIndexProps) {
     const [createOpen, setCreateOpen] = useState(false);
     const [editingTag, setEditingTag] = useState<TagListItem | null>(null);
+    const [deletingTag, setDeletingTag] = useState<TagListItem | null>(null);
     const { t, direction } = useTranslation();
     const alignStart = direction === 'rtl' ? 'text-right' : 'text-left';
     const alignEnd = direction === 'rtl' ? 'text-left' : 'text-right';
 
     const handleDelete = (id: number) => {
-        if (confirm(t('tags.deleteConfirm'))) {
-            router.delete(`/admin/tags/${id}`);
-        }
+        router.delete(`/admin/tags/${id}`, {
+            onSuccess: () => setDeletingTag(null),
+        });
     };
 
     return (
@@ -136,7 +137,7 @@ export default function TagIndex({ tags }: TagIndexProps) {
                                             <Button
                                                 size="sm"
                                                 variant="destructive"
-                                                onClick={() => handleDelete(tag.id)}
+                                                onClick={() => setDeletingTag(tag)}
                                             >
                                                 {t('actions.delete')}
                                             </Button>
@@ -181,6 +182,33 @@ export default function TagIndex({ tags }: TagIndexProps) {
                                 onSuccess={() => setEditingTag(null)}
                             />
                         )}
+                    </DialogContent>
+                </Dialog>
+
+                <Dialog
+                    open={Boolean(deletingTag)}
+                    onOpenChange={(open) => {
+                        if (!open) setDeletingTag(null);
+                    }}
+                >
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>{t('tags.deleteConfirm')}</DialogTitle>
+                            <DialogDescription>
+                                {t('tags.deleteConfirm', { defaultValue: 'Delete this tag?' })}
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="flex justify-end gap-2">
+                            <Button variant="outline" onClick={() => setDeletingTag(null)}>
+                                {t('actions.cancel', { defaultValue: 'Cancel' })}
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={() => deletingTag && handleDelete(deletingTag.id)}
+                            >
+                                {t('actions.delete')}
+                            </Button>
+                        </div>
                     </DialogContent>
                 </Dialog>
             </div>
