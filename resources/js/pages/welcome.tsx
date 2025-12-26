@@ -137,9 +137,9 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
     selectedCategory === 'all'
       ? recentResearches
       : recentResearches.filter((paper) => {
-          const ids = paper.category_ids ?? (paper.category_id ? [paper.category_id] : []);
-          return ids.includes(selectedCategory as number);
-        });
+        const ids = paper.category_ids ?? (paper.category_id ? [paper.category_id] : []);
+        return ids.includes(selectedCategory as number);
+      });
 
   const cardVariants = {
     hidden: { opacity: 0, y: 60, scale: 0.9, rotateX: -15 },
@@ -289,7 +289,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                   className="absolute right-0 top-0 h-[70%] w-[70%] overflow-hidden rounded-3xl shadow-2xl"
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=800&fit=crop"
+                    src="/images/ai-research-hero.png"
                     alt="Research"
                     className="h-full w-full object-cover"
                   />
@@ -305,7 +305,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                   className="absolute bottom-0 left-0 w-[60%] overflow-hidden rounded-2xl bg-background shadow-xl"
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop"
+                    src="/images/ai-collaboration.png"
                     alt="Collaboration"
                     className="h-32 w-full object-cover"
                   />
@@ -342,7 +342,7 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                   </div>
                 </motion.div>
 
-      
+
               </div>
             </motion.div>
           </div>
@@ -488,8 +488,8 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category.id)}
                 className={`group relative overflow-hidden rounded-full px-6 py-3 font-semibold transition-all ${selectedCategory === category.id
-                    ? 'bg-primary text-white shadow-lg'
-                    : 'bg-background hover:bg-primary/10'
+                  ? 'bg-primary text-white shadow-lg'
+                  : 'bg-background hover:bg-primary/10'
                   }`}
                 type="button"
               >

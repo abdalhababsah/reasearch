@@ -1,0 +1,50 @@
+{
+    "audio_id": 1,
+    "filename": "Sunborn - Evening Thoughts (freetouse.com).mp3",
+    "title": "ASDASD",
+    "description": "ASDASD",
+    "duration": "135.05",
+    "researcher": {
+        "id": 2,
+        "name": "Researcher User",
+        "email": "researcher@example.com"
+    },
+    "labeled_at": "2025-12-26T14:28:53+00:00",
+    "metadata": {
+        "codec": "mp3",
+        "bitrate": 320061.8098530265,
+        "channels": 2,
+        "sample_rate": 44100
+    },
+    "segments": [
+        {
+            "id": 1,
+            "start_time": 8.932,
+            "end_time": 28.528,
+            "duration": 19.596,
+            "label": {
+                "id": 1,
+                "name": "PERSON 1",
+                "color": "#ef4444"
+            },
+            "notes": null
+        },
+        {
+            "id": 2,
+            "start_time": 37.993,
+            "end_time": 60.522,
+            "duration": 22.529,
+            "label": {
+                "id": 1,
+                "name": "PERSON 1",
+                "color": "#ef4444"
+            },
+            "notes": null
+        }
+    ],
+    "statistics": {
+        "total_segments": 2,
+        "total_labeled_duration": 42.125,
+        "coverage_percentage": 31.19
+    }
+}

@@ -344,30 +344,30 @@ export default function Contact() {
                       alt={t('contact.office.alt', { defaultValue: 'Office Location' })}
                       className="h-full w-full object-cover"
                     />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-xl font-bold text-white">
-                    {t('contact.office.title', { defaultValue: 'Visit Our Office' })}
-                  </h3>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <p className="font-medium">
-                      {t('contact.office.addressLine1', { defaultValue: '123 Discovery Boulevard' })}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {t('contact.office.addressLine2', { defaultValue: 'Science City, ST 12345' })}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {t('contact.office.addressLine3', { defaultValue: 'Dias Lab' })}
-                    </p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold text-white">
+                        {t('contact.office.title', { defaultValue: 'Visit Our Office' })}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
+                  <div className="p-6">
+                    <div className="flex items-start gap-3">
+                      <MapPin className="h-5 w-5 text-primary mt-1" />
+                      <div>
+                        <p className="font-medium">
+                          {t('contact.office.addressLine1', { defaultValue: '123 Discovery Boulevard' })}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {t('contact.office.addressLine2', { defaultValue: 'Science City, ST 12345' })}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {t('contact.office.addressLine3', { defaultValue: 'Dais Lab' })}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -377,17 +377,17 @@ export default function Contact() {
       {/* Map Section */}
       <section className="border-t bg-muted/30 py-20">
         <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-6xl">
-              <div className="mb-12 text-center">
-                <h2 className="mb-4 text-4xl font-bold">
-                  {t('contact.map.heading', { defaultValue: 'Find Us Here' })}
-                </h2>
-                <p className="text-xl text-muted-foreground">
-                  {t('contact.map.subheading', {
-                    defaultValue: 'Located in the heart of Science City',
-                  })}
-                </p>
-              </div>
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-4xl font-bold">
+                {t('contact.map.heading', { defaultValue: 'Find Us Here' })}
+              </h2>
+              <p className="text-xl text-muted-foreground">
+                {t('contact.map.subheading', {
+                  defaultValue: 'Located in the heart of Science City',
+                })}
+              </p>
+            </div>
 
             <motion.div
               whileHover={{ scale: 1.01 }}
@@ -407,7 +407,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <div className="font-bold dark:text-primary">
-                          {t('contact.map.title', { defaultValue: 'Dias Lab HQ' })}
+                          {t('contact.map.title', { defaultValue: 'Dais Lab HQ' })}
                         </div>
                         <div className="text-sm text-muted-foreground">
                           {t('contact.map.location', { defaultValue: 'Science City' })}

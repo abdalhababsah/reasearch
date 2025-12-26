@@ -13,7 +13,7 @@
     "password": "Password",
     "twoFactor": "Two-Factor Auth",
     "appearance": "Appearance",
-    "platform": "DIAS LAP",
+    "platform": "DAIS LAB",
     "features": "Features",
     "menu": "Menu",
     "account": "Account",
@@ -139,58 +139,58 @@
     }
   },
   "hero": {
-    "badge": "Discover Research That Shapes Tomorrow",
-    "navigate": "Navigate The",
-    "futureOfScience": "Future of Science",
-    "description": "Explore 45,000+ groundbreaking papers. Filter by field, track citations, and connect with researchers worldwide—all in one intelligent platform.",
+    "badge": "Pioneering AI & Data Science Research",
+    "navigate": "The Future of",
+    "futureOfScience": "AI & Data Science",
+    "description": "Explore cutting-edge papers in machine learning, computer vision, and NLP. Access powerful tools for image and audio segmentation directly in your browser.",
     "startPublishing": "Start Publishing",
     "startExploring": "Start Exploring",
     "trendingNow": "TRENDING NOW",
-    "trendingTopic": "AI in Medical Research",
+    "trendingTopic": "Generative AI in Healthcare",
     "mostDownloaded": "Most Downloaded This Week",
     "liveUpdates": "Live Updates",
     "realTime": "Real-time",
     "features": {
-      "smartSearch": "Smart search",
-      "advancedFilters": "Advanced filters",
-      "saveFavorites": "Save favorites"
+      "smartSearch": "Semantic search",
+      "advancedFilters": "Model versioning",
+      "saveFavorites": "Smart datasets"
     }
   },
   "stats": {
-    "publications": "Publications",
+    "publications": "Datasets & Models",
     "researchers": "Active Researchers",
     "papers": "Published Papers",
     "countries": "Countries",
-    "satisfaction": "Satisfaction Rate",
+    "satisfaction": "Model Accuracy",
     "citations": "Citations",
     "collaborators": "Collaborators"
   },
   "features": {
-    "heading": "Everything You Need to Succeed",
-    "subheading": "Powerful tools designed to streamline your research workflow from draft to publication",
+    "heading": "Advanced Tools for Data Science",
+    "subheading": "Streamline your machine learning workflow from data collection to model deployment",
     "publish": {
-      "title": "Publish Research",
-      "description": "Share your findings with a global academic community and get instant feedback"
+      "title": "Publish Datasets",
+      "description": "Share your labeled datasets and models with the global AI community"
     },
     "collaborate": {
       "title": "Collaborate",
-      "description": "Connect with researchers worldwide and build interdisciplinary teams"
+      "description": "Work together on labeling tasks and model evaluation in real-time"
     },
     "track": {
-      "title": "Track Impact",
-      "description": "Monitor citations, downloads, and engagement metrics in real-time"
+      "title": "Track Experiments",
+      "description": "Monitor model performance metrics and version history automatically"
     },
     "secure": {
       "title": "Secure Storage",
-      "description": "Keep your drafts and data safe with enterprise-grade security"
+      "description": "Keep your proprietary datasets and models safe with enterprise-grade security"
     },
     "fast": {
-      "title": "Fast Publishing",
-      "description": "Streamlined peer review process gets your work published faster"
+      "title": "Interactive Labeling",
+      "description": "Use our built-in audio and image segmentation tools to accelerate data preparation"
     },
     "global": {
-      "title": "Global Reach",
-      "description": "Make your research accessible to readers in 150+ countries"
+      "title": "Global Impact",
+      "description": "Contribute to the advancement of AI by sharing reproducible research"
     }
   },
   "researchers": {
@@ -541,13 +541,13 @@
       "title": "Visit Our Office",
       "addressLine1": "123 Discovery Boulevard",
       "addressLine2": "Science City, ST 12345",
-      "addressLine3": "Dias Lab"
+      "addressLine3": "Dais Lab"
     },
     "map": {
       "heading": "Find Us Here",
       "subheading": "Located in the heart of Science City",
       "alt": "Map Location",
-      "title": "Dias Lab HQ",
+      "title": "Dais Lab HQ",
       "location": "Science City"
     }
   },
@@ -974,48 +974,48 @@
     "noResults": "No images found",
     "uploadPrompt": "Upload your first image to get started",
     "status": {
-        "label": "Status",
-        "draft": "Draft",
-        "labeled": "Labeled",
-        "exported": "Exported"
+      "label": "Status",
+      "draft": "Draft",
+      "labeled": "Labeled",
+      "exported": "Exported"
     },
     "stats": {
-        "total": "Total Images",
-        "labeled": "Labeled",
-        "draft": "Draft"
+      "total": "Total Images",
+      "labeled": "Labeled",
+      "draft": "Draft"
     },
     "annotate": {
-        "title": "Annotate Image",
-        "selectLabel": "Select Label",
-        "addLabel": "Add Label",
-        "createLabel": "Create Label",
-        "createLabelDescription": "Create a new label for annotating this image",
-        "labelName": "Label Name",
-        "labelNamePlaceholder": "e.g., Person, Car",
-        "labelColor": "Label Color",
-        "labelDescription": "Description (Optional)",
-        "labelDescriptionPlaceholder": "Describe what this label represents",
-        "creating": "Creating...",
-        "noAnnotations": "No annotations yet",
-        "drawHelp": "Select a label and draw boxes on the image",
-        "instructions": "Tip: Select a label, then click and drag to draw bounding boxes on the image",
-        "saving": "Saving...",
-        "save": "Save",
-        "export": "Export",
-        "annotations": "Annotations",
-        "unknownLabel": "Label",
-        "notesPlaceholder": "Add notes..."
+      "title": "Annotate Image",
+      "selectLabel": "Select Label",
+      "addLabel": "Add Label",
+      "createLabel": "Create Label",
+      "createLabelDescription": "Create a new label for annotating this image",
+      "labelName": "Label Name",
+      "labelNamePlaceholder": "e.g., Person, Car",
+      "labelColor": "Label Color",
+      "labelDescription": "Description (Optional)",
+      "labelDescriptionPlaceholder": "Describe what this label represents",
+      "creating": "Creating...",
+      "noAnnotations": "No annotations yet",
+      "drawHelp": "Select a label and draw boxes on the image",
+      "instructions": "Tip: Select a label, then click and drag to draw bounding boxes on the image",
+      "saving": "Saving...",
+      "save": "Save",
+      "export": "Export",
+      "annotations": "Annotations",
+      "unknownLabel": "Label",
+      "notesPlaceholder": "Add notes..."
     },
     "uploadForm": {
-        "images": "Images",
-        "clickToUpload": "Click to upload or drag and drop",
-        "selectedImages": "Selected Images",
-        "title": "Title (Optional)",
-        "titlePlaceholder": "Enter a title for all images",
-        "description": "Description (Optional)",
-        "descriptionPlaceholder": "Add a description for all images",
-        "uploading": "Uploading...",
-        "upload": "Upload"
+      "images": "Images",
+      "clickToUpload": "Click to upload or drag and drop",
+      "selectedImages": "Selected Images",
+      "title": "Title (Optional)",
+      "titlePlaceholder": "Enter a title for all images",
+      "description": "Description (Optional)",
+      "descriptionPlaceholder": "Add a description for all images",
+      "uploading": "Uploading...",
+      "upload": "Upload"
     }
   }
 }
