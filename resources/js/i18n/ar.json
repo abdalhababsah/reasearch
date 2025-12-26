@@ -6,6 +6,7 @@
     "contact": "تواصل معنا",
     "dashboard": "لوحة التحكم",
     "audios": "الصوتيات",
+    "images": "الصور",
     "categories": "التصنيفات",
     "tags": "الوسوم",
     "profile": "الملف الشخصي",
@@ -55,7 +56,9 @@
     "play": "تشغيل",
     "pause": "إيقاف مؤقت",
     "startLabeling": "ابدأ الوسم",
-    "share": "مشاركة"
+    "share": "مشاركة",
+    "annotate": "وسم",
+    "export": "تصدير JSON"
   },
   "auth": {
     "confirmPassword": {
@@ -121,6 +124,17 @@
       "description": "يرجى تأكيد بريدك الإلكتروني بالنقر على الرابط الذي أرسلناه لك.",
       "linkSent": "تم إرسال رابط تحقق جديد إلى البريد الإلكتروني الذي أدخلته أثناء التسجيل.",
       "resend": "إعادة إرسال رابط التحقق"
+    },
+    "twoFactorChallenge": {
+      "headTitle": "التحقق بخطوتين",
+      "authTitle": "رمز المصادقة",
+      "authDescription": "أدخل رمز المصادقة من تطبيق المصادقة لديك.",
+      "useRecovery": "تسجيل الدخول باستخدام رمز استرداد",
+      "recoveryTitle": "رمز الاسترداد",
+      "recoveryDescription": "يرجى تأكيد الوصول لحسابك بإدخال أحد رموز الاسترداد الطارئة.",
+      "useAuthCode": "تسجيل الدخول باستخدام رمز مصادقة",
+      "recoveryPlaceholder": "أدخل رمز الاسترداد",
+      "or": "أو يمكنك "
     }
   },
   "hero": {
@@ -765,83 +779,7 @@
       "confirm": "تأكيد"
     }
   },
-  "auth": {
-    "confirmPassword": {
-      "title": "تأكيد كلمة المرور",
-      "titleShort": "تأكيد كلمة المرور",
-      "description": "هذه منطقة آمنة في التطبيق. يرجى تأكيد كلمة المرور قبل المتابعة.",
-      "passwordLabel": "كلمة المرور",
-      "passwordPlaceholder": "كلمة المرور",
-      "submit": "تأكيد كلمة المرور"
-    },
-    "register": {
-      "headTitle": "إنشاء حساب",
-      "title": "إنشاء حساب",
-      "description": "أدخل بياناتك لإنشاء حسابك",
-      "name": "الاسم",
-      "namePlaceholder": "الاسم الكامل",
-      "email": "البريد الإلكتروني",
-      "emailPlaceholder": "email@example.com",
-      "password": "كلمة المرور",
-      "passwordPlaceholder": "كلمة المرور",
-      "passwordConfirm": "تأكيد كلمة المرور",
-      "passwordConfirmPlaceholder": "تأكيد كلمة المرور",
-      "submit": "إنشاء الحساب",
-      "haveAccount": "لديك حساب بالفعل؟"
-    },
-    "login": {
-      "headTitle": "تسجيل الدخول",
-      "title": "تسجيل الدخول إلى حسابك",
-      "description": "أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول",
-      "email": "البريد الإلكتروني",
-      "emailPlaceholder": "email@example.com",
-      "password": "كلمة المرور",
-      "passwordPlaceholder": "كلمة المرور",
-      "forgotPassword": "هل نسيت كلمة المرور؟",
-      "remember": "تذكرني",
-      "noAccount": "لا تملك حساباً؟",
-      "signUp": "إنشاء حساب"
-    },
-    "reset": {
-      "headTitle": "إعادة تعيين كلمة المرور",
-      "title": "إعادة تعيين كلمة المرور",
-      "description": "يرجى إدخال كلمة المرور الجديدة أدناه",
-      "email": "البريد الإلكتروني",
-      "password": "كلمة المرور",
-      "passwordPlaceholder": "كلمة المرور",
-      "passwordConfirm": "تأكيد كلمة المرور",
-      "passwordConfirmPlaceholder": "تأكيد كلمة المرور",
-      "submit": "إعادة تعيين كلمة المرور"
-    },
-    "forgot": {
-      "headTitle": "نسيت كلمة المرور",
-      "title": "نسيت كلمة المرور",
-      "description": "أدخل بريدك الإلكتروني لإرسال رابط إعادة تعيين كلمة المرور",
-      "email": "البريد الإلكتروني",
-      "emailPlaceholder": "email@example.com",
-      "submit": "إرسال رابط إعادة التعيين",
-      "backPrompt": "أو ارجع إلى",
-      "backLink": "تسجيل الدخول"
-    },
-    "verify": {
-      "headTitle": "تأكيد البريد الإلكتروني",
-      "title": "تأكيد البريد الإلكتروني",
-      "description": "يرجى تأكيد بريدك الإلكتروني بالنقر على الرابط الذي أرسلناه لك.",
-      "linkSent": "تم إرسال رابط تحقق جديد إلى البريد الإلكتروني الذي أدخلته أثناء التسجيل.",
-      "resend": "إعادة إرسال رابط التحقق"
-    },
-    "twoFactorChallenge": {
-      "headTitle": "التحقق بخطوتين",
-      "authTitle": "رمز المصادقة",
-      "authDescription": "أدخل رمز المصادقة من تطبيق المصادقة لديك.",
-      "useRecovery": "تسجيل الدخول باستخدام رمز استرداد",
-      "recoveryTitle": "رمز الاسترداد",
-      "recoveryDescription": "يرجى تأكيد الوصول لحسابك بإدخال أحد رموز الاسترداد الطارئة.",
-      "useAuthCode": "تسجيل الدخول باستخدام رمز مصادقة",
-      "recoveryPlaceholder": "أدخل رمز الاسترداد",
-      "or": "أو يمكنك "
-    }
-  },
+
   "deleteAccount": {
     "title": "حذف الحساب",
     "description": "حذف حسابك وكل موارده",
@@ -987,5 +925,64 @@
   "audioCta": {
     "heading": "ارتقِ بوسم الصوت لديك",
     "subheading": "ارفع وسم مقاطع الصوت وصدّر بياناتك المعلّمة بسرعة عبر سير عمل مبسّط."
+  },
+  "images": {
+    "title": "وسم الصور",
+    "description": "رفع الصور ووسمها بمربعات التحديد",
+    "uploadTitle": "رفع الصور",
+    "uploadDescription": "ارفع صورة أو أكثر لوضع الوسوم عليها",
+    "details": "التفاصيل",
+    "dimensions": "الأبعاد",
+    "fileSize": "حجم الملف",
+    "mimeType": "النوع",
+    "annotations": "الوسوم",
+    "uploaded": "تاريخ الرفع",
+    "deleteConfirm": "هل تريد حذف :filename؟",
+    "noResults": "لم يتم العثور على صور",
+    "uploadPrompt": "ابدأ برفع أول صورة لك",
+    "status": {
+      "label": "الحالة",
+      "draft": "مسودة",
+      "labeled": "موسومة",
+      "exported": "مُصدَّرة"
+    },
+    "stats": {
+      "total": "إجمالي الصور",
+      "labeled": "موسومة",
+      "draft": "مسودة"
+    },
+    "annotate": {
+      "title": "وسم الصورة",
+      "selectLabel": "اختر وسمًا",
+      "addLabel": "إضافة وسم",
+      "createLabel": "إنشاء وسم",
+      "createLabelDescription": "أنشئ وسمًا جديدًا لوضع العلامات على هذه الصورة",
+      "labelName": "اسم الوسم",
+      "labelNamePlaceholder": "مثال: شخص، سيارة",
+      "labelColor": "لون الوسم",
+      "labelDescription": "الوصف (اختياري)",
+      "labelDescriptionPlaceholder": "صف ماذا يمثل هذا الوسم",
+      "creating": "جارٍ الإنشاء...",
+      "noAnnotations": "لا توجد وسوم بعد",
+      "drawHelp": "اختر وسمًا وارسم مربعات على الصورة",
+      "instructions": "نصيحة: اختر وسمًا، ثم انقر واسحب لرسم مربعات التحديد على الصورة",
+      "saving": "جارٍ الحفظ...",
+      "save": "حفظ",
+      "export": "تصدير",
+      "annotations": "الوسوم",
+      "unknownLabel": "وسم",
+      "notesPlaceholder": "أضف ملاحظات..."
+    },
+    "uploadForm": {
+      "images": "الصور",
+      "clickToUpload": "انقر للرفع أو اسحب وأفلت",
+      "selectedImages": "الصور المختارة",
+      "title": "العنوان (اختياري)",
+      "titlePlaceholder": "أدخل عنوانًا لجميع الصور",
+      "description": "الوصف (اختياري)",
+      "descriptionPlaceholder": "أضف وصفًا لجميع الصور",
+      "uploading": "جارٍ الرفع...",
+      "upload": "رفع"
+    }
   }
 }

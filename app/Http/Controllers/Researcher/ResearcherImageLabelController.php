@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Researcher;
 
 use App\Http\Controllers\Controller;
-use App\Models\ResearcherAudio;
-use App\Models\ResearcherAudioLabel;
+use App\Models\ResearcherImage;
+use App\Models\ResearcherImageLabel;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class ResearcherAudioLabelController extends Controller
+class ResearcherImageLabelController extends Controller
 {
     /**
-     * Get all labels for a specific audio file
+     * Get all labels for a specific image
      */
-    public function index(Request $request, ResearcherAudio $audio): JsonResponse
+    public function index(Request $request, ResearcherImage $image): JsonResponse
     {
         // Authorization
-        if ($audio->user_id !== $request->user()->id) {
+        if ($image->user_id !== $request->user()->id) {
             abort(403, 'Unauthorized');
         }
 
-        $labels = ResearcherAudioLabel::forAudio($audio->id)
-            ->withCount('segments')
+        $labels = ResearcherImageLabel::forImage($image->id)
+            ->withCount('annotations')
             ->orderBy('name')
             ->get();
 
@@ -29,12 +29,12 @@ class ResearcherAudioLabelController extends Controller
     }
 
     /**
-     * Create a new label for a specific audio file
+     * Create a new label for a specific image
      */
-    public function store(Request $request, ResearcherAudio $audio)
+    public function store(Request $request, ResearcherImage $image)
     {
         // Authorization
-        if ($audio->user_id !== $request->user()->id) {
+        if ($image->user_id !== $request->user()->id) {
             abort(403, 'Unauthorized');
         }
 
@@ -43,13 +43,13 @@ class ResearcherAudioLabelController extends Controller
                 'required',
                 'string',
                 'max:100',
-                function ($attribute, $value, $fail) use ($audio) {
-                    $exists = ResearcherAudioLabel::where('researcher_audio_id', $audio->id)
+                function ($attribute, $value, $fail) use ($image) {
+                    $exists = ResearcherImageLabel::where('researcher_image_id', $image->id)
                         ->where('name', $value)
                         ->exists();
 
                     if ($exists) {
-                        $fail('A label with this name already exists for this audio file.');
+                        $fail('A label with this name already exists for this image.');
                     }
                 },
             ],
@@ -57,8 +57,8 @@ class ResearcherAudioLabelController extends Controller
             'description' => 'nullable|string|max:500',
         ]);
 
-        $label = ResearcherAudioLabel::create([
-            'researcher_audio_id' => $audio->id,
+        $label = ResearcherImageLabel::create([
+            'researcher_image_id' => $image->id,
             'name' => $request->name,
             'color' => $request->color,
             'description' => $request->description,
@@ -74,10 +74,10 @@ class ResearcherAudioLabelController extends Controller
     /**
      * Update an existing label
      */
-    public function update(Request $request, ResearcherAudio $audio, ResearcherAudioLabel $label): JsonResponse
+    public function update(Request $request, ResearcherImage $image, ResearcherImageLabel $label): JsonResponse
     {
         // Authorization
-        if ($audio->user_id !== $request->user()->id || $label->researcher_audio_id !== $audio->id) {
+        if ($image->user_id !== $request->user()->id || $label->researcher_image_id !== $image->id) {
             abort(403, 'Unauthorized');
         }
 
@@ -86,14 +86,14 @@ class ResearcherAudioLabelController extends Controller
                 'required',
                 'string',
                 'max:100',
-                function ($attribute, $value, $fail) use ($audio, $label) {
-                    $exists = ResearcherAudioLabel::where('researcher_audio_id', $audio->id)
+                function ($attribute, $value, $fail) use ($image, $label) {
+                    $exists = ResearcherImageLabel::where('researcher_image_id', $image->id)
                         ->where('name', $value)
                         ->where('id', '!=', $label->id)
                         ->exists();
 
                     if ($exists) {
-                        $fail('A label with this name already exists for this audio file.');
+                        $fail('A label with this name already exists for this image.');
                     }
                 },
             ],
@@ -109,17 +109,17 @@ class ResearcherAudioLabelController extends Controller
     /**
      * Delete a label
      */
-    public function destroy(Request $request, ResearcherAudio $audio, ResearcherAudioLabel $label): JsonResponse
+    public function destroy(Request $request, ResearcherImage $image, ResearcherImageLabel $label): JsonResponse
     {
         // Authorization
-        if ($audio->user_id !== $request->user()->id || $label->researcher_audio_id !== $audio->id) {
+        if ($image->user_id !== $request->user()->id || $label->researcher_image_id !== $image->id) {
             abort(403, 'Unauthorized');
         }
 
         // Check if label is in use
         if ($label->isInUse()) {
             return response()->json([
-                'error' => 'Cannot delete label that is currently in use by segments.',
+                'error' => 'Cannot delete label that is currently in use by annotations.',
             ], 422);
         }
 
@@ -133,10 +133,10 @@ class ResearcherAudioLabelController extends Controller
     /**
      * Toggle active status of a label
      */
-    public function toggleActive(Request $request, ResearcherAudio $audio, ResearcherAudioLabel $label): JsonResponse
+    public function toggleActive(Request $request, ResearcherImage $image, ResearcherImageLabel $label): JsonResponse
     {
         // Authorization
-        if ($audio->user_id !== $request->user()->id || $label->researcher_audio_id !== $audio->id) {
+        if ($image->user_id !== $request->user()->id || $label->researcher_image_id !== $image->id) {
             abort(403, 'Unauthorized');
         }
 

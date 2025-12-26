@@ -15,7 +15,7 @@ import { dashboard as adminDashboard } from '@/routes/admin';
 import { dashboard as researcherDashboard } from '@/routes/researcher';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { FileText, FolderTree, LayoutGrid, Tags, FileAudio2 } from 'lucide-react';
+import { FileText, FolderTree, LayoutGrid, Tags, FileAudio2, Image } from 'lucide-react';
 import { useMemo } from 'react';
 import AppLogo from './app-logo';
 import { useTranslation } from '@/i18n';
@@ -71,6 +71,11 @@ export function AppSidebar({ side = 'left' }: { side?: 'left' | 'right' }) {
                     title: t('nav.audios'),
                     href: '/researcher/audios',
                     icon: FileAudio2,
+                },
+                {
+                    title: t('nav.images'),
+                    href: '/researcher/images',
+                    icon: Image,
                 }
             );
         }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ResearcherAudioLabel extends Model
 {
     protected $fillable = [
-        'user_id',
+        'researcher_audio_id',
         'name',
         'color',
         'description',
@@ -21,11 +21,11 @@ class ResearcherAudioLabel extends Model
     ];
 
     /**
-     * Get the user (researcher) who created this label
+     * Get the audio file this label belongs to
      */
-    public function user(): BelongsTo
+    public function audio(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(ResearcherAudio::class, 'researcher_audio_id');
     }
 
     /**
@@ -45,11 +45,11 @@ class ResearcherAudioLabel extends Model
     }
 
     /**
-     * Scope to get labels for a specific user
+     * Scope to get labels for a specific audio file
      */
-    public function scopeForUser($query, int $userId)
+    public function scopeForAudio($query, int $audioId)
     {
-        return $query->where('user_id', $userId);
+        return $query->where('researcher_audio_id', $audioId);
     }
 
     /**

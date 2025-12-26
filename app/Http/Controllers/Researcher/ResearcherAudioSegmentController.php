@@ -27,9 +27,9 @@ class ResearcherAudioSegmentController extends Controller
         // Load audio with segments and their labels
         $audio->load('segments.label');
 
-        // Get user's active labels
+        // Get active labels for this specific audio file
         $labels = ResearcherAudioLabel::active()
-            ->forUser($request->user()->id)
+            ->forAudio($audio->id)
             ->orderBy('name')
             ->get(['id', 'name', 'color', 'description']);
 

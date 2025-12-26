@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-class ResearcherAudio extends Model
+class ResearcherImage extends Model
 {
+    protected $table = 'researcher_images';
     use SoftDeletes;
-
-    protected $table = 'researcher_audios';
 
     protected $fillable = [
         'user_id',
@@ -21,8 +20,8 @@ class ResearcherAudio extends Model
         'storage_path',
         'mime_type',
         'file_size_bytes',
-        'duration_seconds',
-        'metadata',
+        'width',
+        'height',
         'status',
         'title',
         'description',
@@ -32,16 +31,16 @@ class ResearcherAudio extends Model
 
     protected $casts = [
         'file_size_bytes' => 'integer',
-        'duration_seconds' => 'decimal:2',
-        'metadata' => 'array',
+        'width' => 'integer',
+        'height' => 'integer',
         'uploaded_at' => 'datetime',
         'labeled_at' => 'datetime',
     ];
 
-    protected $appends = ['url', 'formatted_file_size', 'formatted_duration'];
+    protected $appends = ['url', 'formatted_file_size', 'dimensions'];
 
     /**
-     * Get the user (researcher) who owns this audio
+     * Get the user who owns this image
      */
     public function user(): BelongsTo
     {
@@ -49,31 +48,23 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * (Optional) Link to a research record if attached.
+     * Get all annotations for this image
      */
-    public function research(): BelongsTo
+    public function annotations(): HasMany
     {
-        return $this->belongsTo(Research::class);
+        return $this->hasMany(ResearcherImageAnnotation::class);
     }
 
     /**
-     * Get all segments for this audio
-     */
-    public function segments(): HasMany
-    {
-        return $this->hasMany(ResearcherAudioSegment::class);
-    }
-    
-    /**
-     * Get all labels for this audio file
+     * Get all labels for this image
      */
     public function labels(): HasMany
     {
-        return $this->hasMany(ResearcherAudioLabel::class);
+        return $this->hasMany(ResearcherImageLabel::class);
     }
 
     /**
-     * Get the audio URL from storage
+     * Get the image URL
      */
     public function getUrlAttribute(): string
     {
@@ -81,7 +72,7 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Get formatted file size (human readable)
+     * Get formatted file size
      */
     public function getFormattedFileSizeAttribute(): string
     {
@@ -92,22 +83,18 @@ class ResearcherAudio extends Model
             $bytes /= 1024;
         }
 
-        return round($bytes, 2).' '.$units[$i];
+        return round($bytes, 2) . ' ' . $units[$i];
     }
 
     /**
-     * Get formatted duration (MM:SS)
+     * Get image dimensions string
      */
-    public function getFormattedDurationAttribute(): string
+    public function getDimensionsAttribute(): string
     {
-        if (! $this->duration_seconds) {
-            return '00:00';
+        if (!$this->width || !$this->height) {
+            return 'Unknown';
         }
-
-        $minutes = floor($this->duration_seconds / 60);
-        $seconds = $this->duration_seconds % 60;
-
-        return sprintf('%02d:%02d', $minutes, $seconds);
+        return "{$this->width} × {$this->height}";
     }
 
     /**
@@ -119,7 +106,7 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Scope: Only labeled audios (with segments)
+     * Scope: Only labeled images
      */
     public function scopeLabeled($query)
     {
@@ -128,7 +115,7 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Scope: Only draft (not labeled yet)
+     * Scope: Only draft
      */
     public function scopeDraft($query)
     {
@@ -136,16 +123,15 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Scope: Search by filename or title
+     * Scope: Search
      */
     public function scopeSearch($query, ?string $term)
     {
-        if (! $term) {
+        if (!$term) {
             return $query;
         }
 
         $like = "%{$term}%";
-
         return $query->where(function ($q) use ($like) {
             $q->where('original_filename', 'like', $like)
                 ->orWhere('title', 'like', $like)
@@ -154,7 +140,7 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Mark audio as labeled (when segments are added)
+     * Mark as labeled
      */
     public function markAsLabeled(): void
     {
@@ -165,7 +151,7 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Mark audio as exported
+     * Mark as exported
      */
     public function markAsExported(): void
     {
@@ -173,70 +159,62 @@ class ResearcherAudio extends Model
     }
 
     /**
-     * Get total segments count
+     * Get total annotations count
      */
-    public function getTotalSegmentsAttribute(): int
+    public function getTotalAnnotationsAttribute(): int
     {
-        return $this->segments()->count();
+        return $this->annotations()->count();
     }
 
     /**
-     * Get total labeled duration (sum of all segments)
+     * Check if image has annotations
      */
-    public function getTotalLabeledDurationAttribute(): float
+    public function hasAnnotations(): bool
     {
-        return $this->segments()->sum('duration') ?? 0.0;
+        return $this->annotations()->exists();
     }
 
     /**
-     * Check if audio has segments
-     */
-    public function hasSegments(): bool
-    {
-        return $this->segments()->exists();
-    }
-
-    /**
-     * Export segments as JSON
+     * Export to JSON
      */
     public function exportToJson(): array
     {
         return [
-            'audio_id' => $this->id,
+            'image_id' => $this->id,
             'filename' => $this->original_filename,
             'title' => $this->title,
             'description' => $this->description,
-            'duration' => $this->duration_seconds,
+            'dimensions' => [
+                'width' => $this->width,
+                'height' => $this->height,
+            ],
             'researcher' => [
                 'id' => $this->user_id,
                 'name' => $this->user->name,
                 'email' => $this->user->email,
             ],
             'labeled_at' => $this->labeled_at?->toIso8601String(),
-            'metadata' => $this->metadata,
-            'segments' => $this->segments()
+            'annotations' => $this->annotations()
                 ->with('label')
-                ->orderBy('start_time')
                 ->get()
-                ->map(fn ($segment) => [
-                    'id' => $segment->id,
-                    'start_time' => (float) $segment->start_time,
-                    'end_time' => (float) $segment->end_time,
-                    'duration' => (float) $segment->duration,
-                    'label' => [
-                        'id' => $segment->label->id,
-                        'name' => $segment->label->name,
-                        'color' => $segment->label->color,
+                ->map(fn($annotation) => [
+                    'id' => $annotation->id,
+                    'bounding_box' => [
+                        'x' => (float) $annotation->x,
+                        'y' => (float) $annotation->y,
+                        'width' => (float) $annotation->width,
+                        'height' => (float) $annotation->height,
                     ],
-                    'notes' => $segment->notes,
+                    'label' => [
+                        'id' => $annotation->label->id,
+                        'name' => $annotation->label->name,
+                        'color' => $annotation->label->color,
+                    ],
+                    'notes' => $annotation->notes,
                 ])
                 ->toArray(),
             'statistics' => [
-                'total_segments' => $this->total_segments,
-                'total_labeled_duration' => (float) $this->total_labeled_duration,
-                'coverage_percentage' => $this->duration_seconds > 0
-                    ? round(($this->total_labeled_duration / $this->duration_seconds) * 100, 2)
-                    : 0,
+                'total_annotations' => $this->total_annotations,
             ],
         ];
     }

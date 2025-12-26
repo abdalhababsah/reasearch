@@ -6,6 +6,7 @@
     "contact": "Contact",
     "dashboard": "Dashboard",
     "audios": "Audios",
+    "images": "Images",
     "categories": "Categories",
     "tags": "Tags",
     "profile": "Profile",
@@ -56,7 +57,9 @@
     "play": "Play",
     "pause": "Pause",
     "startLabeling": "Start Labeling",
-    "share": "Share"
+    "share": "Share",
+    "annotate": "Annotate",
+    "export": "Export JSON"
   },
   "auth": {
     "confirmPassword": {
@@ -955,5 +958,64 @@
   "audioCta": {
     "heading": "Level up your audio labeling",
     "subheading": "Upload, segment, and export labeled audio faster with our streamlined workflow."
+  },
+  "images": {
+    "title": "Image Annotation",
+    "description": "Upload and annotate images with bounding boxes",
+    "uploadTitle": "Upload Images",
+    "uploadDescription": "Upload one or more images to annotate",
+    "details": "Details",
+    "dimensions": "Dimensions",
+    "fileSize": "File Size",
+    "mimeType": "Type",
+    "annotations": "Annotations",
+    "uploaded": "Uploaded",
+    "deleteConfirm": "Delete :filename?",
+    "noResults": "No images found",
+    "uploadPrompt": "Upload your first image to get started",
+    "status": {
+        "label": "Status",
+        "draft": "Draft",
+        "labeled": "Labeled",
+        "exported": "Exported"
+    },
+    "stats": {
+        "total": "Total Images",
+        "labeled": "Labeled",
+        "draft": "Draft"
+    },
+    "annotate": {
+        "title": "Annotate Image",
+        "selectLabel": "Select Label",
+        "addLabel": "Add Label",
+        "createLabel": "Create Label",
+        "createLabelDescription": "Create a new label for annotating this image",
+        "labelName": "Label Name",
+        "labelNamePlaceholder": "e.g., Person, Car",
+        "labelColor": "Label Color",
+        "labelDescription": "Description (Optional)",
+        "labelDescriptionPlaceholder": "Describe what this label represents",
+        "creating": "Creating...",
+        "noAnnotations": "No annotations yet",
+        "drawHelp": "Select a label and draw boxes on the image",
+        "instructions": "Tip: Select a label, then click and drag to draw bounding boxes on the image",
+        "saving": "Saving...",
+        "save": "Save",
+        "export": "Export",
+        "annotations": "Annotations",
+        "unknownLabel": "Label",
+        "notesPlaceholder": "Add notes..."
+    },
+    "uploadForm": {
+        "images": "Images",
+        "clickToUpload": "Click to upload or drag and drop",
+        "selectedImages": "Selected Images",
+        "title": "Title (Optional)",
+        "titlePlaceholder": "Enter a title for all images",
+        "description": "Description (Optional)",
+        "descriptionPlaceholder": "Add a description for all images",
+        "uploading": "Uploading...",
+        "upload": "Upload"
+    }
   }
 }

@@ -10,6 +10,9 @@ use App\Http\Controllers\Researcher\ResearchController as ResearcherResearchCont
 use App\Http\Controllers\Researcher\ResearcherAudioController;
 use App\Http\Controllers\Researcher\ResearcherAudioLabelController;
 use App\Http\Controllers\Researcher\ResearcherAudioSegmentController;
+use App\Http\Controllers\Researcher\ResearcherImageController;
+use App\Http\Controllers\Researcher\ResearcherImageLabelController;
+use App\Http\Controllers\Researcher\ResearcherImageAnnotationController;
 use App\Http\Controllers\ResearcherProfileController;
 use App\Http\Middleware\EnsureResearcherProfileComplete;
 use Illuminate\Support\Facades\Route;
@@ -58,12 +61,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
             });
             
             // Audio Label Management Routes
-            Route::prefix('audio-labels')->name('audio-labels.')->group(function () {
+            Route::prefix('audios/{audio}/labels')->name('audios.labels.')->group(function () {
                 Route::get('/', [ResearcherAudioLabelController::class, 'index'])->name('index');
                 Route::post('/', [ResearcherAudioLabelController::class, 'store'])->name('store');
                 Route::put('/{label}', [ResearcherAudioLabelController::class, 'update'])->name('update');
                 Route::delete('/{label}', [ResearcherAudioLabelController::class, 'destroy'])->name('destroy');
                 Route::patch('/{label}/toggle-active', [ResearcherAudioLabelController::class, 'toggleActive'])->name('toggle-active');
+            });
+
+            // Image Management Routes
+            Route::prefix('images')->name('images.')->group(function () {
+                Route::get('/', [ResearcherImageController::class, 'index'])->name('index');
+                Route::post('/', [ResearcherImageController::class, 'store'])->name('store');
+                Route::get('/{image}', [ResearcherImageController::class, 'show'])->name('show');
+                Route::put('/{image}', [ResearcherImageController::class, 'update'])->name('update');
+                Route::delete('/{image}', [ResearcherImageController::class, 'destroy'])->name('destroy');
+                
+                // Image Annotation Routes
+                Route::get('/{image}/annotate', [ResearcherImageAnnotationController::class, 'edit'])->name('annotate');
+                Route::put('/{image}/annotations', [ResearcherImageAnnotationController::class, 'update'])->name('annotations.update');
+                Route::get('/{image}/annotations', [ResearcherImageAnnotationController::class, 'index'])->name('annotations.index');
+                Route::get('/{image}/export', [ResearcherImageAnnotationController::class, 'export'])->name('export');
+            });
+            
+            // Image Label Management Routes
+            Route::prefix('images/{image}/labels')->name('images.labels.')->group(function () {
+                Route::get('/', [ResearcherImageLabelController::class, 'index'])->name('index');
+                Route::post('/', [ResearcherImageLabelController::class, 'store'])->name('store');
+                Route::put('/{label}', [ResearcherImageLabelController::class, 'update'])->name('update');
+                Route::delete('/{label}', [ResearcherImageLabelController::class, 'destroy'])->name('destroy');
+                Route::patch('/{label}/toggle-active', [ResearcherImageLabelController::class, 'toggleActive'])->name('toggle-active');
             });
         });
     });
