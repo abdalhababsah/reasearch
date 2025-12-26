@@ -810,20 +810,20 @@
     "heading": "Find What Matters to You",
     "subheading": "Powerful tools to discover, filter, and navigate through the world's research",
     "discover": {
-      "title": "Discover Breakthroughs",
-      "description": "Navigate through cutting-edge research across all disciplines with intelligent recommendations"
+      "title": "Smart Datasets",
+      "description": "Access curated datasets for computer vision and NLP with automated quality checks"
     },
     "filter": {
-      "title": "Smart Filtering",
-      "description": "Find exactly what you need with advanced search and category filters"
+      "title": "Model Hub",
+      "description": "Explore pre-trained models and fine-tune them for your specific use cases"
     },
     "save": {
-      "title": "Save & Organize",
-      "description": "Build your personal library of research that matters to you"
+      "title": "Version Control",
+      "description": "Track changes in your datasets and models with Git-like versioning"
     },
     "share": {
-      "title": "Share Insights",
-      "description": "Connect with the global research community and exchange ideas"
+      "title": "Community Benchmarks",
+      "description": "Compare your model performance against state-of-the-art benchmarks"
     }
   },
   "featured": {

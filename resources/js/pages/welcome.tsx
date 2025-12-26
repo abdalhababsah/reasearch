@@ -4,7 +4,7 @@ import {
   BookOpen, Users, Award, TrendingUp, Search, ArrowRight, CheckCircle2,
   Sparkles, Globe, Lock, Zap, BarChart3, FileText, Calendar, ExternalLink,
   ChevronRight, Star, Eye, Download, Brain, Rocket, Target, Lightbulb,
-  Compass, Filter, Bookmark, Share2, MessageCircle, FileAudio,
+  Compass, Filter, Bookmark, Share2, MessageCircle, FileAudio, GitBranch, Database,
 } from 'lucide-react';
 import { register } from '@/routes';
 import { useTranslation } from '@/i18n';
@@ -70,33 +70,33 @@ export default function Welcome({ canRegister = true }: HomePageProps) {
 
   const benefits = [
     {
-      icon: Compass,
-      title: t('benefits.discover.title', { defaultValue: 'Discover Breakthroughs' }),
+      icon: Database,
+      title: t('benefits.discover.title', { defaultValue: 'Smart Datasets' }),
       description: t('benefits.discover.description', {
         defaultValue:
-          'Navigate through cutting-edge research across all disciplines with intelligent recommendations',
+          'Access curated datasets for computer vision and NLP with automated quality checks',
       }),
     },
     {
-      icon: Filter,
-      title: t('benefits.filter.title', { defaultValue: 'Smart Filtering' }),
+      icon: Brain,
+      title: t('benefits.filter.title', { defaultValue: 'Model Hub' }),
       description: t('benefits.filter.description', {
-        defaultValue: 'Find exactly what you need with advanced search and category filters',
+        defaultValue: 'Explore pre-trained models and fine-tune them for your specific use cases',
       }),
     },
     {
-      icon: Bookmark,
-      title: t('benefits.save.title', { defaultValue: 'Save & Organize' }),
+      icon: GitBranch,
+      title: t('benefits.save.title', { defaultValue: 'Version Control' }),
       description: t('benefits.save.description', {
-        defaultValue: 'Build your personal library of research that matters to you',
+        defaultValue: 'Track changes in your datasets and models with Git-like versioning',
       }),
     },
     {
-      icon: Share2,
-      title: t('benefits.share.title', { defaultValue: 'Share Insights' }),
+      icon: BarChart3,
+      title: t('benefits.share.title', { defaultValue: 'Community Benchmarks' }),
       description: t('benefits.share.description', {
         defaultValue:
-          'Connect with the global research community and exchange ideas',
+          'Compare your model performance against state-of-the-art benchmarks',
       }),
     },
   ];
