@@ -1,0 +1,1 @@
+import{c as t,j as s}from"./app-XseEcuwc.js";function a(){const e=t.c(1);let o;return e[0]===Symbol.for("react.memo_cache_sentinel")?(o=s.jsx("img",{src:"/logo-large.png",alt:"Logo",className:"h-20 w-auto"}),e[0]=o):o=e[0],o}export{a as A};
